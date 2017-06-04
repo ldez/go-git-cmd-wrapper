@@ -1,0 +1,16 @@
+= Go Git Cmd Wrapper
+
+It's a simple wrapper around `git` command.
+
+[source, golang]
+----
+# clone
+output, err := git.Clone(clone.Repository("https://github.com/ldez/gcg"))
+
+# fetch
+output, err = git.Fetch(fetch.NoTags, fetch.Remote("upstream"))
+output, err = git.Fetch(fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("master"))
+
+# add a remote
+output, err = git.Remote(remote.Add, remote.Name("upstream"), remote.URL("https://github.com/ldez/gcg"))
+----
