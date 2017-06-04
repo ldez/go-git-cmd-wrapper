@@ -61,6 +61,13 @@ func Debug(g *Cmd) {
 	g.Debug = true
 }
 
+// Debugger display command line
+func Debugger(debug bool) func(*Cmd) {
+	return func(g *Cmd) {
+		g.Debug = debug
+	}
+}
+
 func command(name string, options ...func(*Cmd)) (string, error) {
 	g := &Cmd{base: "git", options: []string{name}}
 	for _, opt := range options {
