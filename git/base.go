@@ -7,6 +7,7 @@ import (
 )
 
 type Cmd struct {
+	Debug   bool
 	base    string
 	options []string
 }
@@ -55,16 +56,23 @@ func Config(options ...func(*Cmd)) (string, error) {
 	return command("config", options...)
 }
 
+// Debug display command line
+func Debug(g *Cmd) {
+	g.Debug = true
+}
+
 func command(name string, options ...func(*Cmd)) (string, error) {
 	g := &Cmd{base: "git", options: []string{name}}
 	for _, opt := range options {
 		opt(g)
 	}
-	return commander(g.base, g.options...)
+	return commander(g.base, g.Debug, g.options...)
 }
 
-func commander(name string, args ...string) (string, error) {
-	log.Println(name, strings.Join(args, " "))
+func commander(name string, debug bool, args ...string) (string, error) {
+	if debug {
+		log.Println(name, strings.Join(args, " "))
+	}
 
 	cmd := exec.Command(name, args...)
 

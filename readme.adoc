@@ -2,10 +2,14 @@
 
 It's a simple wrapper around `git` command.
 
+Import `github.com/ldez/go-git-cmd-wrapper`.
+
 [source, golang]
 ----
 # clone
 output, err := git.Clone(clone.Repository("https://github.com/ldez/gcg"))
+# with debug option
+output, err := git.Clone(clone.Repository("https://github.com/ldez/gcg"), git.Debug)
 
 # fetch
 output, err = git.Fetch(fetch.NoTags, fetch.Remote("upstream"))
