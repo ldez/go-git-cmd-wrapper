@@ -1,7 +1,3 @@
-package rebase
-
-import "github.com/ldez/go-git-cmd-wrapper/git"
-
 // Rebase https://git-scm.com/docs/git-rebase
 // git rebase [-i | --interactive] [options] [--exec <cmd>] [--onto <newbase>] [<upstream> [<branch>]]
 // git rebase [-i | --interactive] [options] [--exec <cmd>] [--onto <newbase>] --root [<branch>]
@@ -44,127 +40,130 @@ import "github.com/ldez/go-git-cmd-wrapper/git"
 // --autostash
 // --no-autostash
 // --no-ff
+package rebase
 
-func Continue(g *git.Cmd) {
+import "github.com/ldez/go-git-cmd-wrapper/types"
+
+func Continue(g *types.Cmd) {
 	g.AddOptions("--continue")
 }
 
-func Abort(g *git.Cmd) {
+func Abort(g *types.Cmd) {
 	g.AddOptions("--abort")
 }
 
-func Quit(g *git.Cmd) {
+func Quit(g *types.Cmd) {
 	g.AddOptions("--quit")
 }
 
-func KeepEmpty(g *git.Cmd) {
+func KeepEmpty(g *types.Cmd) {
 	g.AddOptions("--keep-empty")
 }
 
-func Skip(g *git.Cmd) {
+func Skip(g *types.Cmd) {
 	g.AddOptions("--skip")
 }
 
-func EditTodo(g *git.Cmd) {
+func EditTodo(g *types.Cmd) {
 	g.AddOptions("--edit-todo")
 }
 
-func Merge(g *git.Cmd) {
+func Merge(g *types.Cmd) {
 	g.AddOptions("--merge")
 }
 
-func Quiet(g *git.Cmd) {
+func Quiet(g *types.Cmd) {
 	g.AddOptions("--quiet")
 }
 
-func Verbose(g *git.Cmd) {
+func Verbose(g *types.Cmd) {
 	g.AddOptions("--verbose")
 }
 
-func Stat(g *git.Cmd) {
+func Stat(g *types.Cmd) {
 	g.AddOptions("--stat")
 }
 
-func NoStat(g *git.Cmd) {
+func NoStat(g *types.Cmd) {
 	g.AddOptions("--no-stat")
 }
 
-func NoVerify(g *git.Cmd) {
+func NoVerify(g *types.Cmd) {
 	g.AddOptions("--no-verify")
 }
 
-func Verify(g *git.Cmd) {
+func Verify(g *types.Cmd) {
 	g.AddOptions("--verify")
 }
 
-func ForceRebase(g *git.Cmd) {
+func ForceRebase(g *types.Cmd) {
 	g.AddOptions("--force-rebase")
 }
 
-func ForkPoint(g *git.Cmd) {
+func ForkPoint(g *types.Cmd) {
 	g.AddOptions("--fork-point")
 }
 
-func NoForkPoint(g *git.Cmd) {
+func NoForkPoint(g *types.Cmd) {
 	g.AddOptions("--no-fork-point")
 }
 
-func IgnoreWhitespace(g *git.Cmd) {
+func IgnoreWhitespace(g *types.Cmd) {
 	g.AddOptions("--ignore-whitespace")
 }
 
-func CommitterDateIsAuthorDate(g *git.Cmd) {
+func CommitterDateIsAuthorDate(g *types.Cmd) {
 	g.AddOptions("--committer-date-is-author-date")
 }
 
-func IgnoreDate(g *git.Cmd) {
+func IgnoreDate(g *types.Cmd) {
 	g.AddOptions("--ignore-date")
 }
 
-func Signoff(g *git.Cmd) {
+func Signoff(g *types.Cmd) {
 	g.AddOptions("--signoff")
 }
 
-func Interactive(g *git.Cmd) {
+func Interactive(g *types.Cmd) {
 	g.AddOptions("--interactive")
 }
 
-func PreserveMerges(g *git.Cmd) {
+func PreserveMerges(g *types.Cmd) {
 	g.AddOptions("--preserve-merges")
 }
 
-func Root(g *git.Cmd) {
+func Root(g *types.Cmd) {
 	g.AddOptions("--root")
 }
 
-func Autosquash(g *git.Cmd) {
+func Autosquash(g *types.Cmd) {
 	g.AddOptions("--autosquash")
 }
 
-func NoAutosquash(g *git.Cmd) {
+func NoAutosquash(g *types.Cmd) {
 	g.AddOptions("--no-autosquash")
 }
 
-func Autostash(g *git.Cmd) {
+func Autostash(g *types.Cmd) {
 	g.AddOptions("--autostash")
 }
 
-func NoAutostash(g *git.Cmd) {
+func NoAutostash(g *types.Cmd) {
 	g.AddOptions("--no-autostash")
 }
 
-func NoFF(g *git.Cmd) {
+func NoFF(g *types.Cmd) {
 	g.AddOptions("--no-ff")
 }
 
-func Upstream(name string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Upstream(name string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
 }
 
-func Branch(name string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Branch(name string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
 }

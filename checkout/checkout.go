@@ -1,7 +1,3 @@
-package checkout
-
-import "github.com/ldez/go-git-cmd-wrapper/git"
-
 // Checkout https://git-scm.com/docs/git-checkout
 // git checkout [-q] [-f] [-m] [<branch>]
 // git checkout [-q] [-f] [-m] --detach [<branch>]
@@ -31,89 +27,86 @@ import "github.com/ldez/go-git-cmd-wrapper/git"
 // <new_branch>
 // <start_point>
 // <tree-ish>
+package checkout
 
-func Quiet(g *git.Cmd) {
+import "github.com/ldez/go-git-cmd-wrapper/types"
+
+func Quiet(g *types.Cmd) {
 	g.AddOptions("--quiet")
 }
 
-func Progress(g *git.Cmd) {
+func Progress(g *types.Cmd) {
 	g.AddOptions("--progress")
 }
 
-func NoProgress(g *git.Cmd) {
+func NoProgress(g *types.Cmd) {
 	g.AddOptions("--no-progress")
 }
 
-func Force(g *git.Cmd) {
+func Force(g *types.Cmd) {
 	g.AddOptions("--force")
 }
 
-func Ours(g *git.Cmd) {
+func Ours(g *types.Cmd) {
 	g.AddOptions("--ours")
 }
 
-func Theirs(g *git.Cmd) {
+func Theirs(g *types.Cmd) {
 	g.AddOptions("--theirs")
 }
 
-func Track(g *git.Cmd) {
+func Track(g *types.Cmd) {
 	g.AddOptions("--track")
 }
 
-func NoTrack(g *git.Cmd) {
+func NoTrack(g *types.Cmd) {
 	g.AddOptions("--no-track")
 }
 
-func Detach(g *git.Cmd) {
+func Detach(g *types.Cmd) {
 	g.AddOptions("--detach")
 }
 
-func IgnoreSkipWorktreeBits(g *git.Cmd) {
+func IgnoreSkipWorktreeBits(g *types.Cmd) {
 	g.AddOptions("--ignore-skip-worktree-bits")
 }
 
-func Merge(g *git.Cmd) {
+func Merge(g *types.Cmd) {
 	g.AddOptions("--merge")
 }
 
-func Patch(g *git.Cmd) {
+func Patch(g *types.Cmd) {
 	g.AddOptions("--patch")
 }
 
-func IgnoreOtherWorktrees(g *git.Cmd) {
+func IgnoreOtherWorktrees(g *types.Cmd) {
 	g.AddOptions("--ignore-other-worktrees")
 }
 
-func RecurseSubmodules(g *git.Cmd) {
+func RecurseSubmodules(g *types.Cmd) {
 	g.AddOptions("--recurse-submodules")
 }
 
-func NoRecurseSubmodules(g *git.Cmd) {
+func NoRecurseSubmodules(g *types.Cmd) {
 	g.AddOptions("--no-recurse-submodules")
 }
 
-func NewBranch(name string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
-		g.AddOptions("-b")
+func NewBranch(g *types.Cmd) {
+	g.AddOptions("-b")
+}
+
+func NewBranchForce(g *types.Cmd) {
+	g.AddOptions("-B")
+}
+
+func Branch(name string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
 }
 
-func NewBranchForce(name string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
-		g.AddOptions("-B")
-		g.AddOptions(name)
-	}
-}
-
-func Branch(name string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
-		g.AddOptions(name)
-	}
-}
-
-func Orphan(branch string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Orphan(branch string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions("--orphan")
 		g.AddOptions(branch)
 	}

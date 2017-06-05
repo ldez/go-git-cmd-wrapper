@@ -1,11 +1,3 @@
-package fetch
-
-import (
-	"fmt"
-
-	"github.com/ldez/go-git-cmd-wrapper/git"
-)
-
 // Fetch https://git-scm.com/docs/git-fetch
 // git fetch [<options>] [<repository> [<refspec>…​]]
 // git fetch [<options>] <group>
@@ -43,154 +35,161 @@ import (
 //<repository>
 //<group>
 //<refspec>
+package fetch
 
-func All(g *git.Cmd) {
+import (
+	"fmt"
+
+	"github.com/ldez/go-git-cmd-wrapper/types"
+)
+
+func All(g *types.Cmd) {
 	g.AddOptions("--all")
 }
 
-func Append(g *git.Cmd) {
+func Append(g *types.Cmd) {
 	g.AddOptions("--append")
 }
 
-func Depth(depth string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Depth(depth string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--depth=%s", depth))
 	}
 }
 
-func Deepen(depth string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Deepen(depth string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--deepen=%s", depth))
 	}
 }
 
-func ShallowSince(date string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func ShallowSince(date string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--shallow-since=%s", date))
 	}
 }
 
-func ShallowExclude(revision string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func ShallowExclude(revision string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--shallow-exclude=%s", revision))
 	}
 }
 
-func Unshallow(g *git.Cmd) {
+func Unshallow(g *types.Cmd) {
 	g.AddOptions("--unshallow")
 }
 
-func UpdateShallow(g *git.Cmd) {
+func UpdateShallow(g *types.Cmd) {
 	g.AddOptions("--update-shallow")
 }
 
-func DryRun(g *git.Cmd) {
+func DryRun(g *types.Cmd) {
 	g.AddOptions("--dry-run")
 }
 
-func Force(g *git.Cmd) {
+func Force(g *types.Cmd) {
 	g.AddOptions("--force")
 }
 
-func Keep(g *git.Cmd) {
+func Keep(g *types.Cmd) {
 	g.AddOptions("--keep")
 }
 
-func Multiple(g *git.Cmd) {
+func Multiple(g *types.Cmd) {
 	g.AddOptions("--multiple")
 }
 
-func Prune(g *git.Cmd) {
+func Prune(g *types.Cmd) {
 	g.AddOptions("--prune")
 }
 
-func NoTags(g *git.Cmd) {
+func NoTags(g *types.Cmd) {
 	g.AddOptions("--no-tags")
 }
 
-func Tags(g *git.Cmd) {
+func Tags(g *types.Cmd) {
 	g.AddOptions("--tags")
 }
 
-func RefMap(refspec string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func RefMap(refspec string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--refmap=%s", refspec))
 	}
 }
 
-func RecurseSubmodules(option string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func RecurseSubmodules(option string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--recurse-submodules=%s", option))
 	}
 }
 
-func Jobs(n string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Jobs(n string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--jobs=%s", n))
 	}
 }
 
-func NoRecurseSubmodules(g *git.Cmd) {
+func NoRecurseSubmodules(g *types.Cmd) {
 	g.AddOptions("--no-recurse-submodules")
 }
 
-func SubmodulePrefix(path string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func SubmodulePrefix(path string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--submodule-prefix=%s", path))
 	}
 }
 
-func RecurseSubmodulesDefault(option string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func RecurseSubmodulesDefault(option string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--recurse-submodules-default=%s", option))
 	}
 }
 
-func updateHeadOk(g *git.Cmd) {
+func updateHeadOk(g *types.Cmd) {
 	g.AddOptions("--update-head-ok")
 }
 
-func UploadPack(pack string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func UploadPack(pack string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions("--upload-pack")
 		g.AddOptions(pack)
 	}
 }
 
-func Quiet(g *git.Cmd) {
+func Quiet(g *types.Cmd) {
 	g.AddOptions("--quiet")
 }
 
-func Verbose(g *git.Cmd) {
+func Verbose(g *types.Cmd) {
 	g.AddOptions("--verbose")
 }
 
-func Progress(g *git.Cmd) {
+func Progress(g *types.Cmd) {
 	g.AddOptions("--progress")
 }
 
-func IPv4(g *git.Cmd) {
+func IPv4(g *types.Cmd) {
 	g.AddOptions("--ipv4")
 }
 
-func IPv6(g *git.Cmd) {
+func IPv6(g *types.Cmd) {
 	g.AddOptions("--ipv6")
 }
 
-func Remote(name string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Remote(name string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
 }
 
-func Group(name string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Group(name string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
 }
 
-func RefSpec(ref string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func RefSpec(ref string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(ref)
 	}
 }

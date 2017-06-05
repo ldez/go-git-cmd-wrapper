@@ -4,76 +4,81 @@ import (
 	"log"
 	"os/exec"
 	"strings"
+
+	"github.com/ldez/go-git-cmd-wrapper/types"
 )
 
-type Cmd struct {
-	Debug   bool
-	base    string
-	options []string
-}
-
-func (g *Cmd) AddOptions(option string) {
-	g.options = append(g.options, option)
-}
+var cmdExecutor = commander
 
 // Init https://git-scm.com/docs/git-init
-func Init(options ...func(*Cmd)) (string, error) {
+func Init(options ...types.Option) (string, error) {
 	return command("init", options...)
 }
 
 // Push https://git-scm.com/docs/git-push
-func Push(options ...func(*Cmd)) (string, error) {
+func Push(options ...types.Option) (string, error) {
 	return command("push", options...)
 }
 
 // Clone https://git-scm.com/docs/git-clone
-func Clone(options ...func(*Cmd)) (string, error) {
+func Clone(options ...types.Option) (string, error) {
 	return command("clone", options...)
 }
 
 // Remote https://git-scm.com/docs/git-remote
-func Remote(options ...func(*Cmd)) (string, error) {
+func Remote(options ...types.Option) (string, error) {
 	return command("remote", options...)
 }
 
 // Fetch https://git-scm.com/docs/git-fetch
-func Fetch(options ...func(*Cmd)) (string, error) {
+func Fetch(options ...types.Option) (string, error) {
 	return command("fetch", options...)
 }
 
 // Rebase https://git-scm.com/docs/git-rebase
-func Rebase(options ...func(*Cmd)) (string, error) {
+func Rebase(options ...types.Option) (string, error) {
 	return command("rebase", options...)
 }
 
 // Checkout https://git-scm.com/docs/git-checkout
-func Checkout(options ...func(*Cmd)) (string, error) {
+func Checkout(options ...types.Option) (string, error) {
 	return command("checkout", options...)
 }
 
 // Config https://git-scm.com/docs/git-config
-func Config(options ...func(*Cmd)) (string, error) {
+func Config(options ...types.Option) (string, error) {
 	return command("config", options...)
 }
 
 // Debug display command line
-func Debug(g *Cmd) {
+func Debug(g *types.Cmd) {
 	g.Debug = true
 }
 
-// Debugger display command line
-func Debugger(debug bool) func(*Cmd) {
-	return func(g *Cmd) {
+// DebugBool display command line
+func Debuggger(debug bool) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.Debug = debug
 	}
 }
 
-func command(name string, options ...func(*Cmd)) (string, error) {
-	g := &Cmd{base: "git", options: []string{name}}
+// Cond apply conditionally an option
+func Cond(apply bool, option types.Option) func(*types.Cmd) {
+	if apply {
+		return option
+	}
+	return NoOp
+}
+
+// NoOp do nothing.
+func NoOp(g *types.Cmd) {}
+
+func command(name string, options ...types.Option) (string, error) {
+	g := &types.Cmd{Base: "git", Options: []string{name}}
 	for _, opt := range options {
 		opt(g)
 	}
-	return commander(g.base, g.Debug, g.options...)
+	return cmdExecutor(g.Base, g.Debug, g.Options...)
 }
 
 func commander(name string, debug bool, args ...string) (string, error) {

@@ -1,11 +1,3 @@
-package remote
-
-import (
-	"fmt"
-
-	"github.com/ldez/go-git-cmd-wrapper/git"
-)
-
 // Remote https://git-scm.com/docs/git-remote
 //	git remote [-v | --verbose]
 //	git remote add [-t <branch>] [-m <master>] [-f] [--[no-]tags] [--mirror=<fetch|push>] <name> <url>
@@ -20,57 +12,64 @@ import (
 //	git remote [-v | --verbose] show [-n] <name>…​
 //	git remote prune [-n | --dry-run] <name>…​
 //	git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]
+package remote
 
-func Verbose(g *git.Cmd) {
+import (
+	"fmt"
+
+	"github.com/ldez/go-git-cmd-wrapper/types"
+)
+
+func Verbose(g *types.Cmd) {
 	g.AddOptions("--verbose")
 }
 
 // ----------
 
-func Add(g *git.Cmd) {
+func Add(g *types.Cmd) {
 	g.AddOptions("add")
 }
 
-func Track(branch string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Track(branch string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions("-t")
 		g.AddOptions(branch)
 	}
 }
 
-func Master(symRef string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Master(symRef string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions("-m")
 		g.AddOptions(symRef)
 	}
 }
 
-func Fetch(g *git.Cmd) {
+func Fetch(g *types.Cmd) {
 	g.AddOptions("-f")
 }
 
-func Tags(g *git.Cmd) {
+func Tags(g *types.Cmd) {
 	g.AddOptions("--tags")
 }
 
-func NoTags(g *git.Cmd) {
+func NoTags(g *types.Cmd) {
 	g.AddOptions("--no-tags")
 }
 
-func Mirror(option string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Mirror(option string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--mirror=%s", option))
 	}
 }
 
-func Name(name string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func Name(name string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
 }
 
-func URL(url string) func(*git.Cmd) {
-	return func(g *git.Cmd) {
+func URL(url string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
 		g.AddOptions(url)
 	}
 }
