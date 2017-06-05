@@ -56,7 +56,7 @@ func Debug(g *types.Cmd) {
 }
 
 // DebugBool display command line
-func Debuggger(debug bool) func(*types.Cmd) {
+func Debugger(debug bool) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.Debug = debug
 	}
