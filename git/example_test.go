@@ -104,6 +104,6 @@ func ExampleCond() {
 	// git push --all --dry-run --follow-tags --receive-pack=aaa
 }
 
-func cmdExecutorMock(name string, debug bool, args ...string) (string, error) {
+func cmdExecutorMock(name string, _ bool, args ...string) (string, error) {
 	return fmt.Sprintln(name, strings.Join(args, " ")), nil
 }
