@@ -19,3 +19,5 @@ output, err = git.Fetch(fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("m
 // add a remote
 output, err = git.Remote(remote.Add, remote.Name("upstream"), remote.URL("https://github.com/ldez/gcg"))
 ----
+
+More examples: link:https://godoc.org/github.com/ldez/go-git-cmd-wrapper/git[documentation]
