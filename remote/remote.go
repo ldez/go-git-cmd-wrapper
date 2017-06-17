@@ -24,8 +24,6 @@ func Verbose(g *types.Cmd) {
 	g.AddOptions("--verbose")
 }
 
-// ----------
-
 func Add(g *types.Cmd) {
 	g.AddOptions("add")
 }

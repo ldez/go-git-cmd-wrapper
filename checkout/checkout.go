@@ -29,7 +29,10 @@
 // <tree-ish>
 package checkout
 
-import "github.com/ldez/go-git-cmd-wrapper/types"
+import (
+	"fmt"
+	"github.com/ldez/go-git-cmd-wrapper/types"
+)
 
 func Quiet(g *types.Cmd) {
 	g.AddOptions("--quiet")
@@ -118,7 +121,14 @@ func StartPoint(name string) func(*types.Cmd) {
 	}
 }
 
+// Conflict
+// --conflict=<style>
+func Conflict(style string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		g.AddOptions(fmt.Sprintf("--conflict=%s", style))
+	}
+}
+
 //-l
 //<new_branch>
 //<tree-ish>
-//--conflict=<style>
