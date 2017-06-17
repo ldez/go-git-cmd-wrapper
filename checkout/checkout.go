@@ -112,8 +112,13 @@ func Orphan(branch string) func(*types.Cmd) {
 	}
 }
 
+func StartPoint(name string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		g.AddOptions(name)
+	}
+}
+
 //-l
 //<new_branch>
-//<start_point>
 //<tree-ish>
 //--conflict=<style>
