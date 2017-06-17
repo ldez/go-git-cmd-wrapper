@@ -35,6 +35,20 @@ func Track(branch string) func(*types.Cmd) {
 	}
 }
 
+//	Rename git remote rename <old> <new>
+func Rename(old string, new string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		g.AddOptions("rename")
+		g.AddOptions(old)
+		g.AddOptions(new)
+	}
+}
+
+//	Remove git remote remove <name>
+func Remove(g *types.Cmd) {
+	g.AddOptions("remove")
+}
+
 func Master(symRef string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("-m")
