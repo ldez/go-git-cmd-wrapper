@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/ldez/go-git-cmd-wrapper/branch"
 	"github.com/ldez/go-git-cmd-wrapper/checkout"
 	"github.com/ldez/go-git-cmd-wrapper/clone"
 	"github.com/ldez/go-git-cmd-wrapper/config"
@@ -12,7 +13,6 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/push"
 	"github.com/ldez/go-git-cmd-wrapper/rebase"
 	"github.com/ldez/go-git-cmd-wrapper/remote"
-	"github.com/ldez/go-git-cmd-wrapper/branch"
 )
 
 func ExampleInit() {
@@ -45,7 +45,7 @@ func ExampleClone() {
 func ExampleRemote() {
 	cmdExecutor = cmdExecutorMock
 
-	out, _ := Remote(remote.Add, remote.Name("upstream"), remote.URL("git@github.com:johndoe/go-git-cmd-wrapper.git"))
+	out, _ := Remote(remote.Add("upstream", "git@github.com:johndoe/go-git-cmd-wrapper.git"))
 
 	fmt.Println(out)
 	// Output: git remote add upstream git@github.com:johndoe/go-git-cmd-wrapper.git
