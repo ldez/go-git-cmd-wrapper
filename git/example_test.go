@@ -12,6 +12,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/push"
 	"github.com/ldez/go-git-cmd-wrapper/rebase"
 	"github.com/ldez/go-git-cmd-wrapper/remote"
+	"github.com/ldez/go-git-cmd-wrapper/branch"
 )
 
 func ExampleInit() {
@@ -84,6 +85,15 @@ func ExampleConfig() {
 
 	fmt.Println(out)
 	// Output: git config rebase.autoSquash true
+}
+
+func ExampleBranch() {
+	cmdExecutor = cmdExecutorMock
+
+	out, _ := Branch(branch.DeleteForce, branch.BranchName("myBranch"))
+
+	fmt.Println(out)
+	// Output: git branch -D myBranch
 }
 
 func ExampleCond() {

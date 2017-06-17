@@ -50,6 +50,11 @@ func Config(options ...types.Option) (string, error) {
 	return command("config", options...)
 }
 
+// Branch https://git-scm.com/docs/git-branch
+func Branch(options ...types.Option) (string, error) {
+	return command("branch", options...)
+}
+
 // Debug display command line
 func Debug(g *types.Cmd) {
 	g.Debug = true
