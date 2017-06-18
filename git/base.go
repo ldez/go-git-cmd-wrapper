@@ -60,6 +60,11 @@ func RevParse(options ...types.Option) (string, error) {
 	return command("rev-parse", options...)
 }
 
+// Raw use to execute arbitrary commands.
+func Raw(cmd string, options ...types.Option) (string, error) {
+	return command(cmd, options...)
+}
+
 // Debug display command line
 func Debug(g *types.Cmd) {
 	g.Debug = true
