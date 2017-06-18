@@ -13,6 +13,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/push"
 	"github.com/ldez/go-git-cmd-wrapper/rebase"
 	"github.com/ldez/go-git-cmd-wrapper/remote"
+	"github.com/ldez/go-git-cmd-wrapper/revparse"
 )
 
 func ExampleInit() {
@@ -94,6 +95,15 @@ func ExampleBranch() {
 
 	fmt.Println(out)
 	// Output: git branch -D myBranch
+}
+
+func ExampleRevParse() {
+	cmdExecutor = cmdExecutorMock
+
+	out, _ := RevParse(revparse.AbbrevRef(""), revparse.Args("HEAD"))
+
+	fmt.Println(out)
+	// Output: git rev-parse --abbrev-ref HEAD
 }
 
 func ExampleCond() {

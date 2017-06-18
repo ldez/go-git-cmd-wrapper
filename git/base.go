@@ -55,6 +55,11 @@ func Branch(options ...types.Option) (string, error) {
 	return command("branch", options...)
 }
 
+// RevParse https://git-scm.com/docs/git-rev-parse
+func RevParse(options ...types.Option) (string, error) {
+	return command("rev-parse", options...)
+}
+
 // Debug display command line
 func Debug(g *types.Cmd) {
 	g.Debug = true
