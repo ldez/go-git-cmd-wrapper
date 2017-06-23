@@ -77,10 +77,12 @@ func Debugger(debug bool) types.Option {
 	}
 }
 
-// Cond apply conditionally an option
-func Cond(apply bool, option types.Option) func(*types.Cmd) {
+// Cond apply conditionally some options
+func Cond(apply bool, options ...types.Option) types.Option {
 	if apply {
-		return option
+		return func(g *types.Cmd) {
+			g.ApplyOptions(options...)
+		}
 	}
 	return NoOp
 }
@@ -90,9 +92,9 @@ func NoOp(g *types.Cmd) {}
 
 func command(name string, options ...types.Option) (string, error) {
 	g := &types.Cmd{Base: "git", Options: []string{name}}
-	for _, opt := range options {
-		opt(g)
-	}
+
+	g.ApplyOptions(options...)
+
 	return cmdExecutor(g.Base, g.Debug, g.Options...)
 }
 

@@ -12,3 +12,8 @@ func (g *Cmd) AddOptions(option string) {
 	g.Options = append(g.Options, option)
 }
 
+func (g *Cmd) ApplyOptions(options ...Option) {
+	for _, opt := range options {
+		opt(g)
+	}
+}
