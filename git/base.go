@@ -20,6 +20,11 @@ func Push(options ...types.Option) (string, error) {
 	return command("push", options...)
 }
 
+// Pull https://git-scm.com/docs/git-pull
+func Pull(options ...types.Option) (string, error) {
+	return command("pull", options...)
+}
+
 // Clone https://git-scm.com/docs/git-clone
 func Clone(options ...types.Option) (string, error) {
 	return command("clone", options...)

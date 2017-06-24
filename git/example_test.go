@@ -14,6 +14,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/rebase"
 	"github.com/ldez/go-git-cmd-wrapper/remote"
 	"github.com/ldez/go-git-cmd-wrapper/revparse"
+	"github.com/ldez/go-git-cmd-wrapper/pull"
 )
 
 func ExampleInit() {
@@ -32,6 +33,15 @@ func ExamplePush() {
 
 	fmt.Println(out)
 	// Output: git push --all --follow-tags --receive-pack=aaa
+}
+
+func ExamplePull() {
+	cmdExecutor = cmdExecutorMock
+
+	out, _ := Pull(pull.All, pull.Force, pull.Repository("upstream"), pull.Refspec("master"))
+
+	fmt.Println(out)
+	// Output: git pull --all --force upstream master
 }
 
 func ExampleClone() {
