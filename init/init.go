@@ -1,7 +1,3 @@
-// Init https://git-scm.com/docs/git-init
-// git init [-q | --quiet] [--bare] [--template=<template_directory>]
-// 			[--separate-git-dir <git dir>]
-// 			[--shared[=<permissions>]] [directory]
 package init
 
 import (
@@ -10,34 +6,56 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/types"
 )
 
-func Quiet(g *types.Cmd) {
-	g.AddOptions("--quiet")
-}
-
+// Bare Create a bare repository. If GIT_DIR environment is not set, it is set to the current working directory.
+// --bare
 func Bare(g *types.Cmd) {
 	g.AddOptions("--bare")
 }
 
-func Template(templateDirectory string) func(*types.Cmd) {
+// Quiet Only print error and warning messages; all other output will be suppressed.
+// -q, --quiet
+func Quiet(g *types.Cmd) {
+	g.AddOptions("--quiet")
+}
+
+// SeparateGitDir Instead of initializing the repository as a directory to either $GIT_DIR or ./.git/, create a text file there containing the path to the actual repository.
+// This file acts as filesystem-agnostic Git symbolic link to the repository.
+// --separate-git-dir=<git dir>
+func SeparateGitDir(gitDir string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		g.AddOptions(fmt.Sprintf("--template=%s", templateDirectory))
+		g.AddOptions(fmt.Sprintf("--separate-git-dir=%s", gitDir))
 	}
 }
 
+// Template Specify the directory from which templates will be used. (See the 'TEMPLATE DIRECTORY' section below.)
+// --template=<template_directory>
+func Template(template_directory string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		g.AddOptions(fmt.Sprintf("--template=%s", template_directory))
+	}
+}
+
+// Shared Specify that the Git repository is to be shared amongst several users.
+// This allows users belonging to the same group to push into that repository.
+// When specified, the config variable 'core.sharedRepository' is set so that files and directories under $GIT_DIR are created with the requested permissions.
+// When not specified, Git will use permissions reported by umask(2).
+// --shared[=(false|true|umask|group|all|world|everybody|0xxx)]
 func Shared(g *types.Cmd) {
 	g.AddOptions("--shared")
 }
 
-func SeparateGitDir(gitDir string) func(*types.Cmd) {
-	return func(g *types.Cmd) {
-		g.AddOptions("--separate-git-dir")
-		g.AddOptions(gitDir)
-	}
-}
-
+// Shared Specify that the Git repository is to be shared amongst several users.
+// This allows users belonging to the same group to push into that repository.
+// When specified, the config variable 'core.sharedRepository' is set so that files and directories under $GIT_DIR are created with the requested permissions.
+// When not specified, Git will use permissions reported by umask(2).
+// --shared[=(false|true|umask|group|all|world|everybody|0xxx)]
 func SharedWithPerms(permissions string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		g.AddOptions(fmt.Sprintf("--shared=%s", permissions))
+		if len(permissions) == 0 {
+			g.AddOptions("--shared")
+		} else {
+			g.AddOptions(fmt.Sprintf("--shared=%s", permissions))
+		}
 	}
 }
 

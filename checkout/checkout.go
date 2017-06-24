@@ -31,6 +31,7 @@ package checkout
 
 import (
 	"fmt"
+
 	"github.com/ldez/go-git-cmd-wrapper/types"
 )
 
