@@ -1,11 +1,3 @@
-// Clone https://git-scm.com/docs/git-clone
-// git clone [--template=<template_directory>]
-//			[-l] [-s] [--no-hardlinks] [-q] [-n] [--bare] [--mirror]
-//			[-o <name>] [-b <name>] [-u <upload-pack>] [--reference <repository>]
-//			[--dissociate] [--separate-git-dir <git dir>]
-//			[--depth <depth>] [--[no-]single-branch]
-//			[--recurse-submodules] [--[no-]shallow-submodules]
-//			[--jobs <n>] [--] <repository> [<directory>]
 package clone
 
 import (
@@ -14,114 +6,30 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/types"
 )
 
-func Template(templateDirectory string) func(*types.Cmd) {
+// Config Set a configuration variable in the newly-created repository; this takes effect immediately after the repository is initialized, but before the remote history is fetched or any files checked out. The key is in the same format as expected by git-config(1) (e.g., core.eol=true). If multiple values are given for the same key, each value will be written to the config file. This makes it safe, for example, to add additional fetch refspecs to the origin remote.
+// --config <key>=<value>, -c <key>=<value>
+func Config(key, value string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		g.AddOptions(fmt.Sprintf("--template=%s", templateDirectory))
+		g.AddOptions("--config")
+		g.AddOptions(fmt.Sprintf("%s=%s", key, value))
 	}
 }
 
-func Local(g *types.Cmd) {
-	g.AddOptions("--local")
-}
-
-func Shared(g *types.Cmd) {
-	g.AddOptions("--shared")
-}
-
-func NoHardlinks(g *types.Cmd) {
-	g.AddOptions("--no-hardlinks")
-}
-
-func Quiet(g *types.Cmd) {
-	g.AddOptions("--quiet")
-}
-
-func NoCheckout(g *types.Cmd) {
-	g.AddOptions("--no-checkout")
-}
-
-func Mirror(g *types.Cmd) {
-	g.AddOptions("--mirror")
-}
-
-func Bare(g *types.Cmd) {
-	g.AddOptions("--bare")
-}
-
-func Origin(name string) func(*types.Cmd) {
-	return func(g *types.Cmd) {
-		g.AddOptions("--origin")
-		g.AddOptions(name)
-	}
-}
-
-func Branch(name string) func(*types.Cmd) {
-	return func(g *types.Cmd) {
-		g.AddOptions("--branch")
-		g.AddOptions(name)
-	}
-}
-
-func UploadPack(name string) func(*types.Cmd) {
-	return func(g *types.Cmd) {
-		g.AddOptions("--upload-pack")
-		g.AddOptions(name)
-	}
-}
-
-func Dissociate(g *types.Cmd) {
-	g.AddOptions("--dissociate")
-}
-
-func SeparateGitDir(gitDir string) func(*types.Cmd) {
-	return func(g *types.Cmd) {
-		g.AddOptions("--separate-git-dir")
-		g.AddOptions(gitDir)
-	}
-}
-
-func Depth(depth string) func(*types.Cmd) {
-	return func(g *types.Cmd) {
-		g.AddOptions("--depth")
-		g.AddOptions(depth)
-	}
-}
-
-func SingleBranch(g *types.Cmd) {
-	g.AddOptions("--single-branch")
-}
-
-func NoSingleBranch(g *types.Cmd) {
-	g.AddOptions("--no-single-branch")
-}
-
-func RecurseSubmodules(g *types.Cmd) {
-	g.AddOptions("--recurse-submodules")
-}
-
-func ShallowSubmodules(g *types.Cmd) {
-	g.AddOptions("--shallow-submodules")
-}
-
-func NoShallowSubmodules(g *types.Cmd) {
-	g.AddOptions("--no-shallow-submodules")
-}
-
-func Jobs(n string) func(*types.Cmd) {
-	return func(g *types.Cmd) {
-		g.AddOptions("--jobs")
-		g.AddOptions(n)
-	}
-}
-
+// Repository The (possibly remote) repository to clone from. See the URLS section below for more information on specifying repositories.
+// <repository>
 func Repository(url string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions(url)
 	}
 }
 
+// Directory The name of a new directory to clone into. The "humanish" part of the source repository is used if no directory is explicitly given (repo for /path/to/repo.git and foo for host.xz:foo/.git). Cloning into an existing directory is only allowed if the directory is empty.
+// <directory>
 func Directory(name string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
 }
+
+// --reference[-if-able] <repository>
+// If the reference repository is on the local machine, automatically setup .git/objects/info/alternates to obtain objects from the reference repository. Using an already existing repository as an alternate will require fewer objects to be copied from the repository being cloned, reducing network and local storage costs. When using the --reference-if-able, a non existing directory is skipped with a warning instead of aborting the clone.
