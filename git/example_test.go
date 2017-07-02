@@ -10,11 +10,11 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/config"
 	"github.com/ldez/go-git-cmd-wrapper/fetch"
 	ginit "github.com/ldez/go-git-cmd-wrapper/init"
+	"github.com/ldez/go-git-cmd-wrapper/pull"
 	"github.com/ldez/go-git-cmd-wrapper/push"
 	"github.com/ldez/go-git-cmd-wrapper/rebase"
 	"github.com/ldez/go-git-cmd-wrapper/remote"
 	"github.com/ldez/go-git-cmd-wrapper/revparse"
-	"github.com/ldez/go-git-cmd-wrapper/pull"
 )
 
 func ExampleInit() {
@@ -83,7 +83,7 @@ func ExampleRebase() {
 func ExampleCheckout() {
 	cmdExecutor = cmdExecutorMock
 
-	out, _ := Checkout(checkout.NewBranch, checkout.Branch("myBranchName"))
+	out, _ := Checkout(checkout.NewBranch("myBranchName"))
 
 	fmt.Println(out)
 	// Output: git checkout -b myBranchName
