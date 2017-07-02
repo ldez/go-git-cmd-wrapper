@@ -1,0 +1,25 @@
+= Generator
+
+== Prepare
+
+* replace 01
+
+[source,regexp]
+----
+^(-.+)$
+----
+
+----
+{"argument": "$1", "arguments": "$1",
+----
+
+* replace 02
+
+[source,regexp]
+----
+^ \s+(.+)$*
+----
+
+----
+"description": "$1"},
+----

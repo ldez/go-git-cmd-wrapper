@@ -1,0 +1,1055 @@
+[
+  {
+    "command_name": "pull",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "This is passed to both underlying git-fetch to squelch reporting of during transfer, and underlying git-merge to squelch output during merging."
+      },
+      {
+        "argument": "--verbose",
+        "arguments": "-v, --verbose",
+        "description": "Pass --verbose to git-fetch and git-merge."
+      },
+      {
+        "argument": "--recurse-submodules[=yes|on-demand|no]",
+        "arguments": "--recurse-submodules[=yes|on-demand|no]",
+        "description": "This option controls if new commits of all populated submodules should be fetched too."
+      },
+      {
+        "argument": "--no-recurse-submodules[=yes|on-demand|no]",
+        "arguments": "--no-recurse-submodules[=yes|on-demand|no]",
+        "description": "This option controls if new commits of all populated submodules should be fetched too."
+      },
+      {
+        "argument": "--commit",
+        "arguments": "--commit",
+        "description": "Perform the merge and commit the result.\nThis option can be used to override --no-commit."
+      },
+      {
+        "argument": "--no-commit",
+        "arguments": "--no-commit",
+        "description": "With --no-commit perform the merge but pretend the merge failed and do not autocommit, to give the user a chance to inspect and further tweak the merge result before committing."
+      },
+      {
+        "argument": "--edit",
+        "arguments": "--edit, -e",
+        "description": "Invoke an editor before committing successful mechanical merge to further edit the auto-generated merge message, so that the user can explain and justify the merge."
+      },
+      {
+        "argument": "--no-edit",
+        "arguments": "--no-edit",
+        "description": "The --no-edit option can be used to accept the auto-generated message (this is generally discouraged)."
+      },
+      {
+        "argument": "--ff",
+        "arguments": "--ff",
+        "description": "When the merge resolves as a fast-forward, only update the branch pointer, without creating a merge commit.\nThis is the default behavior."
+      },
+      {
+        "argument": "--no-ff",
+        "arguments": "--no-ff",
+        "description": "Create a merge commit even when the merge resolves as a fast-forward.\nThis is the default behaviour when merging an annotated (and possibly signed) tag."
+      },
+      {
+        "argument": "--ff-only",
+        "arguments": "--ff-only",
+        "description": "Refuse to merge and exit with a non-zero status unless the current HEAD is already up-to-date or the merge can be resolved as a fast-forward."
+      },
+      {
+        "argument": "--log[=<n>]",
+        "arguments": "--log[=<n>]",
+        "description": "In addition to branch names, populate the log message with one-line descriptions from at most <n> actual commits that are being merged.\nSee also git-fmt-merge-msg(1)."
+      },
+      {
+        "argument": "--no-log",
+        "arguments": "--no-log",
+        "description": "With --no-log do not list one-line descriptions from the actual commits being merged."
+      },
+      {
+        "argument": "--stat",
+        "arguments": "--stat",
+        "description": "Show a diffstat at the end of the merge.\nThe diffstat is also controlled by the configuration option merge.stat."
+      },
+      {
+        "argument": "--no-stat",
+        "arguments": "-n, --no-stat",
+        "description": "With -n or --no-stat do not show a diffstat at the end of the merge."
+      },
+      {
+        "argument": "--squash",
+        "arguments": "--squash",
+        "description": "Produce the working tree and index state as if a real merge happened (except for the merge information), but do not actually make a commit, move the HEAD, or record $GIT_DIR/MERGE_HEAD (to cause the next git commit command to create a merge commit).\nThis allows you to create a single commit on top of the current branch whose effect is the same as merging another branch (or more in case of an octopus)."
+      },
+      {
+        "argument": "--no-squash",
+        "arguments": "--no-squash",
+        "description": "With --no-squash perform the merge and commit the result.\nThis option can be used to override --squash."
+      },
+      {
+        "argument": "--strategy=<strategy>",
+        "arguments": "-s <strategy>, --strategy=<strategy>",
+        "description": "Use the given merge strategy; can be supplied more than once to specify them in the order they should be tried.\nIf there is no -s option, a built-in list of strategies is used instead (git merge-recursive when merging a single head, git merge-octopus otherwise)."
+      },
+      {
+        "argument": "--strategy-option=<option>",
+        "arguments": "-X <option>, --strategy-option=<option>",
+        "description": "Pass merge strategy specific option through to the merge strategy."
+      },
+      {
+        "argument": "--verify-signatures",
+        "arguments": "--verify-signatures",
+        "description": "Verify that the tip commit of the side branch being merged is signed with a valid key, i.e. a key that has a valid uid: in the default trust model, this means the signing key has been signed by a trusted key."
+      },
+      {
+        "argument": "--no-verify-signatures",
+        "arguments": "--no-verify-signatures",
+        "description": "Verify that the tip commit of the side branch being merged is signed with a valid key, i.e. a key that has a valid uid: in the default trust model, this means the signing key has been signed by a trusted key."
+      },
+      {
+        "argument": "--allow-unrelated-histories",
+        "arguments": "--allow-unrelated-histories",
+        "description": "By default, git merge command refuses to merge histories that do not share a common ancestor.\nThis option can be used to override this safety when merging histories of two projects that started their lives independently.\nAs that is a very rare occasion, no configuration variable to enable this by default exists and will not be added."
+      },
+      {
+        "argument": "--rebase[=false|true|preserve|interactive]",
+        "arguments": "-r, --rebase[=false|true|preserve|interactive]",
+        "description": "When true, rebase the current branch on top of the upstream branch after fetching.\nIf there is a remote-tracking branch corresponding to the upstream branch and the upstream branch was rebased since last fetched, the rebase uses that information to avoid rebasing non-local changes."
+      },
+      {
+        "argument": "--no-rebase",
+        "arguments": "--no-rebase",
+        "description": "Override earlier --rebase."
+      },
+      {
+        "argument": "--autostash",
+        "arguments": "--autostash",
+        "description": "Before starting rebase, stash local modifications away if needed, and apply the stash when done."
+      },
+      {
+        "argument": "--no-autostash",
+        "arguments": "--no-autostash",
+        "description": "--no-autostash is useful to override the rebase.autoStash configuration variable."
+      },
+      {
+        "argument": "--all",
+        "arguments": "--all",
+        "description": "Fetch all remotes."
+      },
+      {
+        "argument": "--append",
+        "arguments": "-a, --append",
+        "description": "Append ref names and object names of fetched refs to the existing contents of .git/FETCH_HEAD.\nWithout this option old data in .git/FETCH_HEAD will be overwritten."
+      },
+      {
+        "argument": "--depth=<depth>",
+        "arguments": "--depth=<depth>",
+        "description": "Limit fetching to the specified number of commits from the tip of each remote branch history.\nIf fetching to a shallow repository created by git clone with --depth=<depth> option (see git-clone(1)), deepen or shorten the history to the specified number of commits.\nTags for the deepened commits are not fetched."
+      },
+      {
+        "argument": "--deepen=<depth>",
+        "arguments": "--deepen=<depth>",
+        "description": "Similar to --depth, except it specifies the number of commits from the current shallow boundary instead of from the tip of each remote branch history."
+      },
+      {
+        "argument": "--shallow-since=<date>",
+        "arguments": "--shallow-since=<date>",
+        "description": "Deepen or shorten the history of a shallow repository to include all reachable commits after <date>."
+      },
+      {
+        "argument": "--shallow-exclude=<revision>",
+        "arguments": "--shallow-exclude=<revision>",
+        "description": "Deepen or shorten the history of a shallow repository to exclude commits reachable from a specified remote branch or tag.\nThis option can be specified multiple times."
+      },
+      {
+        "argument": "--unshallow",
+        "arguments": "--unshallow",
+        "description": "If the source repository is complete, convert a shallow repository to a complete one, removing all the limitations imposed by shallow repositories.\nIf the source repository is shallow, fetch as much as possible so that the current repository has the same history as the source repository."
+      },
+      {
+        "argument": "--update-shallow",
+        "arguments": "--update-shallow",
+        "description": "By default when fetching from a shallow repository, git fetch refuses refs that require updating .git/shallow.\nThis option updates .git/shallow and accept such refs."
+      },
+      {
+        "argument": "--force",
+        "arguments": "-f, --force",
+        "description": "When git fetch is used with <rbranch>:<lbranch> refspec, it refuses to update the local branch <lbranch> unless the remote branch <rbranch> it fetches is a descendant of <lbranch>.\nThis option overrides that check."
+      },
+      {
+        "argument": "--keep",
+        "arguments": "-k, --keep",
+        "description": "Keep downloaded pack."
+      },
+      {
+        "argument": "--no-tags",
+        "arguments": "--no-tags",
+        "description": "By default, tags that point at objects that are downloaded from the remote repository are fetched and stored locally.\nThis option disables this automatic tag following.\nThe default behavior for a remote may be specified with the remote.<name>.tagOpt setting."
+      },
+      {
+        "argument": "--update-head-ok",
+        "arguments": "-u, --update-head-ok",
+        "description": "By default git fetch refuses to update the head which corresponds to the current branch.\nThis flag disables the check.\nThis is purely for the internal use for git pull to communicate with git fetch, and unless you are implementing your own Porcelain you are not supposed to use it."
+      },
+      {
+        "argument": "--upload-pack <upload-pack>",
+        "arguments": "--upload-pack <upload-pack>",
+        "description": "When given, and the repository to fetch from is handled by git fetch-pack, --exec=<upload-pack> is passed to the command to specify non-default path for the command run on the other end."
+      },
+      {
+        "argument": "--progress",
+        "arguments": "--progress",
+        "description": "Progress status is reported on the standard error stream by default when it is attached to a terminal, unless -q is specified.\nThis flag forces progress status even if the standard error stream is not directed to a terminal."
+      },
+      {
+        "argument": "--ipv4",
+        "arguments": "-4, --ipv4",
+        "description": "Use IPv4 addresses only, ignoring IPv6 addresses."
+      },
+      {
+        "argument": "--ipv6",
+        "arguments": "-6, --ipv6",
+        "description": "Use IPv6 addresses only, ignoring IPv4 addresses."
+      }
+    ]
+  },
+  {
+    "command_name": "fetch",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--all",
+        "arguments": "--all",
+        "description": "Fetch all remotes."
+      },
+      {
+        "argument": "--append",
+        "arguments": "-a, --append",
+        "description": "Append ref names and object names of fetched refs to the existing contents of .git/FETCH_HEAD.\nWithout this option old data in .git/FETCH_HEAD will be overwritten."
+      },
+      {
+        "argument": "--depth=<depth>",
+        "arguments": "--depth=<depth>",
+        "description": "Limit fetching to the specified number of commits from the tip of each remote branch history.\nIf fetching to a shallow repository created by git clone with --depth=<depth> option (see git-clone(1)), deepen or shorten the history to the specified number of commits.\nTags for the deepened commits are not fetched."
+      },
+      {
+        "argument": "--deepen=<depth>",
+        "arguments": "--deepen=<depth>",
+        "description": "Similar to --depth, except it specifies the number of commits from the current shallow boundary instead of from the tip of each remote branch history."
+      },
+      {
+        "argument": "--shallow-since=<date>",
+        "arguments": "--shallow-since=<date>",
+        "description": "Deepen or shorten the history of a shallow repository to include all reachable commits after <date>."
+      },
+      {
+        "argument": "--shallow-exclude=<revision>",
+        "arguments": "--shallow-exclude=<revision>",
+        "description": "Deepen or shorten the history of a shallow repository to exclude commits reachable from a specified remote branch or tag.\nThis option can be specified multiple times."
+      },
+      {
+        "argument": "--unshallow",
+        "arguments": "--unshallow",
+        "description": "If the source repository is complete, convert a shallow repository to a complete one, removing all the limitations imposed by shallow repositories.\nIf the source repository is shallow, fetch as much as possible so that the current repository has the same history as the source repository."
+      },
+      {
+        "argument": "--update-shallow",
+        "arguments": "--update-shallow",
+        "description": "By default when fetching from a shallow repository, git fetch refuses refs that require updating .git/shallow.\nThis option updates .git/shallow and accept such refs."
+      },
+      {
+        "argument": "--dry-run",
+        "arguments": "--dry-run",
+        "description": "Show what would be done, without making any changes."
+      },
+      {
+        "argument": "--force",
+        "arguments": "-f, --force",
+        "description": "When git fetch is used with <rbranch>:<lbranch> refspec, it refuses to update the local branch <lbranch> unless the remote branch <rbranch> it fetches is a descendant of <lbranch>.\nThis option overrides that check."
+      },
+      {
+        "argument": "--keep",
+        "arguments": "-k, --keep",
+        "description": "Keep downloaded pack."
+      },
+      {
+        "argument": "--multiple",
+        "arguments": "--multiple",
+        "description": "Allow several <repository> and <group> arguments to be specified.\nNo <refspec>s may be specified."
+      },
+      {
+        "argument": "--prune",
+        "arguments": "-p, --prune",
+        "description": "Before fetching, remove any remote-tracking references that no longer exist on the remote."
+      },
+      {
+        "argument": "--no-tags",
+        "arguments": "-n, --no-tags",
+        "description": "By default, tags that point at objects that are downloaded from the remote repository are fetched and stored locally.\nThis option disables this automatic tag following.\nThe default behavior for a remote may be specified with the remote.<name>.tagOpt setting."
+      },
+      {
+        "argument": "--refmap=<refspec>",
+        "arguments": "--refmap=<refspec>",
+        "description": "When fetching refs listed on the command line, use the specified refspec (can be given more than once) to map the refs to remote-tracking branches, instead of the values of remote.*.fetch configuration variables for the remote repository."
+      },
+      {
+        "argument": "--tags",
+        "arguments": "-t, --tags",
+        "description": "Fetch all tags from the remote (i.e., fetch remote tags refs/tags/* into local tags with the same name), in addition to whatever else would otherwise be fetched."
+      },
+      {
+        "argument": "--recurse-submodules[=yes|on-demand|no]",
+        "arguments": "--recurse-submodules[=yes|on-demand|no]",
+        "description": "This option controls if and under what conditions new commits of populated submodules should be fetched too."
+      },
+      {
+        "argument": "--jobs=<n>",
+        "arguments": "-j, --jobs=<n>",
+        "description": "Number of parallel children to be used for fetching submodules.\nEach will fetch from different submodules, such that fetching many submodules will be faster.\nBy default submodules will be fetched one at a time."
+      },
+      {
+        "argument": "--no-recurse-submodules",
+        "arguments": "--no-recurse-submodules",
+        "description": "Disable recursive fetching of submodules (this has the same effect as using the --recurse-submodules=no option)."
+      },
+      {
+        "argument": "--submodule-prefix=<path>",
+        "arguments": "--submodule-prefix=<path>",
+        "description": "Prepend <path> to paths printed in informative messages."
+      },
+      {
+        "argument": "--recurse-submodules-default=[yes|on-demand]",
+        "arguments": "--recurse-submodules-default=[yes|on-demand]",
+        "description": "This option is used internally to temporarily provide a non-negative default value for the --recurse-submodules option.\nAll other methods of configuring fetch’s submodule recursion (such as settings in gitmodules(5) and git-config(1)) override this option, as does specifying --[no-]recurse-submodules directly."
+      },
+      {
+        "argument": "--update-head-ok",
+        "arguments": "-u, --update-head-ok",
+        "description": "By default git fetch refuses to update the head which corresponds to the current branch.\nThis flag disables the check.\nThis is purely for the internal use for git pull to communicate with git fetch, and unless you are implementing your own Porcelain you are not supposed to use it."
+      },
+      {
+        "argument": "--upload-pack <upload-pack>",
+        "arguments": "--upload-pack <upload-pack>",
+        "description": "When given, and the repository to fetch from is handled by git fetch-pack, --exec=<upload-pack> is passed to the command to specify non-default path for the command run on the other end."
+      },
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "Pass --quiet to git-fetch-pack and silence any other internally used git commands.\nProgress is not reported to the standard error stream."
+      },
+      {
+        "argument": "--verbose",
+        "arguments": "-v, --verbose",
+        "description": "Be verbose."
+      },
+      {
+        "argument": "--progress",
+        "arguments": "--progress",
+        "description": "Progress status is reported on the standard error stream by default when it is attached to a terminal, unless -q is specified.\nThis flag forces progress status even if the standard error stream is not directed to a terminal."
+      },
+      {
+        "argument": "--ipv4",
+        "arguments": "-4, --ipv4",
+        "description": "Use IPv4 addresses only, ignoring IPv6 addresses."
+      },
+      {
+        "argument": "--ipv6",
+        "arguments": "-6, --ipv6",
+        "description": "Use IPv6 addresses only, ignoring IPv4 addresses."
+      }
+    ]
+  },
+  {
+    "command_name": "init",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "Only print error and warning messages; all other output will be suppressed."
+      },
+      {
+        "argument": "--bare",
+        "arguments": "--bare",
+        "description": "Create a bare repository.\nIf GIT_DIR environment is not set, it is set to the current working directory."
+      },
+      {
+        "argument": "--template=<template_directory>",
+        "arguments": "--template=<template_directory>",
+        "description": "Specify the directory from which templates will be used.\n(See the 'TEMPLATE DIRECTORY' section below.)"
+      },
+      {
+        "argument": "--separate-git-dir=<git dir>",
+        "arguments": "--separate-git-dir=<git dir>",
+        "description": "Instead of initializing the repository as a directory to either $GIT_DIR or ./.git/, create a text file there containing the path to the actual repository.\nThis file acts as filesystem-agnostic Git symbolic link to the repository."
+      },
+      {
+        "argument": "--shared[=(false|true|umask|group|all|world|everybody|0xxx)]",
+        "arguments": "--shared[=(false|true|umask|group|all|world|everybody|0xxx)]",
+        "description": "Specify that the Git repository is to be shared amongst several users.\nThis allows users belonging to the same group to push into that repository.\nWhen specified, the config variable 'core.sharedRepository' is set so that files and directories under $GIT_DIR are created with the requested permissions.\nWhen not specified, Git will use permissions reported by umask(2)."
+      }
+    ]
+  },
+  {
+    "command_name": "rebase",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--onto <newbase>",
+        "arguments": "--onto <newbase>",
+        "description": "Starting point at which to create the new commits.\nIf the --onto option is not specified, the starting point is <upstream>.\nMay be any valid commit, and not just an existing branch name."
+      },
+      {
+        "argument": "--continue",
+        "arguments": "--continue",
+        "description": "Restart the rebasing process after having resolved a merge conflict."
+      },
+      {
+        "argument": "--abort",
+        "arguments": "--abort",
+        "description": "Abort the rebase operation and reset HEAD to the original branch.\nIf <branch> was provided when the rebase operation was started, then HEAD will be reset to <branch>.\nOtherwise HEAD will be reset to where it was when the rebase operation was started."
+      },
+      {
+        "argument": "--quit",
+        "arguments": "--quit",
+        "description": "Abort the rebase operation but HEAD is not reset back to the original branch.\nThe index and working tree are also left unchanged as a result."
+      },
+      {
+        "argument": "--keep-empty",
+        "arguments": "--keep-empty",
+        "description": "Keep the commits that do not change anything from its parents in the result."
+      },
+      {
+        "argument": "--skip",
+        "arguments": "--skip",
+        "description": "Restart the rebasing process by skipping the current patch."
+      },
+      {
+        "argument": "--edit-todo",
+        "arguments": "--edit-todo",
+        "description": "Edit the todo list during an interactive rebase."
+      },
+      {
+        "argument": "--merge",
+        "arguments": "-m, --merge",
+        "description": "Use merging strategies to rebase.\nWhen the recursive (default) merge strategy is used, this allows rebase to be aware of renames on the upstream side."
+      },
+      {
+        "argument": "--strategy=<strategy>",
+        "arguments": "-s <strategy>, --strategy=<strategy>",
+        "description": "Use the given merge strategy.\nIf there is no -s option git merge-recursive is used instead.\nThis implies --merge."
+      },
+      {
+        "argument": "--strategy-option=<strategy-option>",
+        "arguments": "-X <strategy-option>, --strategy-option=<strategy-option>",
+        "description": "Pass the <strategy-option> through to the merge strategy.\nThis implies --merge and, if no strategy has been specified, -s recursive.\nNote the reversal of ours and theirs as noted above for the -m option."
+      },
+      {
+        "argument": "--gpg-sign[=<keyid>]",
+        "arguments": "-S[<keyid>], --gpg-sign[=<keyid>]",
+        "description": "GPG-sign commits.\nThe keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space."
+      },
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "Be quiet.\nImplies --no-stat."
+      },
+      {
+        "argument": "--verbose",
+        "arguments": "-v, --verbose",
+        "description": "Be verbose.\nImplies --stat."
+      },
+      {
+        "argument": "--stat",
+        "arguments": "--stat",
+        "description": "Show a diffstat of what changed upstream since the last rebase.\nThe diffstat is also controlled by the configuration option rebase.stat."
+      },
+      {
+        "argument": "--no-stat",
+        "arguments": "-n, --no-stat",
+        "description": "Do not show a diffstat as part of the rebase process."
+      },
+      {
+        "argument": "--no-verify",
+        "arguments": "--no-verify",
+        "description": "This option bypasses the pre-rebase hook.\nSee also githooks(5)."
+      },
+      {
+        "argument": "--verify",
+        "arguments": "--verify",
+        "description": "Allows the pre-rebase hook to run, which is the default.\nThis option can be used to override --no-verify.\nSee also githooks(5)."
+      },
+      {
+        "method_name": "EnsureContext",
+        "argument": "-C<n>",
+        "arguments": "-C<n>",
+        "description": "Ensure at least <n> lines of surrounding context match before and after each change.\nWhen fewer lines of surrounding context exist they all must match.\nBy default no context is ever ignored."
+      },
+      {
+        "argument": "--force-rebase",
+        "arguments": "-f, --force-rebase",
+        "description": "Force a rebase even if the current branch is up-to-date and the command without --force would return without doing anything."
+      },
+      {
+        "argument": "--fork-point",
+        "arguments": "--fork-point, --no-fork-point",
+        "description": "Use reflog to find a better common ancestor between <upstream> and <branch> when calculating which commits have been introduced by <branch>."
+      },
+      {
+        "argument": "--no-fork-point",
+        "arguments": "--fork-point, --no-fork-point",
+        "description": "Use reflog to find a better common ancestor between <upstream> and <branch> when calculating which commits have been introduced by <branch>."
+      },
+      {
+        "argument": "--ignore-whitespace",
+        "arguments": "--ignore-whitespace",
+        "description": "These flag are passed to the git apply program (see git-apply(1)) that applies the patch.\nIncompatible with the --interactive option."
+      },
+      {
+        "argument": "--whitespace=<option>",
+        "arguments": "--whitespace=<option>",
+        "description": "These flag are passed to the git apply program (see git-apply(1)) that applies the patch.\nIncompatible with the --interactive option."
+      },
+      {
+        "argument": "--committer-date-is-author-date",
+        "arguments": "--ignore-date",
+        "description": "These flags are passed to git am to easily change the dates of the rebased commits (see git-am(1)).\nIncompatible with the --interactive option."
+      },
+      {
+        "argument": "--ignore-date",
+        "arguments": "--ignore-date",
+        "description": "These flags are passed to git am to easily change the dates of the rebased commits (see git-am(1)).\nIncompatible with the --interactive option."
+      },
+      {
+        "argument": "--signoff",
+        "arguments": "--signoff",
+        "description": "This flag is passed to git am to sign off all the rebased commits (see git-am(1)).\nIncompatible with the --interactive option."
+      },
+      {
+        "argument": "--interactive",
+        "arguments": "-i, --interactive",
+        "description": "Make a list of the commits which are about to be rebased.\nLet the user edit that list before rebasing.\nThis mode can also be used to split commits (see SPLITTING COMMITS below)."
+      },
+      {
+        "argument": "--preserve-merges",
+        "arguments": "-p, --preserve-merges",
+        "description": "Recreate merge commits instead of flattening the history by replaying commits a merge commit introduces.\nMerge conflict resolutions or manual amendments to merge commits are not preserved."
+      },
+      {
+        "argument": "--exec <cmd>",
+        "arguments": "-x <cmd>, --exec <cmd>",
+        "description": "Append 'exec <cmd>' after each line creating a commit in the final history.\n<cmd> will be interpreted as one or more shell commands."
+      },
+      {
+        "argument": "--root",
+        "arguments": "--root",
+        "description": "Rebase all commits reachable from <branch>, instead of limiting them with an <upstream>.\nThis allows you to rebase the root commit(s) on a branch.\nWhen used with --onto, it will skip changes already contained in <newbase> (instead of <upstream>) whereas without --onto it will operate on every change.\nWhen used together with both --onto and --preserve-merges, all root commits will be rewritten to have <newbase> as parent instead."
+      },
+      {
+        "argument": "--autosquash",
+        "arguments": "--autosquash, --no-autosquash",
+        "description": "When the commit log message begins with 'squash! ...' (or 'fixup! ...'), and there is a commit whose title begins with the same ..., automatically modify the todo list of rebase -i so that the commit marked for squashing comes right after the commit to be modified, and change the action of the moved commit from pick to squash (or fixup).\nIgnores subsequent 'fixup! ' or 'squash! ' after the first, in case you referred to an earlier fixup/squash with git commit --fixup/--squash.\nThis option is only valid when the --interactive option is used."
+      },
+      {
+        "argument": "--no-autosquash",
+        "arguments": "--autosquash, --no-autosquash",
+        "description": "When the commit log message begins with 'squash! ...' (or 'fixup! ...'), and there is a commit whose title begins with the same ..., automatically modify the todo list of rebase -i so that the commit marked for squashing comes right after the commit to be modified, and change the action of the moved commit from pick to squash (or fixup).\nIgnores subsequent 'fixup! ' or 'squash! ' after the first, in case you referred to an earlier fixup/squash with git commit --fixup/--squash.\nThis option is only valid when the --interactive option is used."
+      },
+      {
+        "argument": "--autostash",
+        "arguments": "--autostash, --no-autostash",
+        "description": "Automatically create a temporary stash before the operation begins, and apply it after the operation ends.\nThis means that you can run rebase on a dirty worktree.\nHowever, use with care: the final stash application after a successful rebase might result in non-trivial conflicts."
+      },
+      {
+        "argument": "--no-autostash",
+        "arguments": "--autostash, --no-autostash",
+        "description": "Automatically create a temporary stash before the operation begins, and apply it after the operation ends.\nThis means that you can run rebase on a dirty worktree.\nHowever, use with care: the final stash application after a successful rebase might result in non-trivial conflicts."
+      },
+      {
+        "argument": "--no-ff",
+        "arguments": "--no-ff",
+        "description": "With --interactive, cherry-pick all rebased commits instead of fast-forwarding over the unchanged ones.\nThis ensures that the entire history of the rebased branch is composed of new commits.\nWithout --interactive, this is a synonym for --force-rebase."
+      }
+    ]
+  },
+  {
+    "command_name": "push",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--all",
+        "arguments": "--all",
+        "description": "Push all branches (i.e. refs under refs/heads/); cannot be used with other <refspec>."
+      },
+      {
+        "argument": "--prune",
+        "arguments": "--prune",
+        "description": "Remove remote branches that don’t have a local counterpart.\nFor example a remote branch tmp will be removed if a local branch with the same name doesn’t exist any more. This also respects refspecs, e.g.  git push --prune remote refs/heads/*:refs/tmp/* would make sure that remote refs/tmp/foo will be removed if refs/heads/foo doesn’t exist."
+      },
+      {
+        "argument": "--mirror",
+        "arguments": "--mirror",
+        "description": "Instead of naming each ref to push, specifies that all refs under refs/ (which includes but is not limited to refs/heads/, refs/remotes/, and refs/tags/) be mirrored to the remote repository.\nNewly created local refs will be pushed to the remote end, locally updated refs will be force updated on the remote end, and deleted refs will be removed from the remote end.\nThis is the default if the configuration option remote.<remote>.mirror is set."
+      },
+      {
+        "argument": "--dry-run",
+        "arguments": "-n, --dry-run",
+        "description": "Do everything except actually send the updates."
+      },
+      {
+        "argument": "--porcelain",
+        "arguments": "--porcelain",
+        "description": "Produce machine-readable output.\nThe output status line for each ref will be tab-separated and sent to stdout instead of stderr.\nThe full symbolic names of the refs will be given."
+      },
+      {
+        "argument": "--delete",
+        "arguments": "--delete",
+        "description": "All listed refs are deleted from the remote repository.\nThis is the same as prefixing all refs with a colon."
+      },
+      {
+        "argument": "--tags",
+        "arguments": "--tags",
+        "description": "All refs under refs/tags are pushed, in addition to refspecs explicitly listed on the command line."
+      },
+      {
+        "argument": "--follow-tags",
+        "arguments": "--follow-tags",
+        "description": "Push all the refs that would be pushed without this option, and also push annotated tags in refs/tags that are missing from the remote but are pointing at commit-ish that are reachable from the refs being pushed.\nThis can also be specified with configuration variable push.followTags.\nFor more information, see push.followTags in git-config(1)."
+      },
+      {
+        "argument": "--signed",
+        "arguments": "--signed",
+        "description": "GPG-sign the push request to update refs on the receiving side, to allow it to be checked by the hooks and/or be logged.\nIf false or --no-signed, no signing will be attempted.\nIf true or --signed, the push will fail if the server does not support signed pushes.\nIf set to if-asked, sign if and only if the server supports signed pushes.\nThe push will also fail if the actual call to gpg --sign fails.\nSee git-receive-pack(1) for the details on the receiving end."
+      },
+      {
+        "argument": "--no-signed",
+        "arguments": "--no-signed",
+        "description": "GPG-sign the push request to update refs on the receiving side, to allow it to be checked by the hooks and/or be logged.\nIf false or --no-signed, no signing will be attempted.\nIf true or --signed, the push will fail if the server does not support signed pushes.\nIf set to if-asked, sign if and only if the server supports signed pushes.\nThe push will also fail if the actual call to gpg --sign fails.\nSee git-receive-pack(1) for the details on the receiving end."
+      },
+      {
+        "argument": "--sign=(true|false|if-asked)",
+        "arguments": "--sign=(true|false|if-asked)",
+        "description": "GPG-sign the push request to update refs on the receiving side, to allow it to be checked by the hooks and/or be logged.\nIf false or --no-signed, no signing will be attempted.\nIf true or --signed, the push will fail if the server does not support signed pushes.\nIf set to if-asked, sign if and only if the server supports signed pushes.\nThe push will also fail if the actual call to gpg --sign fails.\nSee git-receive-pack(1) for the details on the receiving end."
+      },
+      {
+        "argument": "--atomic",
+        "arguments": "--atomic",
+        "description": "Use an atomic transaction on the remote side if available.\nEither all refs are updated, or on error, no refs are updated.\nIf the server does not support atomic pushes the push will fail."
+      },
+      {
+        "argument": "--no-atomic",
+        "arguments": "--no-atomic",
+        "description": "Use an atomic transaction on the remote side if available.\nEither all refs are updated, or on error, no refs are updated.\nIf the server does not support atomic pushes the push will fail."
+      },
+      {
+        "argument": "--push-option",
+        "arguments": "-o, --push-option",
+        "description": "Transmit the given string to the server, which passes them to the pre-receive as well as the post-receive hook.\nThe given string must not contain a NUL or LF character."
+      },
+      {
+        "argument": "--receive-pack=<git-receive-pack>",
+        "arguments": "--receive-pack=<git-receive-pack>",
+        "description": "Path to the git-receive-pack program on the remote end.\nSometimes useful when pushing to a remote repository over ssh, and you do not have the program in a directory on the default $PATH."
+      },
+      {
+        "argument": "--exec=<git-receive-pack>",
+        "arguments": "--exec=<git-receive-pack>",
+        "description": "Path to the git-receive-pack program on the remote end.\nSometimes useful when pushing to a remote repository over ssh, and you do not have the program in a directory on the default $PATH."
+      },
+      {
+        "argument": "--force",
+        "arguments": "-f, --force",
+        "description": "Usually, the command refuses to update a remote ref that is not an ancestor of the local ref used to overwrite it.\nAlso, when --force-with-lease option is used, the command refuses to update a remote ref whose current value does not match what is expected."
+      },
+      {
+        "argument": "--repo=<repository>",
+        "arguments": "--repo=<repository>",
+        "description": "This option is equivalent to the <repository> argument.\nIf both are specified, the command-line argument takes precedence."
+      },
+      {
+        "argument": "--set-upstream",
+        "arguments": "-u, --set-upstream",
+        "description": "For every branch that is up to date or successfully pushed, add upstream (tracking) reference, used by argument-less git-pull(1) and other commands.\nFor more information, see branch.<name>.merge in git-config(1)."
+      },
+      {
+        "argument": "--thin",
+        "arguments": "--thin",
+        "description": "These options are passed to git-send-pack(1).\nA thin transfer significantly reduces the amount of sent data when the sender and receiver share many of the same objects in common.\nThe default is --thin."
+      },
+      {
+        "argument": "--no-thin",
+        "arguments": "--no-thin",
+        "description": "These options are passed to git-send-pack(1).\nA thin transfer significantly reduces the amount of sent data when the sender and receiver share many of the same objects in common.\nThe default is --thin."
+      },
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "Suppress all output, including the listing of updated refs, unless an error occurs.\nProgress is not reported to the standard error stream."
+      },
+      {
+        "argument": "--verbose",
+        "arguments": "-v, --verbose",
+        "description": "Run verbosely."
+      },
+      {
+        "argument": "--progress",
+        "arguments": "--progress",
+        "description": "Progress status is reported on the standard error stream by default when it is attached to a terminal, unless -q is specified.\nThis flag forces progress status even if the standard error stream is not directed to a terminal."
+      },
+      {
+        "argument": "--no-recurse-submodules",
+        "arguments": "--no-recurse-submodules",
+        "description": "May be used to make sure all submodule commits used by the revisions to be pushed are available on a remote-tracking branch.\nIf check is used Git will verify that all submodule commits that changed in the revisions to be pushed are available on at least one remote of the submodule.\nIf any commits are missing the push will be aborted and exit with non-zero status.\nIf on-demand is used all submodules that changed in the revisions to be pushed will be pushed.\nIf on-demand was not able to push all necessary revisions it will also be aborted and exit with non-zero status.\nIf only is used all submodules will be recursively pushed while the superproject is left unpushed.\nA value of no or using --no-recurse-submodules can be used to override the push.recurseSubmodules configuration variable when no submodule recursion is required."
+      },
+      {
+        "argument": "--recurse-submodules=(check|on-demand|only|no)",
+        "arguments": "--recurse-submodules=(check|on-demand|only|no)",
+        "description": "May be used to make sure all submodule commits used by the revisions to be pushed are available on a remote-tracking branch.\nIf check is used Git will verify that all submodule commits that changed in the revisions to be pushed are available on at least one remote of the submodule.\nIf any commits are missing the push will be aborted and exit with non-zero status.\nIf on-demand is used all submodules that changed in the revisions to be pushed will be pushed.\nIf on-demand was not able to push all necessary revisions it will also be aborted and exit with non-zero status.\nIf only is used all submodules will be recursively pushed while the superproject is left unpushed.\nA value of no or using --no-recurse-submodules can be used to override the push.recurseSubmodules configuration variable when no submodule recursion is required."
+      },
+      {
+        "argument": "--verify",
+        "arguments": "--verify",
+        "description": "Toggle the pre-push hook (see githooks(5)).\nThe default is --verify, giving the hook a chance to prevent the push.\nWith --no-verify, the hook is bypassed completely."
+      },
+      {
+        "argument": "--no-verify",
+        "arguments": "--no-verify",
+        "description": "Toggle the pre-push hook (see githooks(5)).\nThe default is --verify, giving the hook a chance to prevent the push.\nWith --no-verify, the hook is bypassed completely."
+      },
+      {
+        "argument": "--ipv4",
+        "arguments": "-4, --ipv4",
+        "description": "Use IPv4 addresses only, ignoring IPv6 addresses."
+      },
+      {
+        "argument": "--ipv6",
+        "arguments": "-6, --ipv6",
+        "description": "Use IPv6 addresses only, ignoring IPv4 addresses."
+      }
+    ]
+  },
+  {
+    "command_name": "clone",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--local",
+        "arguments": "--local, -l",
+        "description": "When the repository to clone from is on a local machine, this flag bypasses the normal 'Git aware' transport mechanism and clones the repository by making a copy of HEAD and everything under objects and refs directories. The files under .git/objects/ directory are hardlinked to save space when possible."
+      },
+      {
+        "argument": "--no-hardlinks",
+        "arguments": "--no-hardlinks",
+        "description": "Force the cloning process from a repository on a local filesystem to copy the files under the .git/objects directory instead of using hardlinks. This may be desirable if you are trying to make a back-up of your repository."
+      },
+      {
+        "argument": "--shared",
+        "arguments": "--shared, -s",
+        "description": "When the repository to clone is on the local machine, instead of using hard links, automatically setup .git/objects/info/alternates to share the objects with the source repository. The resulting repository starts out without any object of its own."
+      },
+      {
+        "argument": "--dissociate",
+        "arguments": "--dissociate",
+        "description": "Borrow the objects from reference repositories specified with the --reference options only to reduce network transfer, and stop borrowing from them after a clone is made by making necessary local copies of borrowed objects. This option can also be used when cloning locally from a repository that already borrows objects from another repository—the new repository will borrow objects from the same repository, and this option can be used to stop the borrowing."
+      },
+      {
+        "argument": "--quiet",
+        "arguments": "--quiet, -q",
+        "description": "Operate quietly. Progress is not reported to the standard error stream."
+      },
+      {
+        "argument": "--verbose",
+        "arguments": "--verbose, -v",
+        "description": "Run verbosely. Does not affect the reporting of progress status to the standard error stream."
+      },
+      {
+        "argument": "--progress",
+        "arguments": "--progress",
+        "description": "Progress status is reported on the standard error stream by default when it is attached to a terminal, unless -q is specified. This flag forces progress status even if the standard error stream is not directed to a terminal."
+      },
+      {
+        "argument": "--no-checkout",
+        "arguments": "--no-checkout, -n",
+        "description": "No checkout of HEAD is performed after the clone is complete."
+      },
+      {
+        "argument": "--bare",
+        "arguments": "--bare",
+        "description": "Make a bare Git repository. That is, instead of creating <directory> and placing the administrative files in <directory>/.git, make the <directory> itself the $GIT_DIR. This obviously implies the -n because there is nowhere to check out the working tree. Also the branch heads at the remote are copied directly to corresponding local branch heads, without mapping them to refs/remotes/origin/. When this option is used, neither remote-tracking branches nor the related configuration variables are created."
+      },
+      {
+        "argument": "--mirror",
+        "arguments": "--mirror",
+        "description": "Set up a mirror of the source repository. This implies --bare. Compared to --bare, --mirror not only maps local branches of the source to local branches of the target, it maps all refs (including remote-tracking branches, notes etc.) and sets up a refspec configuration such that all these refs are overwritten by a git remote update in the target repository."
+      },
+      {
+        "argument": "--origin <name>",
+        "arguments": "--origin <name>, -o <name>",
+        "description": "Instead of using the remote name origin to keep track of the upstream repository, use <name>."
+      },
+      {
+        "argument": "--branch <name>",
+        "arguments": "--branch <name>, -b <name>",
+        "description": "Instead of pointing the newly created HEAD to the branch pointed to by the cloned repository’s HEAD, point to <name> branch instead. In a non-bare repository, this is the branch that will be checked out.  --branch can also take tags and detaches the HEAD at that commit in the resulting repository."
+      },
+      {
+        "argument": "--upload-pack <upload-pack>",
+        "arguments": "--upload-pack <upload-pack>, -u <upload-pack>",
+        "description": "When given, and the repository to clone from is accessed via ssh, this specifies a non-default path for the command run on the other end."
+      },
+      {
+        "argument": "--template=<template_directory>",
+        "arguments": "--template=<template_directory>",
+        "description": "Specify the directory from which templates will be used; (See the 'TEMPLATE DIRECTORY' section of git-init(1).)"
+      },
+      {
+        "argument": "--depth <depth>",
+        "arguments": "--depth <depth>",
+        "description": "Create a shallow clone with a history truncated to the specified number of commits. Implies --single-branch unless --no-single-branch is given to fetch the histories near the tips of all branches. If you want to clone submodules shallowly, also pass --shallow-submodules."
+      },
+      {
+        "argument": "--shallow-since=<date>",
+        "arguments": "--shallow-since=<date>",
+        "description": "Create a shallow clone with a history after the specified time."
+      },
+      {
+        "argument": "--shallow-exclude=<revision>",
+        "arguments": "--shallow-exclude=<revision>",
+        "description": "Create a shallow clone with a history, excluding commits reachable from a specified remote branch or tag. This option can be specified multiple times."
+      },
+      {
+        "argument": "--single-branch",
+        "arguments": "--single-branch",
+        "description": "Clone only the history leading to the tip of a single branch, either specified by the --branch option or the primary branch remote’s HEAD points at. Further fetches into the resulting repository will only update the remote-tracking branch for the branch this option was used for the initial cloning. If the HEAD at the remote did not point at any branch when --single-branch clone was made, no remote-tracking branch is created."
+      },
+      {
+        "argument": "--no-single-branch",
+        "arguments": "--no-single-branch",
+        "description": "Clone only the history leading to the tip of a single branch, either specified by the --branch option or the primary branch remote’s HEAD points at. Further fetches into the resulting repository will only update the remote-tracking branch for the branch this option was used for the initial cloning. If the HEAD at the remote did not point at any branch when --single-branch clone was made, no remote-tracking branch is created."
+      },
+      {
+        "argument": "--recurse-submodules[=<pathspec>]",
+        "arguments": "--recurse-submodules[=<pathspec>]",
+        "description": "After the clone is created, initialize and clone submodules within based on the provided pathspec. If no pathspec is provided, all submodules are initialized and cloned. Submodules are initialized and cloned using their default settings. The resulting clone has submodule.active set to the provided pathspec, or '.' (meaning all submodules) if no pathspec is provided. This is equivalent to running git submodule update --init --recursive immediately after the clone is finished. This option is ignored if the cloned repository does not have a worktree/checkout (i.e. if any of --no-checkout/-n, --bare, or --mirror is given)"
+      },
+      {
+        "argument": "--shallow-submodules",
+        "arguments": "--shallow-submodules",
+        "description": "All submodules which are cloned will be shallow with a depth of 1."
+      },
+      {
+        "argument": "--no-shallow-submodules",
+        "arguments": "--no-shallow-submodules",
+        "description": "All submodules which are cloned will be shallow with a depth of 1."
+      },
+      {
+        "argument": "--separate-git-dir=<git dir>",
+        "arguments": "--separate-git-dir=<git dir>",
+        "description": "Instead of placing the cloned repository where it is supposed to be, place the cloned repository at the specified directory, then make a filesystem-agnostic Git symbolic link to there. The result is Git repository can be separated from working tree."
+      },
+      {
+        "argument": "--jobs <n>",
+        "arguments": "-j <n>, --jobs <n>",
+        "description": "The number of submodules fetched at the same time. Defaults to the submodule.fetchJobs option."
+      }
+    ]
+  },
+  {
+    "command_name": "checkout",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "Quiet, suppress feedback messages."
+      },
+      {
+        "argument": "--progress",
+        "arguments": "--progress",
+        "description": "Progress status is reported on the standard error stream by default when it is attached to a terminal, unless --quiet is specified.\nThis flag enables progress reporting even if not attached to a terminal, regardless of --quiet."
+      },
+      {
+        "argument": "--no-progress",
+        "arguments": "--no-progress",
+        "description": "Progress status is reported on the standard error stream by default when it is attached to a terminal, unless --quiet is specified.\nThis flag enables progress reporting even if not attached to a terminal, regardless of --quiet."
+      },
+      {
+        "argument": "--force",
+        "arguments": "-f, --force",
+        "description": "When switching branches, proceed even if the index or the working tree differs from HEAD.\nThis is used to throw away local changes.\nWhen checking out paths from the index, do not fail upon unmerged entries; instead, unmerged entries are ignored."
+      },
+      {
+        "argument": "--ours",
+        "arguments": "--ours, --theirs",
+        "description": "When checking out paths from the index, check out stage #2 (ours) or #3 (theirs) for unmerged paths."
+      },
+      {
+        "argument": "--theirs",
+        "arguments": "--ours, --theirs",
+        "description": "When checking out paths from the index, check out stage #2 (ours) or #3 (theirs) for unmerged paths."
+      },
+      {
+        "method_name": "NewBranch",
+        "argument": "-b <new_branch>",
+        "arguments": "-b <new_branch>",
+        "description": "Create a new branch named <new_branch> and start it at <start_point>; see git-branch(1) for details."
+      },
+      {
+        "method_name": "NewBranchForce",
+        "argument": "-B <new_branch>",
+        "arguments": "-B <new_branch>",
+        "description": "Creates the branch <new_branch> and start it at <start_point>; if it already exists, then reset it to <start_point>.\nThis is equivalent to running 'git branch' with '-f'; see git-branch(1) for details."
+      },
+      {
+        "argument": "--track",
+        "arguments": "-t, --track",
+        "description": "When creating a new branch, set up 'upstream' configuration.\nSee '--track' in git-branch(1) for details."
+      },
+      {
+        "argument": "--no-track",
+        "arguments": "--no-track",
+        "description": "Do not set up 'upstream' configuration, even if the branch.autoSetupMerge configuration variable is true."
+      },
+      {
+        "method_name": "NewBranchReflog",
+        "argument": "-l",
+        "arguments": "-l",
+        "description": "Create the new branch’s reflog; see git-branch(1) for details."
+      },
+      {
+        "argument": "--detach",
+        "arguments": "--detach",
+        "description": "Rather than checking out a branch to work on it, check out a commit for inspection and discardable experiments.\nThis is the default behavior of 'git checkout <commit>' when <commit> is not a branch name.\nSee the 'DETACHED HEAD' section below for details."
+      },
+      {
+        "argument": "--orphan <new_branch>",
+        "arguments": "--orphan <new_branch>",
+        "description": "Create a new orphan branch, named <new_branch>, started from <start_point> and switch to it.\nThe first commit made on this new branch will have no parents and it will be the root of a new history totally disconnected from all the other branches and commits."
+      },
+      {
+        "argument": "--ignore-skip-worktree-bits",
+        "arguments": "--ignore-skip-worktree-bits",
+        "description": "In sparse checkout mode, git checkout -- <paths> would update only entries matched by <paths> and sparse patterns in $GIT_DIR/info/sparse-checkout.\nThis option ignores the sparse patterns and adds back any files in <paths>."
+      },
+      {
+        "argument": "--merge",
+        "arguments": "-m, --merge",
+        "description": "When switching branches, if you have local modifications to one or more files that are different between the current branch and the branch to which you are switching, the command refuses to switch branches in order to preserve your modifications in context.\nHowever, with this option, a three-way merge between the current branch, your working tree contents, and the new branch is done, and you will be on the new branch."
+      },
+      {
+        "argument": "--conflict=<style>",
+        "arguments": "--conflict=<style>",
+        "description": "The same as --merge option above, but changes the way the conflicting hunks are presented, overriding the merge.conflictStyle configuration variable.\nPossible values are 'merge' (default) and 'diff3' (in addition to what is shown by 'merge' style, shows the original contents)."
+      },
+      {
+        "argument": "--patch",
+        "arguments": "-p, --patch",
+        "description": "Interactively select hunks in the difference between the <tree-ish> (or the index, if unspecified) and the working tree.\nThe chosen hunks are then applied in reverse to the working tree (and if a <tree-ish> was specified, the index)."
+      },
+      {
+        "argument": "--ignore-other-worktrees",
+        "arguments": "--ignore-other-worktrees",
+        "description": "git checkout refuses when the wanted ref is already checked out by another worktree.\nThis option makes it check the ref out anyway.\nIn other words, the ref can be held by more than one worktree."
+      },
+      {
+        "argument": "--recurse-submodules",
+        "arguments": "--recurse-submodules",
+        "description": "Using --recurse-submodules will update the content of all initialized submodules according to the commit recorded in the superproject.\nIf local modifications in a submodule would be overwritten the checkout will fail unless -f is used.\nIf nothing (or --no-recurse-submodules) is used, the work trees of submodules will not be updated."
+      },
+      {
+        "argument": "--no-recurse-submodules",
+        "arguments": "--no-recurse-submodules",
+        "description": "Using --recurse-submodules will update the content of all initialized submodules according to the commit recorded in the superproject.\nIf local modifications in a submodule would be overwritten the checkout will fail unless -f is used.\nIf nothing (or --no-recurse-submodules) is used, the work trees of submodules will not be updated."
+      }
+    ]
+  },
+  {
+    "command_name": "config",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--global",
+        "arguments": "--global",
+        "description": "For writing options: write to global ~/.gitconfig file rather than the repository .git/config, write to $XDG_CONFIG_HOME/git/config file if this file exists and the ~/.gitconfig file doesn’t."
+      },
+      {
+        "argument": "--system",
+        "arguments": "--system",
+        "description": "For writing options: write to system-wide $(prefix)/etc/gitconfig rather than the repository .git/config."
+      },
+      {
+        "argument": "--local",
+        "arguments": "--local",
+        "description": "For writing options: write to the repository .git/config file. This is the default behavior."
+      },
+      {
+        "argument": "--file <config-file>",
+        "arguments": "-f <config-file>, --file <config-file>",
+        "description": "Use the given config file instead of the one specified by GIT_CONFIG."
+      },
+      {
+        "argument": "--blob <blob>",
+        "arguments": "--blob <blob>",
+        "description": "Similar to --file but use the given blob instead of a file. E.g. you can use master:.gitmodules to read values from the file .gitmodules in the master branch. See 'SPECIFYING REVISIONS' section in gitrevisions(7) for a more complete list of ways to spell blob names."
+      },
+      {
+        "argument": "--list",
+        "arguments": "-l, --list",
+        "description": "List all variables set in config file, along with their values."
+      },
+      {
+        "argument": "--bool",
+        "arguments": "--bool",
+        "description": "git config will ensure that the output is 'true' or 'false'"
+      },
+      {
+        "argument": "--int",
+        "arguments": "--int",
+        "description": "git config will ensure that the output is a simple decimal number. An optional value suffix of k, m, or g in the config file will cause the value to be multiplied by 1024, 1048576, or 1073741824 prior to output."
+      },
+      {
+        "argument": "--bool-or-int",
+        "arguments": "--bool-or-int",
+        "description": "git config will ensure that the output matches the format of either --bool or --int, as described above."
+      },
+      {
+        "argument": "--path",
+        "arguments": "--path",
+        "description": "git-config will expand leading ~ to the value of $HOME, and ~user to the home directory for the specified user. This option has no effect when setting the value (but you can use git config bla ~/ from the command line to let your shell do the expansion)."
+      },
+      {
+        "argument": "--null",
+        "arguments": "-z, --null",
+        "description": "For all options that output values and/or keys, always end values with the null character (instead of a newline). Use newline instead as a delimiter between key and value. This allows for secure parsing of the output without getting confused e.g. by values that contain line breaks."
+      },
+      {
+        "argument": "--name-only",
+        "arguments": "--name-only",
+        "description": "Output only the names of config variables for --list or --get-regexp."
+      },
+      {
+        "argument": "--show-origin",
+        "arguments": "--show-origin",
+        "description": "Augment the output of all queried config options with the origin type (file, standard input, blob, command line) and the actual origin (config file path, ref, or blob id if applicable)."
+      },
+      {
+        "argument": "--edit",
+        "arguments": "-e, --edit",
+        "description": "Opens an editor to modify the specified config file; either --system, --global, or repository (default)."
+      }
+    ]
+  },
+  {
+    "command_name": "",
+    "enabled": false,
+    "options": [
+      {
+        "argument": "",
+        "arguments": "",
+        "description": ""
+      }
+    ]
+  }
+]
