@@ -58,21 +58,25 @@ func Merge(g *types.Cmd) {
 }
 
 // NewBranch Create a new branch named <new_branch> and start it at <start_point>; see git-branch(1) for details. 
-// -b <new_branch>
+// -b [new_branch]
 func NewBranch(new_branch string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("-b")
-		g.AddOptions(new_branch)
+		if len(new_branch) != 0 {
+			g.AddOptions(new_branch)
+		}
 	}
 }
 
 // NewBranchForce Creates the branch <new_branch> and start it at <start_point>; if it already exists, then reset it to <start_point>. 
 // This is equivalent to running 'git branch' with '-f'; see git-branch(1) for details. 
-// -B <new_branch>
+// -B [new_branch]
 func NewBranchForce(new_branch string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("-B")
-		g.AddOptions(new_branch)
+		if len(new_branch) != 0 {
+			g.AddOptions(new_branch)
+		}
 	}
 }
 

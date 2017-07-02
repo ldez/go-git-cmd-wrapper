@@ -892,14 +892,14 @@
       },
       {
         "method_name": "NewBranch",
-        "argument": "-b <new_branch>",
-        "arguments": "-b <new_branch>",
+        "argument": "-b [new_branch]",
+        "arguments": "-b [new_branch]",
         "description": "Create a new branch named <new_branch> and start it at <start_point>; see git-branch(1) for details."
       },
       {
         "method_name": "NewBranchForce",
-        "argument": "-B <new_branch>",
-        "arguments": "-B <new_branch>",
+        "argument": "-B [new_branch]",
+        "arguments": "-B [new_branch]",
         "description": "Creates the branch <new_branch> and start it at <start_point>; if it already exists, then reset it to <start_point>.\nThis is equivalent to running 'git branch' with '-f'; see git-branch(1) for details."
       },
       {
