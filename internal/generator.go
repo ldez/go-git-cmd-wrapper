@@ -96,7 +96,7 @@ func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 // {{ .CmdComment }}
 func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len({{ .Argument }}) == 0 {
+		if len({{ .Argument }}) != 0 {
 			g.AddOptions("{{ .Cmd }}")
 		} else {
 			g.AddOptions(fmt.Sprintf("{{ .Cmd }}=%s", {{ .Argument }}))

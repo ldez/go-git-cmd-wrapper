@@ -110,7 +110,7 @@ func Quiet(g *types.Cmd) {
 // --recurse-submodules[=<pathspec>]
 func RecurseSubmodules(pathspec string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(pathspec) == 0 {
+		if len(pathspec) != 0 {
 			g.AddOptions("--recurse-submodules")
 		} else {
 			g.AddOptions(fmt.Sprintf("--recurse-submodules=%s", pathspec))
