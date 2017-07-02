@@ -1,5 +1,8 @@
 = Go Git Cmd Wrapper
 
+image:https://travis-ci.org/ldez/go-git-cmd-wrapper.svg?branch=master["Build Status", link="https://travis-ci.org/ldez/go-git-cmd-wrapper"]
+image:https://godoc.org/ldez/go-git-cmd-wrapper.svg?status.svg["GoDoc", link="https://godoc.org/ldez/go-git-cmd-wrapper"]
+
 It's a simple wrapper around `git` command.
 
 Import `github.com/ldez/go-git-cmd-wrapper`.
