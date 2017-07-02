@@ -18,5 +18,3 @@ func Branch(name string) func(*types.Cmd) {
 		g.AddOptions(name)
 	}
 }
-
-//-C<n>

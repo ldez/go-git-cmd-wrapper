@@ -53,6 +53,17 @@ func EditTodo(g *types.Cmd) {
 	g.AddOptions("--edit-todo")
 }
 
+// EnsureContext Ensure at least <n> lines of surrounding context match before and after each change. 
+// When fewer lines of surrounding context exist they all must match. 
+// By default no context is ever ignored. 
+// -C<n>
+func EnsureContext(n string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		g.AddOptions("-C")
+		g.AddOptions(n)
+	}
+}
+
 // Exec Append 'exec <cmd>' after each line creating a commit in the final history. 
 // <cmd> will be interpreted as one or more shell commands. 
 // -x <cmd>, --exec <cmd>
