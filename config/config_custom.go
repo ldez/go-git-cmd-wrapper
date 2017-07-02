@@ -1,6 +1,10 @@
 package config
 
-import "github.com/ldez/go-git-cmd-wrapper/types"
+import (
+	"strconv"
+
+	"github.com/ldez/go-git-cmd-wrapper/types"
+)
 
 func Entry(key string, value string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
@@ -139,7 +143,7 @@ func GetColorBool(name string, stdoutIsTTY bool) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get-colorbool")
 		g.AddOptions(name)
-		g.AddOptions(string(stdoutIsTTY))
+		g.AddOptions(strconv.FormatBool(stdoutIsTTY))
 	}
 }
 
