@@ -71,6 +71,7 @@ package {{ .Name }}
 {{else if eq .Type "EQUAL_OPTIONAL_WITHOUT_NAME" }}{{template "templateCmdEqualOptional" .}}
 {{else if eq .Type "EQUAL_OPTIONAL_WITH_NAME" }}{{template "templateCmdEqualOptional" .}}
 {{else if eq .Type "WITH_PARAMETER" }}{{template "templateCmdWithParameter" .}}
+{{else if eq .Type "WITH_OPTIONAL_PARAMETER" }}{{template "templateCmdWithOptionalParameter" .}}
 {{else}} BUG
 {{end -}}
 {{end -}}
@@ -113,6 +114,18 @@ func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 		g.AddOptions({{ .Argument }})
 	}
 }`
+
+	templateCmdWithOptionalParameter = `{{- range $index, $element := .Comments}}
+// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }} {{end}}
+// {{ .CmdComment }}
+func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		g.AddOptions("{{ .Cmd }}")
+		if len({{ .Argument }}) != 0 {
+			g.AddOptions({{ .Argument }})
+		}
+	}
+}`
 )
 
 var (
@@ -134,6 +147,9 @@ var (
 
 	// --foo <bar>
 	expCmdWithParameter = regexp.MustCompile(`^(-{1,2}([\w\d\-]+)) ?<([\w\d\-)]+)>$`)
+
+	// --foo [bar]
+	expCmdWithOptionalParameter = regexp.MustCompile(`^(-{1,2}([\w\d\-]+)) ?\[([\w\d\-)]+)]$`)
 )
 
 func main() {
@@ -175,6 +191,7 @@ func generateFileContent(model GenCmdModel) (string, error) {
 	base.New("templateCmdEqualNoOptional").Parse(templateCmdEqualNoOptional)
 	base.New("templateCmdEqualOptional").Parse(templateCmdEqualOptional)
 	base.New("templateCmdWithParameter").Parse(templateCmdWithParameter)
+	base.New("templateCmdWithOptionalParameter").Parse(templateCmdWithOptionalParameter)
 	tmpl := template.Must(base.Parse(fileTemplate))
 
 	b := &bytes.Buffer{}
@@ -223,6 +240,8 @@ func jsonCmdModelToCmdMetas(jsonCmdModels []JSONCmdModel) []CmdMeta {
 			metas = append(metas, newMetaCmdEqualOptionalWithName(jsonCmdModel))
 		} else if expCmdWithParameter.MatchString(jsonCmdModel.Argument) {
 			metas = append(metas, newMetaCmdWithParameter(jsonCmdModel))
+		} else if expCmdWithOptionalParameter.MatchString(jsonCmdModel.Argument) {
+			metas = append(metas, newMetaCmdWithOptionalParameter(jsonCmdModel))
 		} else {
 			log.Println("fail", jsonCmdModel)
 		}
@@ -231,6 +250,18 @@ func jsonCmdModelToCmdMetas(jsonCmdModels []JSONCmdModel) []CmdMeta {
 	sort.Sort(ByMethodName(metas))
 
 	return metas
+}
+
+func newMetaCmdWithOptionalParameter(jsonCmdModel JSONCmdModel) CmdMeta {
+	return newMetaCmd(expCmdWithOptionalParameter, jsonCmdModel, func(subMatch []string) CmdMeta {
+		return newMeta(
+			methodName(subMatch[2], jsonCmdModel),
+			subMatch[3],
+			subMatch[1],
+			"WITH_OPTIONAL_PARAMETER",
+			jsonCmdModel.Description,
+			jsonCmdModel.Arguments)
+	})
 }
 
 func newMetaCmdSimple(jsonCmdModel JSONCmdModel) CmdMeta {
