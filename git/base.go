@@ -70,6 +70,11 @@ func Reset(options ...types.Option) (string, error) {
 	return command("reset", options...)
 }
 
+// Commit https://git-scm.com/docs/git-commit
+func Commit(options ...types.Option) (string, error) {
+	return command("commit", options...)
+}
+
 // Raw use to execute arbitrary commands.
 func Raw(cmd string, options ...types.Option) (string, error) {
 	return command(cmd, options...)

@@ -1078,6 +1078,187 @@
     ]
   },
   {
+    "command_name": "commit",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--all",
+        "arguments": "-a, --all",
+        "description": "Tell the command to automatically stage files that have been modified and deleted, but new files you have not told Git about are not affected."
+      },
+      {
+        "argument": "--patch",
+        "arguments": "-p, --patch",
+        "description": "Use the interactive patch selection interface to chose which changes to commit.\nSee git-add(1) for details."
+      },
+      {
+        "argument": "--reuse-message=<commit>",
+        "arguments": "-C <commit>, --reuse-message=<commit>",
+        "description": "Take an existing commit object, and reuse the log message and the authorship information (including the timestamp) when creating the commit."
+      },
+      {
+        "argument": "--reedit-message=<commit>",
+        "arguments": "-c <commit>, --reedit-message=<commit>",
+        "description": "Like -C, but with -c the editor is invoked, so that the user can further edit the commit message."
+      },
+      {
+        "argument": "--fixup=<commit>",
+        "arguments": "--fixup=<commit>",
+        "description": "Construct a commit message for use with rebase --autosquash.\nThe commit message will be the subject line from the specified commit with a prefix of 'fixup! '.\nSee git-rebase(1) for details."
+      },
+      {
+        "argument": "--squash=<commit>",
+        "arguments": "--squash=<commit>",
+        "description": "Construct a commit message for use with rebase --autosquash.\nThe commit message subject line is taken from the specified commit with a prefix of 'squash! '.\nCan be used with additional commit message options (-m/-c/-C/-F).\nSee git-rebase(1) for details."
+      },
+      {
+        "argument": "--reset-author",
+        "arguments": "--reset-author",
+        "description": "When used with -C/-c/--amend options, or when committing after a conflicting cherry-pick, declare that the authorship of the resulting commit now belongs to the committer.\nThis also renews the author timestamp."
+      },
+      {
+        "argument": "--short",
+        "arguments": "--short",
+        "description": "When doing a dry-run, give the output in the short-format.\nSee git-status(1) for details.\nImplies --dry-run."
+      },
+      {
+        "argument": "--branch",
+        "arguments": "--branch",
+        "description": "Show the branch and tracking info even in short-format."
+      },
+      {
+        "argument": "--porcelain",
+        "arguments": "--porcelain",
+        "description": "When doing a dry-run, give the output in a porcelain-ready format.\nSee git-status(1) for details.\nImplies --dry-run."
+      },
+      {
+        "argument": "--long",
+        "arguments": "--long",
+        "description": "When doing a dry-run, give the output in the long-format.\nImplies --dry-run."
+      },
+      {
+        "argument": "--null",
+        "arguments": "-z, --null",
+        "description": "When showing short or porcelain status output, print the filename verbatim and terminate the entries with NUL, instead of LF.\nIf no format is given, implies the --porcelain output format.\nWithout the -z option, filenames with 'unusual' characters are quoted as explained for the configuration variable core.quotePath (see git-config(1))."
+      },
+      {
+        "argument": "--file=<file>",
+        "arguments": "-F <file>, --file=<file>",
+        "description": "Take the commit message from the given file.\nUse - to read the message from the standard input."
+      },
+      {
+        "argument": "--author=<author>",
+        "arguments": "--author=<author>",
+        "description": "Override the commit author.\nSpecify an explicit author using the standard A U Thor <author@example.com> format.\nOtherwise <author> is assumed to be a pattern and is used to search for an existing commit by that author (i.e. rev-list --all -i --author=<author>); the commit author is then copied from the first such commit found."
+      },
+      {
+        "argument": "--date=<date>",
+        "arguments": "--date=<date>",
+        "description": "Override the author date used in the commit."
+      },
+      {
+        "argument": "--template=<file>",
+        "arguments": "-t <file>, --template=<file>",
+        "description": "When editing the commit message, start the editor with the contents in the given file.\nThe commit.template configuration variable is often used to give this option implicitly to the command.\nThis mechanism can be used by projects that want to guide participants with some hints on what to write in the message in what order.\nIf the user exits the editor without editing the message, the commit is aborted.\nThis has no effect when a message is given by other means, e.g. with the -m or -F options."
+      },
+      {
+        "argument": "--signoff",
+        "arguments": "-s, --signoff",
+        "description": "Add Signed-off-by line by the committer at the end of the commit log message.\nThe meaning of a signoff depends on the project, but it typically certifies that committer has the rights to submit this work under the same license and agrees to a Developer Certificate of Origin (see http://developercertificate.org/ for more information)."
+      },
+      {
+        "argument": "--no-verify",
+        "arguments": "-n, --no-verify",
+        "description": "This option bypasses the pre-commit and commit-msg hooks.\nSee also githooks(5)."
+      },
+      {
+        "argument": "--allow-empty",
+        "arguments": "--allow-empty",
+        "description": "Usually recording a commit that has the exact same tree as its sole parent commit is a mistake, and the command prevents you from making such a commit.\nThis option bypasses the safety, and is primarily for use by foreign SCM interface scripts."
+      },
+      {
+        "argument": "--allow-empty-message",
+        "arguments": "--allow-empty-message",
+        "description": "Like --allow-empty this command is primarily for use by foreign SCM interface scripts.\nIt allows you to create a commit with an empty commit message without using plumbing commands like git-commit-tree(1)."
+      },
+      {
+        "argument": "--cleanup=<mode>",
+        "arguments": "--cleanup=<mode>",
+        "description": "This option determines how the supplied commit message should be cleaned up before committing.\nThe <mode> can be strip, whitespace, verbatim, scissors or default."
+      },
+      {
+        "argument": "--edit",
+        "arguments": "-e, --edit",
+        "description": "The message taken from file with -F, command line with -m, and from commit object with -C are usually used as the commit log message unmodified.\nThis option lets you further edit the message taken from these sources."
+      },
+      {
+        "argument": "--no-edit",
+        "arguments": "--no-edit",
+        "description": "Use the selected commit message without launching an editor.\nFor example, git commit --amend --no-edit amends a commit without changing its commit message."
+      },
+      {
+        "argument": "--amend",
+        "arguments": "--amend",
+        "description": "Replace the tip of the current branch by creating a new commit.\nThe recorded tree is prepared as usual (including the effect of the -i and -o options and explicit pathspec), and the message from the original commit is used as the starting point, instead of an empty message, when no other message is specified from the command line via options such as -m, -F, -c, etc.\nThe new commit has the same parents and author as the current one (the --reset-author option can countermand this)."
+      },
+      {
+        "argument": "--no-post-rewrite",
+        "arguments": "--no-post-rewrite",
+        "description": "Bypass the post-rewrite hook."
+      },
+      {
+        "argument": "--include",
+        "arguments": "-i, --include",
+        "description": "Before making a commit out of staged contents so far, stage the contents of paths given on the command line as well.\nThis is usually not what you want unless you are concluding a conflicted merge."
+      },
+      {
+        "argument": "--only",
+        "arguments": "-o, --only",
+        "description": "Make a commit by taking the updated working tree contents of the paths specified on the command line, disregarding any contents that have been staged for other paths.\nThis is the default mode of operation of git commit if any paths are given on the command line, in which case this option can be omitted.\nIf this option is specified together with --amend, then no paths need to be specified, which can be used to amend the last commit without committing changes that have already been staged.\nIf used together with --allow-empty paths are also not required, and an empty commit will be created."
+      },
+      {
+        "argument": "--untracked-files[=<mode>]",
+        "arguments": "-u[<mode>], --untracked-files[=<mode>]",
+        "description": "Show untracked files. \nThe mode parameter is optional (defaults to all), and is used to specify the handling of untracked files; when -u is not used, the default is normal, i.e. show untracked files and directories."
+      },
+      {
+        "argument": "--verbose",
+        "arguments": "-v, --verbose",
+        "description": "Show unified diff between the HEAD commit and what would be committed at the bottom of the commit message template to help the user describe the commit by reminding what changes the commit has.\nNote that this diff output doesn’t have its lines prefixed with #.\nThis diff will not be a part of the commit message.\nSee the commit.verbose configuration variable in git-config(1).\nIf specified twice, show in addition the unified diff between what would be committed and the worktree files, i.e. the unstaged changes to tracked files."
+      },
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "Suppress commit summary message."
+      },
+      {
+        "argument": "--dry-run",
+        "arguments": "--dry-run",
+        "description": "Do not create a commit, but show a list of paths that are to be committed, paths with local changes that will be left uncommitted and paths that are untracked."
+      },
+      {
+        "argument": "--status",
+        "arguments": "--status",
+        "description": "Include the output of git-status(1) in the commit message template when using an editor to prepare the commit message.\nDefaults to on, but can be used to override configuration variable commit.status."
+      },
+      {
+        "argument": "--no-status",
+        "arguments": "--no-status",
+        "description": "Do not include the output of git-status(1) in the commit message template when using an editor to prepare the default commit message."
+      },
+      {
+        "argument": "--gpg-sign[=<keyid>]",
+        "arguments": "-S[<keyid>], --gpg-sign[=<keyid>]",
+        "description": "GPG-sign commits.\nThe keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space."
+      },
+      {
+        "argument": "--no-gpg-sign",
+        "arguments": "--no-gpg-sign",
+        "description": "Countermand commit.gpgSign configuration variable that is set to force each and every commit to be signed."
+      }
+    ]
+  },
+  {
     "command_name": "",
     "enabled": false,
     "options": [

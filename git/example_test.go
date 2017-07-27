@@ -7,6 +7,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/branch"
 	"github.com/ldez/go-git-cmd-wrapper/checkout"
 	"github.com/ldez/go-git-cmd-wrapper/clone"
+	"github.com/ldez/go-git-cmd-wrapper/commit"
 	"github.com/ldez/go-git-cmd-wrapper/config"
 	"github.com/ldez/go-git-cmd-wrapper/fetch"
 	ginit "github.com/ldez/go-git-cmd-wrapper/init"
@@ -124,6 +125,15 @@ func ExampleReset() {
 
 	fmt.Println(out)
 	// Output: git reset --soft e41f083
+}
+
+func ExampleCommit() {
+	cmdExecutor = cmdExecutorMock
+
+	out, _ := Commit(commit.Amend, commit.Message("chore: foo"))
+
+	fmt.Println(out)
+	// Output: git commit --amend --message="chore: foo"
 }
 
 func ExampleCond() {
