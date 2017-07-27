@@ -14,6 +14,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/push"
 	"github.com/ldez/go-git-cmd-wrapper/rebase"
 	"github.com/ldez/go-git-cmd-wrapper/remote"
+	"github.com/ldez/go-git-cmd-wrapper/reset"
 	"github.com/ldez/go-git-cmd-wrapper/revparse"
 )
 
@@ -114,6 +115,15 @@ func ExampleRevParse() {
 
 	fmt.Println(out)
 	// Output: git rev-parse --abbrev-ref HEAD
+}
+
+func ExampleReset() {
+	cmdExecutor = cmdExecutorMock
+
+	out, _ := Reset(reset.Soft, reset.Commit("e41f083"))
+
+	fmt.Println(out)
+	// Output: git reset --soft e41f083
 }
 
 func ExampleCond() {

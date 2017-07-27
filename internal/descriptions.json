@@ -1042,6 +1042,42 @@
     ]
   },
   {
+    "command_name": "reset",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--soft",
+        "arguments": "--soft",
+        "description": "Does not touch the index file or the working tree at all (but resets the head to <commit>, just like all modes do).\nThis leaves all your changed files 'Changes to be committed', as git status would put it."
+      },
+      {
+        "argument": "--mixed",
+        "arguments": "--mixed",
+        "description": "Resets the index but not the working tree (i.e., the changed files are preserved but not marked for commit) and reports what has not been updated.\nThis is the default action.\nIf -N is specified, removed paths are marked as intent-to-add (see git-add(1))."
+      },
+      {
+        "argument": "--hard",
+        "arguments": "--hard",
+        "description": "Resets the index and working tree. Any changes to tracked files in the working tree since <commit> are discarded."
+      },
+      {
+        "argument": "--merge",
+        "arguments": "--merge",
+        "description": "Resets the index and updates the files in the working tree that are different between <commit> and HEAD, but keeps those which are different between the index and working tree (i.e. which have changes which have not been added).\nIf a file that is different between <commit> and the index has unstaged changes, reset is aborted.\n In other words, --merge does something like a git read-tree -u -m <commit>, but carries forward unmerged index entries."
+      },
+      {
+        "argument": "--keep",
+        "arguments": "--keep",
+        "description": "Resets index entries and updates files in the working tree that are different between <commit> and HEAD. If a file that is different between <commit> and HEAD has local changes, reset is aborted."
+      },
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "Be quiet, only report errors."
+      }
+    ]
+  },
+  {
     "command_name": "",
     "enabled": false,
     "options": [

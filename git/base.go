@@ -65,6 +65,11 @@ func RevParse(options ...types.Option) (string, error) {
 	return command("rev-parse", options...)
 }
 
+// Reset https://git-scm.com/docs/git-reset
+func Reset(options ...types.Option) (string, error) {
+	return command("reset", options...)
+}
+
 // Raw use to execute arbitrary commands.
 func Raw(cmd string, options ...types.Option) (string, error) {
 	return command(cmd, options...)
