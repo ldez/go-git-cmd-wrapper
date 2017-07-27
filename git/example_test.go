@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/ldez/go-git-cmd-wrapper/add"
 	"github.com/ldez/go-git-cmd-wrapper/branch"
 	"github.com/ldez/go-git-cmd-wrapper/checkout"
 	"github.com/ldez/go-git-cmd-wrapper/clone"
@@ -134,6 +135,15 @@ func ExampleCommit() {
 
 	fmt.Println(out)
 	// Output: git commit --amend --message="chore: foo"
+}
+
+func ExampleAdd() {
+	cmdExecutor = cmdExecutorMock
+
+	out, _ := Add(add.All)
+
+	fmt.Println(out)
+	// Output: git add --all
 }
 
 func ExampleCond() {

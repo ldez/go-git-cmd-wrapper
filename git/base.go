@@ -75,6 +75,11 @@ func Commit(options ...types.Option) (string, error) {
 	return command("commit", options...)
 }
 
+// Add https://git-scm.com/docs/git-add
+func Add(options ...types.Option) (string, error) {
+	return command("add", options...)
+}
+
 // Raw use to execute arbitrary commands.
 func Raw(cmd string, options ...types.Option) (string, error) {
 	return command(cmd, options...)
