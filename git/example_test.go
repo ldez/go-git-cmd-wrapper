@@ -12,6 +12,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/config"
 	"github.com/ldez/go-git-cmd-wrapper/fetch"
 	ginit "github.com/ldez/go-git-cmd-wrapper/init"
+	"github.com/ldez/go-git-cmd-wrapper/merge"
 	"github.com/ldez/go-git-cmd-wrapper/pull"
 	"github.com/ldez/go-git-cmd-wrapper/push"
 	"github.com/ldez/go-git-cmd-wrapper/rebase"
@@ -144,6 +145,15 @@ func ExampleAdd() {
 
 	fmt.Println(out)
 	// Output: git add --all
+}
+
+func ExampleMerge() {
+	cmdExecutor = cmdExecutorMock
+
+	out, _ := Merge(merge.Squash, merge.Commits("myBranch"))
+
+	fmt.Println(out)
+	// Output: git merge --squash myBranch
 }
 
 func ExampleCond() {

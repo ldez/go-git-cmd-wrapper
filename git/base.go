@@ -80,6 +80,11 @@ func Add(options ...types.Option) (string, error) {
 	return command("add", options...)
 }
 
+// Merge https://git-scm.com/docs/git-merge
+func Merge(options ...types.Option) (string, error) {
+	return command("merge", options...)
+}
+
 // Raw use to execute arbitrary commands.
 func Raw(cmd string, options ...types.Option) (string, error) {
 	return command(cmd, options...)

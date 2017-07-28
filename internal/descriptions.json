@@ -1330,6 +1330,162 @@
     ]
   },
   {
+    "command_name": "merge",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--commit",
+        "arguments": "--commit, --no-commit",
+        "description": "Perform the merge and commit the result.\nThis option can be used to override --no-commit."
+      },
+      {
+        "argument": "--no-commit",
+        "arguments": "--commit, --no-commit",
+        "description": "With --no-commit perform the merge but pretend the merge failed and do not autocommit, to give the user a chance to inspect and further tweak the merge result before committing."
+      },
+      {
+        "argument": "--edit",
+        "arguments": "--edit, -e, --no-edit",
+        "description": "Invoke an editor before committing successful mechanical merge to further edit the auto-generated merge message, so that the user can explain and justify the merge.\nThe --no-edit option can be used to accept the auto-generated message (this is generally discouraged).\nThe --edit (or -e) option is still useful if you are giving a draft message with the -m option from the command line and want to edit it in the editor.\nOlder scripts may depend on the historical behaviour of not allowing the user to edit the merge log message.\nThey will see an editor opened when they run git merge.\nTo make it easier to adjust such scripts to the updated behaviour, the environment variable GIT_MERGE_AUTOEDIT can be set to no at the beginning of them."
+      },
+      {
+        "argument": "--no-edit",
+        "arguments": "--edit, -e, --no-edit",
+        "description": "Invoke an editor before committing successful mechanical merge to further edit the auto-generated merge message, so that the user can explain and justify the merge.\nThe --no-edit option can be used to accept the auto-generated message (this is generally discouraged).\nThe --edit (or -e) option is still useful if you are giving a draft message with the -m option from the command line and want to edit it in the editor.\nOlder scripts may depend on the historical behaviour of not allowing the user to edit the merge log message.\nThey will see an editor opened when they run git merge.\nTo make it easier to adjust such scripts to the updated behaviour, the environment variable GIT_MERGE_AUTOEDIT can be set to no at the beginning of them."
+      },
+      {
+        "argument": "--ff",
+        "arguments": "--ff",
+        "description": "When the merge resolves as a fast-forward, only update the branch pointer, without creating a merge commit.\nThis is the default behavior."
+      },
+      {
+        "argument": "--no-ff",
+        "arguments": "--no-ff",
+        "description": "Create a merge commit even when the merge resolves as a fast-forward.\nThis is the default behaviour when merging an annotated (and possibly signed) tag."
+      },
+      {
+        "argument": "--ff-only",
+        "arguments": "--ff-only",
+        "description": "Refuse to merge and exit with a non-zero status unless the current HEAD is already up-to-date or the merge can be resolved as a fast-forward."
+      },
+      {
+        "argument": "--log[=<n>]",
+        "arguments": "--log[=<n>], --no-log",
+        "description": "In addition to branch names, populate the log message with one-line descriptions from at most <n> actual commits that are being merged.\nSee also git-fmt-merge-msg(1).\nWith --no-log do not list one-line descriptions from the actual commits being merged."
+      },
+      {
+        "argument": "--no-log",
+        "arguments": "--log[=<n>], --no-log",
+        "description": "In addition to branch names, populate the log message with one-line descriptions from at most <n> actual commits that are being merged.\nSee also git-fmt-merge-msg(1).\nWith --no-log do not list one-line descriptions from the actual commits being merged."
+      },
+      {
+        "argument": "--stat",
+        "arguments": "--stat, -n, --no-stat",
+        "description": "Show a diffstat at the end of the merge.\nThe diffstat is also controlled by the configuration option merge.stat.\nWith -n or --no-stat do not show a diffstat at the end of the merge."
+      },
+      {
+        "argument": "--no-stat",
+        "arguments": "--stat, -n, --no-stat",
+        "description": "Show a diffstat at the end of the merge.\nThe diffstat is also controlled by the configuration option merge.stat.\nWith -n or --no-stat do not show a diffstat at the end of the merge."
+      },
+      {
+        "argument": "--squash",
+        "arguments": "--squash, --no-squash",
+        "description": "Produce the working tree and index state as if a real merge happened (except for the merge information), but do not actually make a commit, move the HEAD, or record $GIT_DIR/MERGE_HEAD (to cause the next git commit command to create a merge commit).\nThis allows you to create a single commit on top of the current branch whose effect is the same as merging another branch (or more in case of an octopus).\nWith --no-squash perform the merge and commit the result.\nThis option can be used to override --squash."
+      },
+      {
+        "argument": "--no-squash",
+        "arguments": "--squash, --no-squash",
+        "description": "Produce the working tree and index state as if a real merge happened (except for the merge information), but do not actually make a commit, move the HEAD, or record $GIT_DIR/MERGE_HEAD (to cause the next git commit command to create a merge commit).\nThis allows you to create a single commit on top of the current branch whose effect is the same as merging another branch (or more in case of an octopus).\nWith --no-squash perform the merge and commit the result.\nThis option can be used to override --squash."
+      },
+      {
+        "argument": "--strategy=<strategy>",
+        "arguments": "-s <strategy>, --strategy=<strategy>",
+        "description": "Use the given merge strategy; can be supplied more than once to specify them in the order they should be tried.\nIf there is no -s option, a built-in list of strategies is used instead (git merge-recursive when merging a single head, git merge-octopus otherwise)."
+      },
+      {
+        "argument": "--strategy-option=<option>",
+        "arguments": "-X <option>, --strategy-option=<option>",
+        "description": "Pass merge strategy specific option through to the merge strategy."
+      },
+      {
+        "argument": "--verify-signatures",
+        "arguments": "--verify-signatures, --no-verify-signatures",
+        "description": "Verify that the tip commit of the side branch being merged is signed with a valid key, i.e. a key that has a valid uid: in the default trust model, this means the signing key has been signed by a trusted key.\nIf the tip commit of the side branch is not signed with a valid key, the merge is aborted."
+      },
+      {
+        "argument": "--no-verify-signatures",
+        "arguments": "--verify-signatures, --no-verify-signatures",
+        "description": "Verify that the tip commit of the side branch being merged is signed with a valid key, i.e. a key that has a valid uid: in the default trust model, this means the signing key has been signed by a trusted key.\nIf the tip commit of the side branch is not signed with a valid key, the merge is aborted."
+      },
+      {
+        "argument": "--summary",
+        "arguments": "--summary, --no-summary",
+        "description": "Synonyms to --stat and --no-stat; these are deprecated and will be removed in the future."
+      },
+      {
+        "argument": "--no-summary",
+        "arguments": "--summary, --no-summary",
+        "description": "Synonyms to --stat and --no-stat; these are deprecated and will be removed in the future."
+      },
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "Operate quietly.\nImplies --no-progress."
+      },
+      {
+        "argument": "--verbose",
+        "arguments": "-v, --verbose",
+        "description": "Be verbose."
+      },
+      {
+        "argument": "--progress",
+        "arguments": "--progress, --no-progress",
+        "description": "Turn progress on/off explicitly.\nIf neither is specified, progress is shown if standard error is connected to a terminal.\nNote that not all merge strategies may support progress reporting."
+      },
+      {
+        "argument": "--no-progress",
+        "arguments": "--progress, --no-progress",
+        "description": "Turn progress on/off explicitly.\nIf neither is specified, progress is shown if standard error is connected to a terminal.\nNote that not all merge strategies may support progress reporting."
+      },
+      {
+        "argument": "--allow-unrelated-histories",
+        "arguments": "--allow-unrelated-histories",
+        "description": "By default, git merge command refuses to merge histories that do not share a common ancestor.\nThis option can be used to override this safety when merging histories of two projects that started their lives independently.\nAs that is a very rare occasion, no configuration variable to enable this by default exists and will not be added."
+      },
+      {
+        "argument": "--gpg-sign[=<keyid>]",
+        "arguments": "-S[<keyid>], --gpg-sign[=<keyid>]",
+        "description": "GPG-sign the resulting merge commit.\nThe keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space."
+      },
+      {
+        "argument": "-m <msg>",
+        "arguments": "-m <msg>",
+        "description": "Set the commit message to be used for the merge commit (in case one is created).\nIf --log is specified, a shortlog of the commits being merged will be appended to the specified message.\nThe git fmt-merge-msg command can be used to give a good default for automated git merge invocations.\nThe automated message can include the branch description."
+      },
+      {
+        "argument": "--rerere-autoupdate",
+        "arguments": "--[no-]rerere-autoupdate",
+        "description": "Allow the rerere mechanism to update the index with the result of auto-conflict resolution if possible."
+      },
+      {
+        "argument": "--no-rerere-autoupdate",
+        "arguments": "--[no-]rerere-autoupdate",
+        "description": "Allow the rerere mechanism to update the index with the result of auto-conflict resolution if possible."
+      },
+      {
+        "argument": "--abort",
+        "arguments": "--abort",
+        "description": "Abort the current conflict resolution process, and try to reconstruct the pre-merge state.\nIf there were uncommitted worktree changes present when the merge started, git merge --abort will in some cases be unable to reconstruct these changes.\nIt is therefore recommended to always commit or stash your changes before running git merge.\ngit merge --abort is equivalent to git reset --merge when MERGE_HEAD is present."
+      },
+      {
+        "argument": "--continue",
+        "arguments": "--continue",
+        "description": "After a git merge stops due to conflicts you can conclude the merge by running git merge --continue (see 'HOW TO RESOLVE CONFLICTS' section below)."
+      }
+    ]
+  },
+  {
     "command_name": "",
     "enabled": false,
     "options": [
