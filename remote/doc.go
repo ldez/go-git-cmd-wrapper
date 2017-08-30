@@ -1,5 +1,5 @@
 /*
-git-remote - Manage set of tracked repositories
+Package remote git-remote - Manage set of tracked repositories
 
 SYNOPSIS
 

@@ -1,7 +1,7 @@
 /*
-* CODE GENERATED AUTOMATICALLY
-* THIS FILE MUST NOT BE EDITED BY HAND
- */
+Package fetch CODE GENERATED AUTOMATICALLY
+THIS FILE MUST NOT BE EDITED BY HAND
+*/
 package fetch
 
 import (
@@ -127,7 +127,7 @@ func Quiet(g *types.Cmd) {
 // --recurse-submodules[=yes|on-demand|no]
 func RecurseSubmodules(value string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(value) != 0 {
+		if len(value) == 0 {
 			g.AddOptions("--recurse-submodules")
 		} else {
 			g.AddOptions(fmt.Sprintf("--recurse-submodules=%s", value))

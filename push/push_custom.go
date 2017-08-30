@@ -50,7 +50,7 @@ func Remote(repository string) func(*types.Cmd) {
 	}
 }
 
-// RefSpecSpecify what destination ref to update with what source object.
+// RefSpec Specify what destination ref to update with what source object.
 // The format of a <refspec> parameter is an optional plus +, followed by the source object <src>, followed by a colon :, followed by the destination ref <dst>.
 // <refspec>...
 func RefSpec(refspecs ...string) func(*types.Cmd) {

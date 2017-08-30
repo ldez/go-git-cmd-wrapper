@@ -1,5 +1,5 @@
 /*
-git-push - Update remote refs along with associated objects
+Package push git-push - Update remote refs along with associated objects
 
 SYNOPSIS
 

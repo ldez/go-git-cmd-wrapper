@@ -6,7 +6,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/types"
 )
 
-// Shared Specify that the Git repository is to be shared amongst several users.
+// SharedWithPerms Shared Specify that the Git repository is to be shared amongst several users.
 // This allows users belonging to the same group to push into that repository.
 // When specified, the config variable 'core.sharedRepository' is set so that files and directories under $GIT_DIR are created with the requested permissions.
 // When not specified, Git will use permissions reported by umask(2).
@@ -21,6 +21,7 @@ func SharedWithPerms(permissions string) func(*types.Cmd) {
 	}
 }
 
+// Directory path.
 func Directory(directory string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions(directory)

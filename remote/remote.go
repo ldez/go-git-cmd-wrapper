@@ -140,7 +140,7 @@ func DryRun(g *types.Cmd) {
 	g.AddOptions("--dry-run")
 }
 
-//[-p | --prune]
+// PruneOpt [-p | --prune]
 func PruneOpt(g *types.Cmd) {
 	g.AddOptions("--prune")
 }

@@ -1,5 +1,5 @@
 /*
-git-merge - Join two or more development histories together
+Package merge git-merge - Join two or more development histories together
 
 SYNOPSIS
 		git merge [-n] [--stat] [--no-commit] [--squash] [--[no-]edit]

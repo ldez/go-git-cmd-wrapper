@@ -1,7 +1,7 @@
 /*
-* CODE GENERATED AUTOMATICALLY
-* THIS FILE MUST NOT BE EDITED BY HAND
- */
+Package init CODE GENERATED AUTOMATICALLY
+THIS FILE MUST NOT BE EDITED BY HAND
+*/
 package init
 
 import (
@@ -39,7 +39,7 @@ func SeparateGitDir(gitDir string) func(*types.Cmd) {
 // --shared[=(false|true|umask|group|all|world|everybody|0xxx)]
 func Shared(value string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(value) != 0 {
+		if len(value) == 0 {
 			g.AddOptions("--shared")
 		} else {
 			g.AddOptions(fmt.Sprintf("--shared=%s", value))
@@ -50,8 +50,8 @@ func Shared(value string) func(*types.Cmd) {
 // Template Specify the directory from which templates will be used. 
 // (See the 'TEMPLATE DIRECTORY' section below.) 
 // --template=<template_directory>
-func Template(template_directory string) func(*types.Cmd) {
+func Template(templateDirectory string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		g.AddOptions(fmt.Sprintf("--template=%s", template_directory))
+		g.AddOptions(fmt.Sprintf("--template=%s", templateDirectory))
 	}
 }

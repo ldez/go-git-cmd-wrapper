@@ -1,5 +1,5 @@
 /*
-git-config - Get and set repository or global options
+Package config git-config - Get and set repository or global options
 
 SYNOPSIS
 

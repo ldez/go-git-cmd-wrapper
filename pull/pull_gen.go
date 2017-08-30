@@ -1,7 +1,7 @@
 /*
-* CODE GENERATED AUTOMATICALLY
-* THIS FILE MUST NOT BE EDITED BY HAND
- */
+Package pull CODE GENERATED AUTOMATICALLY
+THIS FILE MUST NOT BE EDITED BY HAND
+*/
 package pull
 
 import (
@@ -111,7 +111,7 @@ func Keep(g *types.Cmd) {
 // --log[=<n>]
 func Log(n string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(n) != 0 {
+		if len(n) == 0 {
 			g.AddOptions("--log")
 		} else {
 			g.AddOptions(fmt.Sprintf("--log=%s", n))
@@ -160,7 +160,7 @@ func NoRebase(g *types.Cmd) {
 // --no-recurse-submodules[=yes|on-demand|no]
 func NoRecurseSubmodules(value string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(value) != 0 {
+		if len(value) == 0 {
 			g.AddOptions("--no-recurse-submodules")
 		} else {
 			g.AddOptions(fmt.Sprintf("--no-recurse-submodules=%s", value))
@@ -213,7 +213,7 @@ func Quiet(g *types.Cmd) {
 // -r, --rebase[=false|true|preserve|interactive]
 func Rebase(value string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(value) != 0 {
+		if len(value) == 0 {
 			g.AddOptions("--rebase")
 		} else {
 			g.AddOptions(fmt.Sprintf("--rebase=%s", value))
@@ -225,7 +225,7 @@ func Rebase(value string) func(*types.Cmd) {
 // --recurse-submodules[=yes|on-demand|no]
 func RecurseSubmodules(value string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(value) != 0 {
+		if len(value) == 0 {
 			g.AddOptions("--recurse-submodules")
 		} else {
 			g.AddOptions(fmt.Sprintf("--recurse-submodules=%s", value))

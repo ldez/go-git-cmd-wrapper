@@ -1,5 +1,5 @@
 /*
-git-clone - Clone a repository into a new directory
+Package clone git-clone - Clone a repository into a new directory
 
 SYNOPSIS
 

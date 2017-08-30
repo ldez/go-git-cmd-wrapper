@@ -1,5 +1,5 @@
 /*
-git-fetch - Download objects and refs from another repository
+Package fetch git-fetch - Download objects and refs from another repository
 
 SYNOPSIS
 

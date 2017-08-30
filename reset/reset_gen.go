@@ -1,7 +1,7 @@
 /*
-* CODE GENERATED AUTOMATICALLY
-* THIS FILE MUST NOT BE EDITED BY HAND
- */
+Package reset CODE GENERATED AUTOMATICALLY
+THIS FILE MUST NOT BE EDITED BY HAND
+*/
 package reset
 
 import "github.com/ldez/go-git-cmd-wrapper/types"

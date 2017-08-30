@@ -1,5 +1,5 @@
 /*
-git-pull - Fetch from and integrate with another repository or a local branch
+Package pull git-pull - Fetch from and integrate with another repository or a local branch
 
 SYNOPSIS
 

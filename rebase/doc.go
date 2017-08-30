@@ -1,5 +1,5 @@
 /*
-git-rebase - Reapply commits on top of another base tip
+Package rebase git-rebase - Reapply commits on top of another base tip
 
 SYNOPSIS
 

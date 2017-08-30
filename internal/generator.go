@@ -14,26 +14,26 @@ import (
 	"text/template"
 )
 
-type JSONModel struct {
+type jsonModel struct {
 	CommandName string         `json:"command_name,omitempty"`
 	Enabled     bool           `json:"enabled"`
-	Options     []JSONCmdModel `json:"options"`
+	Options     []jsonCmdModel `json:"options"`
 }
 
-type JSONCmdModel struct {
+type jsonCmdModel struct {
 	MethodName  string `json:"method_name,omitempty"`
 	Argument    string `json:"argument"`
 	Arguments   string `json:"arguments"`
 	Description string `json:"description"`
 }
 
-type GenCmdModel struct {
+type genCmdModel struct {
 	Name      string
 	ImportFMT bool
-	Metas     []CmdMeta
+	Metas     []cmdMeta
 }
 
-type CmdMeta struct {
+type cmdMeta struct {
 	Type       string
 	Method     string
 	Argument   string
@@ -42,18 +42,18 @@ type CmdMeta struct {
 	CmdComment string
 }
 
-// ByMethodName sort method by name.
-type ByMethodName []CmdMeta
+// byMethodName sort method by name.
+type byMethodName []cmdMeta
 
-func (r ByMethodName) Len() int           { return len(r) }
-func (r ByMethodName) Swap(i, j int)      { r[i], r[j] = r[j], r[i] }
-func (r ByMethodName) Less(i, j int) bool { return r[i].Method < r[j].Method }
+func (r byMethodName) Len() int           { return len(r) }
+func (r byMethodName) Swap(i, j int)      { r[i], r[j] = r[j], r[i] }
+func (r byMethodName) Less(i, j int) bool { return r[i].Method < r[j].Method }
 
 const (
 	fileTemplate = `/*
-* CODE GENERATED AUTOMATICALLY
-* THIS FILE MUST NOT BE EDITED BY HAND
- */
+Package {{ .Name }} CODE GENERATED AUTOMATICALLY
+THIS FILE MUST NOT BE EDITED BY HAND
+*/
 package {{ .Name }}
 
 {{if .ImportFMT }}import (
@@ -97,7 +97,7 @@ func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 // {{ .CmdComment }}
 func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len({{ .Argument }}) != 0 {
+		if len({{ .Argument }}) == 0 {
 			g.AddOptions("{{ .Cmd }}")
 		} else {
 			g.AddOptions(fmt.Sprintf("{{ .Cmd }}=%s", {{ .Argument }}))
@@ -154,8 +154,11 @@ var (
 
 func main() {
 	filePath := "descriptions.json"
-	var jsonModels []JSONModel
+	var jsonModels []jsonModel
 	file, err := ioutil.ReadFile(filePath)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	err = json.Unmarshal(file, &jsonModels)
 	if err != nil {
@@ -184,18 +187,33 @@ func main() {
 	}
 }
 
-func generateFileContent(model GenCmdModel) (string, error) {
+func generateFileContent(model genCmdModel) (string, error) {
 
 	base := template.New(model.Name)
-	base.New("templateCmdSimple").Parse(templateCmdSimple)
-	base.New("templateCmdEqualNoOptional").Parse(templateCmdEqualNoOptional)
-	base.New("templateCmdEqualOptional").Parse(templateCmdEqualOptional)
-	base.New("templateCmdWithParameter").Parse(templateCmdWithParameter)
-	base.New("templateCmdWithOptionalParameter").Parse(templateCmdWithOptionalParameter)
+	_, err := base.New("templateCmdSimple").Parse(templateCmdSimple)
+	if err != nil {
+		return "", err
+	}
+	_, err = base.New("templateCmdEqualNoOptional").Parse(templateCmdEqualNoOptional)
+	if err != nil {
+		return "", err
+	}
+	_, err = base.New("templateCmdEqualOptional").Parse(templateCmdEqualOptional)
+	if err != nil {
+		return "", err
+	}
+	_, err = base.New("templateCmdWithParameter").Parse(templateCmdWithParameter)
+	if err != nil {
+		return "", err
+	}
+	_, err = base.New("templateCmdWithOptionalParameter").Parse(templateCmdWithOptionalParameter)
+	if err != nil {
+		return "", err
+	}
 	tmpl := template.Must(base.Parse(fileTemplate))
 
 	b := &bytes.Buffer{}
-	err := tmpl.Execute(b, model)
+	err = tmpl.Execute(b, model)
 	if err != nil {
 		return "", err
 	}
@@ -203,15 +221,15 @@ func generateFileContent(model GenCmdModel) (string, error) {
 	return b.String(), nil
 }
 
-func newGenCmdModel(jsonModel JSONModel) GenCmdModel {
-	return GenCmdModel{
+func newGenCmdModel(jsonModel jsonModel) genCmdModel {
+	return genCmdModel{
 		Name:      jsonModel.CommandName,
 		Metas:     jsonCmdModelToCmdMetas(jsonModel.Options),
 		ImportFMT: hasImportFMT(jsonModel.Options),
 	}
 }
 
-func hasImportFMT(jsonCmdModels []JSONCmdModel) bool {
+func hasImportFMT(jsonCmdModels []jsonCmdModel) bool {
 	for _, jsonCmdModel := range jsonCmdModels {
 		if expCmdEqualNoOptional.MatchString(jsonCmdModel.Argument) ||
 			expCmdEqualOptionalWithoutName.MatchString(jsonCmdModel.Argument) ||
@@ -223,9 +241,9 @@ func hasImportFMT(jsonCmdModels []JSONCmdModel) bool {
 	return false
 }
 
-func jsonCmdModelToCmdMetas(jsonCmdModels []JSONCmdModel) []CmdMeta {
+func jsonCmdModelToCmdMetas(jsonCmdModels []jsonCmdModel) []cmdMeta {
 
-	metas := []CmdMeta{}
+	metas := []cmdMeta{}
 
 	for _, jsonCmdModel := range jsonCmdModels {
 		if expCmdSimple.MatchString(jsonCmdModel.Argument) {
@@ -247,13 +265,13 @@ func jsonCmdModelToCmdMetas(jsonCmdModels []JSONCmdModel) []CmdMeta {
 		}
 	}
 
-	sort.Sort(ByMethodName(metas))
+	sort.Sort(byMethodName(metas))
 
 	return metas
 }
 
-func newMetaCmdWithOptionalParameter(jsonCmdModel JSONCmdModel) CmdMeta {
-	return newMetaCmd(expCmdWithOptionalParameter, jsonCmdModel, func(subMatch []string) CmdMeta {
+func newMetaCmdWithOptionalParameter(jsonCmdModel jsonCmdModel) cmdMeta {
+	return newMetaCmd(expCmdWithOptionalParameter, jsonCmdModel, func(subMatch []string) cmdMeta {
 		return newMeta(
 			methodName(subMatch[2], jsonCmdModel),
 			subMatch[3],
@@ -264,8 +282,8 @@ func newMetaCmdWithOptionalParameter(jsonCmdModel JSONCmdModel) CmdMeta {
 	})
 }
 
-func newMetaCmdSimple(jsonCmdModel JSONCmdModel) CmdMeta {
-	return newMetaCmd(expCmdSimple, jsonCmdModel, func(subMatch []string) CmdMeta {
+func newMetaCmdSimple(jsonCmdModel jsonCmdModel) cmdMeta {
+	return newMetaCmd(expCmdSimple, jsonCmdModel, func(subMatch []string) cmdMeta {
 		return newMeta(
 			methodName(subMatch[2], jsonCmdModel),
 			"",
@@ -276,8 +294,8 @@ func newMetaCmdSimple(jsonCmdModel JSONCmdModel) CmdMeta {
 	})
 }
 
-func newMetaCmdEqualNoOptional(jsonCmdModel JSONCmdModel) CmdMeta {
-	return newMetaCmd(expCmdEqualNoOptional, jsonCmdModel, func(subMatch []string) CmdMeta {
+func newMetaCmdEqualNoOptional(jsonCmdModel jsonCmdModel) cmdMeta {
+	return newMetaCmd(expCmdEqualNoOptional, jsonCmdModel, func(subMatch []string) cmdMeta {
 		return newMeta(
 			methodName(subMatch[2], jsonCmdModel),
 			subMatch[3],
@@ -288,8 +306,8 @@ func newMetaCmdEqualNoOptional(jsonCmdModel JSONCmdModel) CmdMeta {
 	})
 }
 
-func newMetaCmdEqualOptionalWithoutName(jsonCmdModel JSONCmdModel) CmdMeta {
-	return newMetaCmd(expCmdEqualOptionalWithoutName, jsonCmdModel, func(subMatch []string) CmdMeta {
+func newMetaCmdEqualOptionalWithoutName(jsonCmdModel jsonCmdModel) cmdMeta {
+	return newMetaCmd(expCmdEqualOptionalWithoutName, jsonCmdModel, func(subMatch []string) cmdMeta {
 		return newMeta(
 			methodName(subMatch[2], jsonCmdModel),
 			"value",
@@ -300,8 +318,8 @@ func newMetaCmdEqualOptionalWithoutName(jsonCmdModel JSONCmdModel) CmdMeta {
 	})
 }
 
-func newMetaCmdEqualWithoutName(jsonCmdModel JSONCmdModel) CmdMeta {
-	return newMetaCmd(expCmdEqualWithoutName, jsonCmdModel, func(subMatch []string) CmdMeta {
+func newMetaCmdEqualWithoutName(jsonCmdModel jsonCmdModel) cmdMeta {
+	return newMetaCmd(expCmdEqualWithoutName, jsonCmdModel, func(subMatch []string) cmdMeta {
 		return newMeta(
 			methodName(subMatch[2], jsonCmdModel),
 			"value",
@@ -312,8 +330,8 @@ func newMetaCmdEqualWithoutName(jsonCmdModel JSONCmdModel) CmdMeta {
 	})
 }
 
-func newMetaCmdEqualOptionalWithName(jsonCmdModel JSONCmdModel) CmdMeta {
-	return newMetaCmd(expCmdEqualOptionalWithName, jsonCmdModel, func(subMatch []string) CmdMeta {
+func newMetaCmdEqualOptionalWithName(jsonCmdModel jsonCmdModel) cmdMeta {
+	return newMetaCmd(expCmdEqualOptionalWithName, jsonCmdModel, func(subMatch []string) cmdMeta {
 		return newMeta(
 			methodName(subMatch[2], jsonCmdModel),
 			subMatch[3],
@@ -324,8 +342,8 @@ func newMetaCmdEqualOptionalWithName(jsonCmdModel JSONCmdModel) CmdMeta {
 	})
 }
 
-func newMetaCmdWithParameter(jsonCmdModel JSONCmdModel) CmdMeta {
-	return newMetaCmd(expCmdWithParameter, jsonCmdModel, func(subMatch []string) CmdMeta {
+func newMetaCmdWithParameter(jsonCmdModel jsonCmdModel) cmdMeta {
+	return newMetaCmd(expCmdWithParameter, jsonCmdModel, func(subMatch []string) cmdMeta {
 		return newMeta(
 			methodName(subMatch[2], jsonCmdModel),
 			subMatch[3],
@@ -336,21 +354,21 @@ func newMetaCmdWithParameter(jsonCmdModel JSONCmdModel) CmdMeta {
 	})
 }
 
-func methodName(raw string, jsonCmdModel JSONCmdModel) string {
+func methodName(raw string, jsonCmdModel jsonCmdModel) string {
 	if len(jsonCmdModel.MethodName) == 0 {
 		return raw
 	}
 	return jsonCmdModel.MethodName
 }
 
-type MetaBuilder func(subMatch []string) CmdMeta
+type metaBuilder func(subMatch []string) cmdMeta
 
-func newMetaCmd(regexp *regexp.Regexp, jsonCmdModel JSONCmdModel, builder MetaBuilder) CmdMeta {
+func newMetaCmd(regexp *regexp.Regexp, jsonCmdModel jsonCmdModel, builder metaBuilder) cmdMeta {
 	subMatch := regexp.FindStringSubmatch(jsonCmdModel.Argument)
 	return builder(subMatch)
 }
 
-func newMeta(rawMethodName, rawArg, cmd, cmdType, description, arguments string) CmdMeta {
+func newMeta(rawMethodName, rawArg, cmd, cmdType, description, arguments string) cmdMeta {
 
 	method := toGoName(rawMethodName, true)
 
@@ -362,7 +380,7 @@ func newMeta(rawMethodName, rawArg, cmd, cmdType, description, arguments string)
 		}
 	}
 
-	return CmdMeta{
+	return cmdMeta{
 		Type:       cmdType,
 		Method:     method,
 		Argument:   arg,
@@ -374,7 +392,10 @@ func newMeta(rawMethodName, rawArg, cmd, cmdType, description, arguments string)
 
 func toGoName(kebab string, upperFirst bool) string {
 	var camelCase string
-	kebabTrim := strings.Replace(strings.TrimSpace(kebab), " ", "-", -1)
+	kebabTrim := strings.Replace(
+		strings.Replace(
+			strings.TrimSpace(kebab), " ", "-", -1),
+		"_", "-", -1)
 	isToUpper := false
 	for i, runeValue := range kebabTrim {
 		if i == 0 && upperFirst {

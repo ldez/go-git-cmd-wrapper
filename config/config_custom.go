@@ -6,6 +6,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/types"
 )
 
+// Entry Adds a configuration entry.
 func Entry(key string, value string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions(key)

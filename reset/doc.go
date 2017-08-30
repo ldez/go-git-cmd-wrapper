@@ -1,5 +1,5 @@
 /*
-git-reset - Reset current HEAD to the specified state
+Package reset git-reset - Reset current HEAD to the specified state
 
 SYNOPSIS
 

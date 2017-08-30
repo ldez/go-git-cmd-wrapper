@@ -1,5 +1,5 @@
 /*
-git-init - Create an empty Git repository or reinitialize an existing one
+Package init git-init - Create an empty Git repository or reinitialize an existing one
 
 SYNOPSIS
 

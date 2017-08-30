@@ -2,10 +2,10 @@ package init
 
 import (
 	"io/ioutil"
+	"log"
 	"os"
-	"testing"
-
 	"path"
+	"testing"
 
 	"github.com/ldez/go-git-cmd-wrapper/git"
 )
@@ -17,9 +17,15 @@ func TestInit(t *testing.T) {
 	}
 
 	// clean up
-	defer os.RemoveAll(dir)
+	defer func() {
+		errRm := os.RemoveAll(dir)
+		log.Println(errRm)
+	}()
 
-	os.Chdir(dir)
+	err = os.Chdir(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
 
 	msg, err := git.Init(Directory("test"))
 	if err != nil {

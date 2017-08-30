@@ -1,7 +1,7 @@
 /*
-* CODE GENERATED AUTOMATICALLY
-* THIS FILE MUST NOT BE EDITED BY HAND
- */
+Package add CODE GENERATED AUTOMATICALLY
+THIS FILE MUST NOT BE EDITED BY HAND
+*/
 package add
 
 import "github.com/ldez/go-git-cmd-wrapper/types"

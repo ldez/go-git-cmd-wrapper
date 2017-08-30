@@ -1,7 +1,7 @@
 /*
-* CODE GENERATED AUTOMATICALLY
-* THIS FILE MUST NOT BE EDITED BY HAND
- */
+Package merge CODE GENERATED AUTOMATICALLY
+THIS FILE MUST NOT BE EDITED BY HAND
+*/
 package merge
 
 import (
@@ -69,7 +69,7 @@ func FfOnly(g *types.Cmd) {
 // -S[<keyid>], --gpg-sign[=<keyid>]
 func GpgSign(keyid string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(keyid) != 0 {
+		if len(keyid) == 0 {
 			g.AddOptions("--gpg-sign")
 		} else {
 			g.AddOptions(fmt.Sprintf("--gpg-sign=%s", keyid))
@@ -83,7 +83,7 @@ func GpgSign(keyid string) func(*types.Cmd) {
 // --log[=<n>], --no-log
 func Log(n string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(n) != 0 {
+		if len(n) == 0 {
 			g.AddOptions("--log")
 		} else {
 			g.AddOptions(fmt.Sprintf("--log=%s", n))

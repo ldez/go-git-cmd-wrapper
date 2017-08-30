@@ -1,5 +1,5 @@
 /*
-git-add - Add file contents to the index
+Package add git-add - Add file contents to the index
 
 SYNOPSIS
 

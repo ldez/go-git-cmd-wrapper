@@ -1,5 +1,5 @@
 /*
-git-checkout - Switch branches or restore working tree files
+Package checkout git-checkout - Switch branches or restore working tree files
 
 SYNOPSIS
 

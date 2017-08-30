@@ -15,7 +15,7 @@ func Test_newMeta(t *testing.T) {
 		cmdType       string
 		description   string
 		arguments     string
-		expectedMeta  CmdMeta
+		expectedMeta  cmdMeta
 	}{
 		{
 			name:          "with all parameters",
@@ -25,7 +25,7 @@ func Test_newMeta(t *testing.T) {
 			cmdType:       "TYPE",
 			description:   "line1\nline2",
 			arguments:     "arg",
-			expectedMeta: CmdMeta{
+			expectedMeta: cmdMeta{
 				Method:     "FooBar",
 				Argument:   "fiiBir",
 				Cmd:        "--foo-bar",
@@ -42,7 +42,7 @@ func Test_newMeta(t *testing.T) {
 			cmdType:       "TYPE",
 			description:   "line1\nline2",
 			arguments:     "arg",
-			expectedMeta: CmdMeta{
+			expectedMeta: cmdMeta{
 				Method:     "FooBar",
 				Argument:   "",
 				Cmd:        "--foo-bar",
@@ -59,7 +59,7 @@ func Test_newMeta(t *testing.T) {
 			cmdType:       "TYPE",
 			description:   "line1\nline2",
 			arguments:     "arg",
-			expectedMeta: CmdMeta{
+			expectedMeta: cmdMeta{
 				Method:     "FooBar",
 				Argument:   "value",
 				Cmd:        "--foo-bar",

@@ -1,7 +1,7 @@
 /*
-* CODE GENERATED AUTOMATICALLY
-* THIS FILE MUST NOT BE EDITED BY HAND
- */
+Package clone CODE GENERATED AUTOMATICALLY
+THIS FILE MUST NOT BE EDITED BY HAND
+*/
 package clone
 
 import (
@@ -110,7 +110,7 @@ func Quiet(g *types.Cmd) {
 // --recurse-submodules[=<pathspec>]
 func RecurseSubmodules(pathspec string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(pathspec) != 0 {
+		if len(pathspec) == 0 {
 			g.AddOptions("--recurse-submodules")
 		} else {
 			g.AddOptions(fmt.Sprintf("--recurse-submodules=%s", pathspec))
@@ -162,9 +162,9 @@ func SingleBranch(g *types.Cmd) {
 
 // Template Specify the directory from which templates will be used; (See the 'TEMPLATE DIRECTORY' section of git-init(1).) 
 // --template=<template_directory>
-func Template(template_directory string) func(*types.Cmd) {
+func Template(templateDirectory string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		g.AddOptions(fmt.Sprintf("--template=%s", template_directory))
+		g.AddOptions(fmt.Sprintf("--template=%s", templateDirectory))
 	}
 }
 

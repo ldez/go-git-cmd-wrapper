@@ -1,7 +1,7 @@
 /*
-* CODE GENERATED AUTOMATICALLY
-* THIS FILE MUST NOT BE EDITED BY HAND
- */
+Package commit CODE GENERATED AUTOMATICALLY
+THIS FILE MUST NOT BE EDITED BY HAND
+*/
 package commit
 
 import (
@@ -108,7 +108,7 @@ func Fixup(commit string) func(*types.Cmd) {
 // -S[<keyid>], --gpg-sign[=<keyid>]
 func GpgSign(keyid string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(keyid) != 0 {
+		if len(keyid) == 0 {
 			g.AddOptions("--gpg-sign")
 		} else {
 			g.AddOptions(fmt.Sprintf("--gpg-sign=%s", keyid))
@@ -273,7 +273,7 @@ func Template(file string) func(*types.Cmd) {
 // -u[<mode>], --untracked-files[=<mode>]
 func UntrackedFiles(mode string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(mode) != 0 {
+		if len(mode) == 0 {
 			g.AddOptions("--untracked-files")
 		} else {
 			g.AddOptions(fmt.Sprintf("--untracked-files=%s", mode))

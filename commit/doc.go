@@ -1,5 +1,5 @@
 /*
-git-commit - Record changes to the repository
+Package commit git-commit - Record changes to the repository
 
 SYNOPSIS
 
