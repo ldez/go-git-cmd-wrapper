@@ -6,6 +6,12 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/types"
 )
 
+// NoFollowTags undocumented push option
+// --no-follow-tags
+func NoFollowTags(g *types.Cmd) {
+	g.AddOptions("--no-follow-tags")
+}
+
 // ForceWithLease alone, without specifying the details, will protect all remote refs that are going to be updated by requiring their current value to be the same as the remote-tracking branch we have for them.
 // Usually, "git push" refuses to update a remote ref that is not an ancestor of the local ref used to overwrite it.
 // This option overrides this restriction if the current value of the remote ref is the expected value. "git push" fails otherwise.
