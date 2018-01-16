@@ -85,6 +85,11 @@ func Merge(options ...types.Option) (string, error) {
 	return command("merge", options...)
 }
 
+// Worktree https://git-scm.com/docs/git-worktree
+func Worktree(options ...types.Option) (string, error) {
+	return command("worktree", options...)
+}
+
 // Raw use to execute arbitrary commands.
 func Raw(cmd string, options ...types.Option) (string, error) {
 	return command(cmd, options...)

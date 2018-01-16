@@ -19,6 +19,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/remote"
 	"github.com/ldez/go-git-cmd-wrapper/reset"
 	"github.com/ldez/go-git-cmd-wrapper/revparse"
+	"github.com/ldez/go-git-cmd-wrapper/worktree"
 )
 
 func ExampleInit() {
@@ -172,6 +173,15 @@ func ExampleCond() {
 	// Output:
 	// git push --all --follow-tags --receive-pack=aaa
 	// git push --all --dry-run --follow-tags --receive-pack=aaa
+}
+
+func ExampleWorktree() {
+	cmdExecutor = cmdExecutorMock
+
+	out, _ := Worktree(worktree.Add("v1.0", "origin/v1.0"))
+
+	fmt.Println(out)
+	// Output: git worktree add v1.0 origin/v1.0
 }
 
 func cmdExecutorMock(name string, _ bool, args ...string) (string, error) {
