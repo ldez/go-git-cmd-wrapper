@@ -1,5 +1,5 @@
 /*
-Package remote git-worktree - Manage multiple working trees
+Package worktree git-worktree - Manage multiple working trees
 
 SYNOPSIS
 

@@ -4,7 +4,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/types"
 )
 
-// git worktree add [-f] [--detach] [--checkout] [--lock] [-b <new-branch>] <path> [<branch>]
+// Add git worktree add [-f] [--detach] [--checkout] [--lock] [-b <new-branch>] <path> [<branch>]
 func Add(path, branch string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("add")
@@ -15,14 +15,12 @@ func Add(path, branch string) func(*types.Cmd) {
 	}
 }
 
-// git worktree list [--porcelain]
-func List() func(*types.Cmd) {
-	return func(g *types.Cmd) {
-		g.AddOptions("list")
-	}
+// List git worktree list [--porcelain]
+func List(g *types.Cmd) {
+	g.AddOptions("list")
 }
 
-// git worktree lock [--reason <string>] <worktree>
+// Lock git worktree lock [--reason <string>] <worktree>
 func Lock(worktree string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("lock")
@@ -30,14 +28,12 @@ func Lock(worktree string) func(*types.Cmd) {
 	}
 }
 
-// git worktree prune [-n] [-v] [--expire <expire>]
-func Prune() func(*types.Cmd) {
-	return func(g *types.Cmd) {
-		g.AddOptions("prune")
-	}
+// Prune git worktree prune [-n] [-v] [--expire <expire>]
+func Prune(g *types.Cmd) {
+	g.AddOptions("prune")
 }
 
-// git worktree unlock <worktree>
+// UnLock git worktree unlock <worktree>
 func UnLock(worktree string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("unlock")
@@ -85,7 +81,7 @@ func NoCheckout(g *types.Cmd) {
 	g.AddOptions("--no-checkout")
 }
 
-// Lock [--lock]
+// LockOption [--lock]
 func LockOption(g *types.Cmd) {
 	g.AddOptions("--lock")
 }
