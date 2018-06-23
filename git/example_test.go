@@ -23,7 +23,7 @@ import (
 )
 
 func ExampleInit() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Init(ginit.Bare, ginit.Quiet, ginit.Directory("foobar"))
 
@@ -32,7 +32,7 @@ func ExampleInit() {
 }
 
 func ExamplePush() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Push(push.All, push.FollowTags, push.ReceivePack("aaa"))
 
@@ -41,7 +41,7 @@ func ExamplePush() {
 }
 
 func ExamplePull() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Pull(pull.All, pull.Force, pull.Repository("upstream"), pull.Refspec("master"))
 
@@ -50,7 +50,7 @@ func ExamplePull() {
 }
 
 func ExampleClone() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Clone(clone.Repository("git@github.com:ldez/go-git-cmd-wrapper.git"))
 
@@ -59,7 +59,7 @@ func ExampleClone() {
 }
 
 func ExampleRemote() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Remote(remote.Add("upstream", "git@github.com:johndoe/go-git-cmd-wrapper.git"))
 
@@ -68,7 +68,7 @@ func ExampleRemote() {
 }
 
 func ExampleFetch() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Fetch(fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("myBranchName"))
 
@@ -77,7 +77,7 @@ func ExampleFetch() {
 }
 
 func ExampleRebase() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Rebase(rebase.PreserveMerges, rebase.Branch(fmt.Sprintf("%s/%s", "upstream", "master")))
 
@@ -86,7 +86,7 @@ func ExampleRebase() {
 }
 
 func ExampleCheckout() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Checkout(checkout.NewBranch("myBranchName"))
 
@@ -95,7 +95,7 @@ func ExampleCheckout() {
 }
 
 func ExampleConfig() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Config(config.Entry("rebase.autoSquash", "true"))
 
@@ -104,7 +104,7 @@ func ExampleConfig() {
 }
 
 func ExampleBranch() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Branch(branch.DeleteForce, branch.BranchName("myBranch"))
 
@@ -113,7 +113,7 @@ func ExampleBranch() {
 }
 
 func ExampleRevParse() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := RevParse(revparse.AbbrevRef(""), revparse.Args("HEAD"))
 
@@ -122,7 +122,7 @@ func ExampleRevParse() {
 }
 
 func ExampleReset() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Reset(reset.Soft, reset.Commit("e41f083"))
 
@@ -131,7 +131,7 @@ func ExampleReset() {
 }
 
 func ExampleCommit() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Commit(commit.Amend, commit.Message("chore: foo"))
 
@@ -140,7 +140,7 @@ func ExampleCommit() {
 }
 
 func ExampleAdd() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Add(add.All)
 
@@ -149,7 +149,7 @@ func ExampleAdd() {
 }
 
 func ExampleMerge() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Merge(merge.Squash, merge.Commits("myBranch"))
 
@@ -158,7 +158,7 @@ func ExampleMerge() {
 }
 
 func ExampleCond() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	param := false
 	out, _ := Push(push.All, Cond(param, push.DryRun), push.FollowTags, push.ReceivePack("aaa"))
@@ -176,7 +176,7 @@ func ExampleCond() {
 }
 
 func ExampleWorktree() {
-	cmdExecutor = cmdExecutorMock
+	CmdExecutor = cmdExecutorMock
 
 	out, _ := Worktree(worktree.Add("v1.0", "origin/v1.0"))
 

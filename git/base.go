@@ -8,7 +8,8 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/types"
 )
 
-var cmdExecutor = commander
+// CmdExecutor Allow to override the Git command call (useful for testing purpose)
+var CmdExecutor = commander
 
 // Init https://git-scm.com/docs/git-init
 func Init(options ...types.Option) (string, error) {
@@ -125,7 +126,7 @@ func command(name string, options ...types.Option) (string, error) {
 
 	g.ApplyOptions(options...)
 
-	return cmdExecutor(g.Base, g.Debug, g.Options...)
+	return CmdExecutor(g.Base, g.Debug, g.Options...)
 }
 
 func commander(name string, debug bool, args ...string) (string, error) {
