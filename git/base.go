@@ -1,15 +1,11 @@
 package git
 
 import (
+	"io"
 	"log"
-	"os/exec"
-	"strings"
 
 	"github.com/ldez/go-git-cmd-wrapper/types"
 )
-
-// CmdExecutor Allow to override the Git command call (useful for testing purpose)
-var CmdExecutor = commander
 
 // Init https://git-scm.com/docs/git-init
 func Init(options ...types.Option) (string, error) {
@@ -119,24 +115,25 @@ func Cond(apply bool, options ...types.Option) types.Option {
 }
 
 // NoOp do nothing.
-func NoOp(g *types.Cmd) {}
+func NoOp(_ *types.Cmd) {}
 
-func command(name string, options ...types.Option) (string, error) {
-	g := &types.Cmd{Base: "git", Options: []string{name}}
-
-	g.ApplyOptions(options...)
-
-	return CmdExecutor(g.Base, g.Debug, g.Options...)
+// LogOutput Writer used by the internal logger.
+func LogOutput(w io.Writer) types.Option {
+	return func(g *types.Cmd) {
+		g.Logger = log.New(w, "", 0)
+	}
 }
 
-func commander(name string, debug bool, args ...string) (string, error) {
-	if debug {
-		log.Println(name, strings.Join(args, " "))
+// CmdExecutor Allow to override the Git command call (useful for testing purpose)
+func CmdExecutor(executor types.Executor) types.Option {
+	return func(g *types.Cmd) {
+		g.Executor = executor
 	}
+}
 
-	cmd := exec.Command(name, args...)
+func command(name string, options ...types.Option) (string, error) {
+	g := types.NewCmd(name)
+	g.ApplyOptions(options...)
 
-	output, err := cmd.CombinedOutput()
-
-	return string(output), err
+	return g.Exec(g.Base, g.Debug, g.Options...)
 }
