@@ -6,7 +6,6 @@ import (
 )
 
 func Test_newMeta(t *testing.T) {
-
 	testCases := []struct {
 		name          string
 		rawMethodName string
@@ -71,9 +70,7 @@ func Test_newMeta(t *testing.T) {
 	}
 
 	for _, test := range testCases {
-		test := test
 		t.Run(test.name, func(t *testing.T) {
-			//t.Parallel()
 
 			meta := newMeta(test.rawMethodName, test.rawArg, test.cmd, test.cmdType, test.description, test.arguments)
 

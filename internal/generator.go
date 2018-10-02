@@ -154,19 +154,19 @@ var (
 
 func main() {
 	filePath := "descriptions.json"
-	var jsonModels []jsonModel
+
 	file, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	var jsonModels []jsonModel
 	err = json.Unmarshal(file, &jsonModels)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for _, jsonModel := range jsonModels {
-
 		if len(jsonModel.CommandName) != 0 && jsonModel.Enabled {
 
 			cmdModel := newGenCmdModel(jsonModel)
@@ -188,8 +188,8 @@ func main() {
 }
 
 func generateFileContent(model genCmdModel) (string, error) {
-
 	base := template.New(model.Name)
+
 	_, err := base.New("templateCmdSimple").Parse(templateCmdSimple)
 	if err != nil {
 		return "", err
@@ -210,6 +210,7 @@ func generateFileContent(model genCmdModel) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	tmpl := template.Must(base.Parse(fileTemplate))
 
 	b := &bytes.Buffer{}
@@ -242,8 +243,7 @@ func hasImportFMT(jsonCmdModels []jsonCmdModel) bool {
 }
 
 func jsonCmdModelToCmdMetas(jsonCmdModels []jsonCmdModel) []cmdMeta {
-
-	metas := []cmdMeta{}
+	var metas []cmdMeta
 
 	for _, jsonCmdModel := range jsonCmdModels {
 		if expCmdSimple.MatchString(jsonCmdModel.Argument) {
@@ -369,7 +369,6 @@ func newMetaCmd(regexp *regexp.Regexp, jsonCmdModel jsonCmdModel, builder metaBu
 }
 
 func newMeta(rawMethodName, rawArg, cmd, cmdType, description, arguments string) cmdMeta {
-
 	method := toGoName(rawMethodName, true)
 
 	var arg string
@@ -391,11 +390,10 @@ func newMeta(rawMethodName, rawArg, cmd, cmdType, description, arguments string)
 }
 
 func toGoName(kebab string, upperFirst bool) string {
+	kebabTrim := strings.NewReplacer(" ", "-", "_", "-").Replace(strings.TrimSpace(kebab))
+
 	var camelCase string
-	kebabTrim := strings.Replace(
-		strings.Replace(
-			strings.TrimSpace(kebab), " ", "-", -1),
-		"_", "-", -1)
+
 	isToUpper := false
 	for i, runeValue := range kebabTrim {
 		if i == 0 && upperFirst {
