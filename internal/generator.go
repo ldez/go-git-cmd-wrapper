@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"go/format"
 	"io/ioutil"
 	"log"
 	"regexp"
@@ -179,7 +180,15 @@ func main() {
 			genFilePath := fmt.Sprintf("../%[1]s/%[1]s_gen.go", jsonModel.CommandName)
 
 			fmt.Println(genFilePath)
-			err = ioutil.WriteFile(genFilePath, []byte(data), 0644)
+
+			// gofmt
+			source, err := format.Source([]byte(data))
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			err = ioutil.WriteFile(genFilePath, source, 0644)
+			format.Source([]byte(data))
 			if err != nil {
 				log.Fatal(err)
 			}
