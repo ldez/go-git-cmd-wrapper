@@ -10,3 +10,6 @@ test-unit:
 
 checks:
 	golangci-lint run
+
+fmt:
+	gofmt -s -l -w .

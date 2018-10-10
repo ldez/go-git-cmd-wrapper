@@ -77,14 +77,14 @@ package {{ .Name }}
 {{end -}}
 `
 	templateCmdSimple = `{{- range $index, $element := .Comments}}
-// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }} {{end}}
+// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }}{{end}}
 // {{ .CmdComment }}
 func {{ .Method }}(g *types.Cmd) {
 	g.AddOptions("{{ .Cmd }}")
 }`
 
 	templateCmdEqualNoOptional = `{{- range $index, $element := .Comments}}
-// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }} {{end}}
+// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }}{{end}}
 // {{ .CmdComment }}
 func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
@@ -93,7 +93,7 @@ func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 }`
 
 	templateCmdEqualOptional = `{{- range $index, $element := .Comments}}
-// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }} {{end}}
+// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }}{{end}}
 // {{ .CmdComment }}
 func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
@@ -106,7 +106,7 @@ func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 }`
 
 	templateCmdWithParameter = `{{- range $index, $element := .Comments}}
-// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }} {{end}}
+// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }}{{end}}
 // {{ .CmdComment }}
 func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
@@ -116,7 +116,7 @@ func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 }`
 
 	templateCmdWithOptionalParameter = `{{- range $index, $element := .Comments}}
-// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }} {{end}}
+// {{if eq $index 0 }}{{ $.Method }} {{end}}{{ $element }}{{end}}
 // {{ .CmdComment }}
 func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 	return func(g *types.Cmd) {

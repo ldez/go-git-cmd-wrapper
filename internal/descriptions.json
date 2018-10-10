@@ -1219,7 +1219,7 @@
       {
         "argument": "--untracked-files[=<mode>]",
         "arguments": "-u[<mode>], --untracked-files[=<mode>]",
-        "description": "Show untracked files. \nThe mode parameter is optional (defaults to all), and is used to specify the handling of untracked files; when -u is not used, the default is normal, i.e. show untracked files and directories."
+        "description": "Show untracked files.\nThe mode parameter is optional (defaults to all), and is used to specify the handling of untracked files; when -u is not used, the default is normal, i.e. show untracked files and directories."
       },
       {
         "argument": "--verbose",
