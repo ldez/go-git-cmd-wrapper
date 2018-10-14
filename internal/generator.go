@@ -188,7 +188,6 @@ func main() {
 			}
 
 			err = ioutil.WriteFile(genFilePath, source, 0644)
-			format.Source([]byte(data))
 			if err != nil {
 				log.Fatal(err)
 			}
