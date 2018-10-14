@@ -1,7 +1,9 @@
 /*
-Package push git-push - Update remote refs along with associated objects
+Package push git-push - Update remote refs along with associated objects.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-push
 
 		git push [--all | --mirror | --tags] [--follow-tags] [--atomic] [-n | --dry-run] [--receive-pack=<git-receive-pack>]
 			[--repo=<repository>] [-f | --force] [-d | --delete] [--prune] [-v | --verbose]
@@ -25,6 +27,5 @@ honors push.default configuration to decide what to push (See git-config(1) for 
 When neither the command-line nor the configuration specify what to push, the default behavior is used, which corresponds to the simple value for push.default: the current branch is pushed to the corresponding upstream
 branch, but as a safety measure, the push is aborted if the upstream branch does not have the same name as the local one.
 
-URL:	https://git-scm.com/docs/git-push
 */
 package push

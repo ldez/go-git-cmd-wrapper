@@ -1,7 +1,9 @@
 /*
-Package fetch git-fetch - Download objects and refs from another repository
+Package fetch git-fetch - Download objects and refs from another repository.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-fetch
 
 		git fetch [<options>] [<repository> [<refspec>...]]
 		git fetch [<options>] <group>
@@ -23,6 +25,5 @@ When no remote is specified, by default the origin remote will be used, unless t
 
 The names of refs that are fetched, together with the object names they point at, are written to .git/FETCH_HEAD. This information may be used by scripts or other git commands, such as git-pull(1).
 
-URL https://git-scm.com/docs/git-fetch
 */
 package fetch

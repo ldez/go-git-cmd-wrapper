@@ -1,7 +1,9 @@
 /*
-Package clone git-clone - Clone a repository into a new directory
+Package clone git-clone - Clone a repository into a new directory.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-clone
 
 		git clone [--template=<template_directory>]
 						 [-l] [-s] [--no-hardlinks] [-q] [-n] [--bare] [--mirror]
@@ -19,6 +21,5 @@ After the clone, a plain git fetch without arguments will update all the remote-
 
 This default configuration is achieved by creating references to the remote branch heads under refs/remotes/origin and by initializing remote.origin.url and remote.origin.fetch configuration variables.
 
-URL https://git-scm.com/docs/git-clone
 */
 package clone

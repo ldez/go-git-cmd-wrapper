@@ -51,11 +51,10 @@ func (r byMethodName) Swap(i, j int)      { r[i], r[j] = r[j], r[i] }
 func (r byMethodName) Less(i, j int) bool { return r[i].Method < r[j].Method }
 
 const (
-	fileTemplate = `/*
-Package {{ .Name }} CODE GENERATED AUTOMATICALLY
-THIS FILE MUST NOT BE EDITED BY HAND
-*/
-package {{ .Name }}
+	fileTemplate = `package {{ .Name }}
+
+// CODE GENERATED AUTOMATICALLY
+// THIS FILE MUST NOT BE EDITED BY HAND
 
 {{if .ImportFMT }}import (
 	"fmt"

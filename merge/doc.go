@@ -1,7 +1,10 @@
 /*
-Package merge git-merge - Join two or more development histories together
+Package merge git-merge - Join two or more development histories together.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-merge
+
 		git merge [-n] [--stat] [--no-commit] [--squash] [--[no-]edit]
 				[-s <strategy>] [-X <strategy-option>] [-S[<keyid>]]
 				[--[no-]allow-unrelated-histories]
@@ -31,6 +34,5 @@ Warning: Running git merge with non-trivial uncommitted changes is discouraged: 
 
 The fourth syntax ("git merge --continue") can only be run after the merge has resulted in conflicts.
 
-URL:	https://git-scm.com/docs/git-merge
 */
 package merge

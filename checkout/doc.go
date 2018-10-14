@@ -1,7 +1,9 @@
 /*
-Package checkout git-checkout - Switch branches or restore working tree files
+Package checkout git-checkout - Switch branches or restore working tree files.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-checkout
 
 		git checkout [-q] [-f] [-m] [<branch>]
 		git checkout [-q] [-f] [-m] --detach [<branch>]
@@ -14,6 +16,5 @@ DESCRIPTION
 
 Updates files in the working tree to match the version in the index or the specified tree. If no paths are given, git checkout will also update HEAD to set the specified branch as the current branch.
 
-URL https://git-scm.com/docs/git-checkout
 */
 package checkout

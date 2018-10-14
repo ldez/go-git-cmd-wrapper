@@ -1,7 +1,9 @@
 /*
-Package rebase git-rebase - Reapply commits on top of another base tip
+Package rebase git-rebase - Reapply commits on top of another base tip.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-rebase
 
 		git rebase [-i | --interactive] [options] [--exec <cmd>] [--onto <newbase>]
 					 [<upstream> [<branch>]]
@@ -28,6 +30,5 @@ HEAD..<upstream> are omitted (i.e., a patch already accepted upstream with a dif
 It is possible that a merge failure will prevent this process from being completely automatic. You will have to resolve any such merge failure and run git rebase --continue. Another option is to bypass the commit that caused
 the merge failure with git rebase --skip. To check out the original <branch> and remove the .git/rebase-apply working files, use the command git rebase --abort instead.
 
-URL https://git-scm.com/docs/git-rebase
 */
 package rebase

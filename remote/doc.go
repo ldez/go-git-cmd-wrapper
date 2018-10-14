@@ -1,7 +1,9 @@
 /*
-Package remote git-remote - Manage set of tracked repositories
+Package remote git-remote - Manage set of tracked repositories.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-remote
 
 		git remote [-v | --verbose]
 		git remote add [-t <branch>] [-m <master>] [-f] [--[no-]tags] [--mirror=<fetch|push>] <name> <url>
@@ -21,6 +23,5 @@ DESCRIPTION
 
 Manage the set of repositories ("remotes") whose branches you track.
 
-URL https://git-scm.com/docs/git-remote
 */
 package remote

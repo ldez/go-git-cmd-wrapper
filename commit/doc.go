@@ -1,7 +1,9 @@
 /*
-Package commit git-commit - Record changes to the repository
+Package commit git-commit - Record changes to the repository.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-commit
 
 		git commit [-a | --interactive | --patch] [-s] [-v] [-u<mode>] [--amend]
 				[--dry-run] [(-c | -C | --fixup | --squash) <commit>]
@@ -30,6 +32,5 @@ The --dry-run option can be used to obtain a summary of what is included by any 
 
 If you make a commit and then find a mistake immediately after that, you can recover from it with git reset.
 
-URL https://git-scm.com/docs/git-commit
 */
 package commit

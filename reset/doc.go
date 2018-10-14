@@ -1,7 +1,9 @@
 /*
-Package reset git-reset - Reset current HEAD to the specified state
+Package reset git-reset - Reset current HEAD to the specified state.
 
 SYNOPSIS
+
+Reference:  https://git-scm.com/docs/git-reset
 
 		git reset [-q] [<tree-ish>] [--] <paths>...
 		git reset (--patch | -p) [<tree-ish>] [--] [<paths>...]
@@ -30,6 +32,5 @@ This means that git reset -p is the opposite of git add -p, i.e. you can use it 
 
 This form resets the current branch head to <commit> and possibly updates the index (resetting it to the tree of <commit>) and the working tree depending on <mode>. If <mode> is omitted, defaults to "--mixed".
 
-URL https://git-scm.com/docs/git-reset
 */
 package reset

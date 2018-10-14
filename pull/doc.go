@@ -1,7 +1,9 @@
 /*
-Package pull git-pull - Fetch from and integrate with another repository or a local branch
+Package pull git-pull - Fetch from and integrate with another repository or a local branch.
 
 SYNOPSIS
+
+Reference:https://git-scm.com/docs/git-pull
 
 		git pull [options] [<repository> [<refspec>...]]
 
@@ -39,6 +41,5 @@ hard to back out of in the case of a conflict.
 If any of the remote changes overlap with local uncommitted changes, the merge will be automatically canceled and the work tree untouched. It is generally best to get any local changes in working order before pulling or stash
 them away with git-stash(1).
 
-URL:	https://git-scm.com/docs/git-pull
 */
 package pull

@@ -1,13 +1,3 @@
-/*
-Package branch Branch https://git-scm.com/docs/git-branch
-
-usage: git branch [<options>] [-r | -a] [--merged | --no-merged]
-or: git branch [<options>] [-l] [-f] <branch-name> [<start-point>]
-or: git branch [<options>] [-r] (-d | -D) <branch-name>...
-or: git branch [<options>] (-m | -M) [<old-branch>] <new-branch>
-or: git branch [<options>] [-r | -a] [--points-at]
-or: git branch [<options>] [-r | -a] [--format]
-*/
 package branch
 
 import (

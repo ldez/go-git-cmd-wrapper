@@ -1,7 +1,9 @@
 /*
-Package cleanup --cleanup=<mode>
+Package cleanup This option determines how the supplied commit message should be cleaned up before committing.
+The <mode> can be strip, whitespace, verbatim, scissors or default.
 
-This option determines how the supplied commit message should be cleaned up before committing. The <mode> can be strip, whitespace, verbatim, scissors or default.
+		--cleanup=<mode>
+
 */
 package cleanup
 

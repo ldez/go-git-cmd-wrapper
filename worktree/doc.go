@@ -1,7 +1,9 @@
 /*
-Package worktree git-worktree - Manage multiple working trees
+Package worktree git-worktree - Manage multiple working trees.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-worktree
 
 		git worktree add [-f] [--detach] [--checkout] [--lock] [-b <new-branch>] <path> [<branch>]
 		git worktree list [--porcelain]
@@ -13,6 +15,5 @@ DESCRIPTION
 
 Manage multiple working trees attached to the same repository.
 
-URL https://git-scm.com/docs/git-worktree
 */
 package worktree

@@ -1,7 +1,9 @@
 /*
-Package add git-add - Add file contents to the index
+Package add git-add - Add file contents to the index.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-add
 
 		git add [--verbose | -v] [--dry-run | -n] [--force | -f] [--interactive | -i] [--patch | -p]
 				[--edit | -e] [--[no-]all | --[no-]ignore-removal | [--update | -u]]
@@ -22,6 +24,5 @@ The git add command will not add ignored files by default. If any ignored files 
 
 Please see git-commit(1) for alternative ways to add content to a commit.
 
-URL https://git-scm.com/docs/git-add
 */
 package add

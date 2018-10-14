@@ -1,7 +1,9 @@
 /*
-Package config git-config - Get and set repository or global options
+Package config git-config - Get and set repository or global options.
 
 SYNOPSIS
+
+Reference: https://git-scm.com/docs/git-config
 
 		git config [<file-option>] [type] [--show-origin] [-z|--null] name [value [value_regex]]
 		git config [<file-option>] [type] --add name value
@@ -47,7 +49,5 @@ This command will fail with non-zero status upon error. Some exit codes are:
 
 On success, the command returns the exit code 0.
 
-
-URL https://git-scm.com/docs/git-config
 */
 package config
