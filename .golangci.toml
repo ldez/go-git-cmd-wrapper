@@ -35,4 +35,5 @@
   max-same = 0
   exclude = [
     "func name will be used as branch.BranchName by other packages", # branch/branch.go
+    "don't use an underscore in package name" # doc.go (root)
   ]
