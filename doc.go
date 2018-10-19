@@ -1,5 +1,5 @@
 /*
-Package gogitcmdwrapper A simple wrapper around `git` command.
+Package go_git_cmd_wrapper A simple wrapper around `git` command.
 
 		import (
 			// ...
@@ -25,4 +25,4 @@ Package gogitcmdwrapper A simple wrapper around `git` command.
 		output, err = git.Remote(remote.Add, remote.Name("upstream"), remote.URL("https://github.com/ldez/gcg"))
 
 */
-package gogitcmdwrapper
+package go_git_cmd_wrapper
