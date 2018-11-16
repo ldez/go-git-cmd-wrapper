@@ -253,21 +253,22 @@ func jsonCmdModelToCmdMetas(jsonCmdModels []jsonCmdModel) []cmdMeta {
 	var metas []cmdMeta
 
 	for _, jsonCmdModel := range jsonCmdModels {
-		if expCmdSimple.MatchString(jsonCmdModel.Argument) {
+		switch {
+		case expCmdSimple.MatchString(jsonCmdModel.Argument):
 			metas = append(metas, newMetaCmdSimple(jsonCmdModel))
-		} else if expCmdEqualNoOptional.MatchString(jsonCmdModel.Argument) {
+		case expCmdEqualNoOptional.MatchString(jsonCmdModel.Argument):
 			metas = append(metas, newMetaCmdEqualNoOptional(jsonCmdModel))
-		} else if expCmdEqualOptionalWithoutName.MatchString(jsonCmdModel.Argument) {
+		case expCmdEqualOptionalWithoutName.MatchString(jsonCmdModel.Argument):
 			metas = append(metas, newMetaCmdEqualOptionalWithoutName(jsonCmdModel))
-		} else if expCmdEqualWithoutName.MatchString(jsonCmdModel.Argument) {
+		case expCmdEqualWithoutName.MatchString(jsonCmdModel.Argument):
 			metas = append(metas, newMetaCmdEqualWithoutName(jsonCmdModel))
-		} else if expCmdEqualOptionalWithName.MatchString(jsonCmdModel.Argument) {
+		case expCmdEqualOptionalWithName.MatchString(jsonCmdModel.Argument):
 			metas = append(metas, newMetaCmdEqualOptionalWithName(jsonCmdModel))
-		} else if expCmdWithParameter.MatchString(jsonCmdModel.Argument) {
+		case expCmdWithParameter.MatchString(jsonCmdModel.Argument):
 			metas = append(metas, newMetaCmdWithParameter(jsonCmdModel))
-		} else if expCmdWithOptionalParameter.MatchString(jsonCmdModel.Argument) {
+		case expCmdWithOptionalParameter.MatchString(jsonCmdModel.Argument):
 			metas = append(metas, newMetaCmdWithOptionalParameter(jsonCmdModel))
-		} else {
+		default:
 			log.Println("fail", jsonCmdModel)
 		}
 	}
@@ -403,17 +404,16 @@ func toGoName(kebab string, upperFirst bool) string {
 
 	isToUpper := false
 	for i, runeValue := range kebabTrim {
-		if i == 0 && upperFirst {
+		switch {
+		case i == 0 && upperFirst:
 			camelCase += strings.ToUpper(string(runeValue))
-		} else if isToUpper {
+		case isToUpper:
 			camelCase += strings.ToUpper(string(runeValue))
 			isToUpper = false
-		} else {
-			if runeValue == '-' {
-				isToUpper = true
-			} else {
-				camelCase += string(runeValue)
-			}
+		case runeValue == '-':
+			isToUpper = true
+		default:
+			camelCase += string(runeValue)
 		}
 	}
 	return camelCase

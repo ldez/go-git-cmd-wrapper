@@ -27,6 +27,7 @@
     "gas",
     "dupl",
     "prealloc",
+    "scopelint",
   ]
 
 [issues]
@@ -35,5 +36,6 @@
   max-same = 0
   exclude = [
     "func name will be used as branch.BranchName by other packages", # branch/branch.go
-    "don't use an underscore in package name" # doc.go (root)
+    "don't use an underscore in package name", # doc.go (root)
+    "`expCmd(.+)` is a global variable", # internal/generator.go
   ]
