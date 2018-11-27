@@ -77,6 +77,11 @@ func Add(options ...types.Option) (string, error) {
 	return command("add", options...)
 }
 
+// Tag https://git-scm.com/docs/git-tag
+func Tag(options ...types.Option) (string, error) {
+	return command("tag", options...)
+}
+
 // Merge https://git-scm.com/docs/git-merge
 func Merge(options ...types.Option) (string, error) {
 	return command("merge", options...)
