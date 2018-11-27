@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/ldez/go-git-cmd-wrapper/tag"
+
 	"github.com/ldez/go-git-cmd-wrapper/add"
 	"github.com/ldez/go-git-cmd-wrapper/branch"
 	"github.com/ldez/go-git-cmd-wrapper/checkout"
@@ -149,6 +151,13 @@ func ExampleWorktree() {
 
 	fmt.Println(out)
 	// Output: git worktree add v1.0 origin/v1.0
+}
+
+func ExampleTag() {
+	out, _ := Tag(tag.List, CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git tag --list
 }
 
 func cmdExecutorMock(name string, _ bool, args ...string) (string, error) {
