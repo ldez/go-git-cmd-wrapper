@@ -382,7 +382,7 @@ func newMeta(rawMethodName, rawArg, cmd, cmdType, description, arguments string)
 	var arg string
 	if len(rawArg) != 0 {
 		arg = toGoName(rawArg, false)
-		if strings.ToLower(method) == strings.ToLower(arg) {
+		if strings.EqualFold(method, arg) {
 			arg = "value"
 		}
 	}

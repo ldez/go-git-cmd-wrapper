@@ -1,14 +1,14 @@
-.PHONY: all
+.PHONY: generate check test fmt
 
-default: generate checks test-unit
+default: generate check test
 
 generate:
 	go generate -x internal/generator.go
 
-test-unit:
+test:
 	go test ./... --cover
 
-checks:
+check:
 	golangci-lint run
 
 fmt:
