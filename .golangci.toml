@@ -18,6 +18,7 @@
 
   [linters-settings.misspell]
     locale = "US"
+    ignore-words = ["hardlinked", "behaviour"]
 
 [linters]
   enable-all = true
@@ -28,14 +29,28 @@
     "dupl",
     "prealloc",
     "scopelint",
+    "wsl",
+    "stylecheck",
   ]
 
 [issues]
   exclude-use-default = false
   max-per-linter = 0
   max-same = 0
-  exclude = [
-    "func name will be used as branch.BranchName by other packages", # branch/branch.go
-    "don't use an underscore in package name", # doc.go (root)
-    "`expCmd(.+)` is a global variable", # internal/generator.go
-  ]
+  exclude = []
+
+  [[issues.exclude-rules]]
+    path = "branch/branch.go"
+    text = "func name will be used as branch.BranchName by other packages"
+  [[issues.exclude-rules]]
+    path = "push/push_gen.go"
+    text = "func name will be used as push.PushOption by other packages"
+  [[issues.exclude-rules]]
+    path = "doc.go"
+    text = "don't use an underscore in package name"
+  [[issues.exclude-rules]]
+    path = "internal/generator.go"
+    text = "`expCmd(.+)` is a global variable"
+ [[issues.exclude-rules]]
+    path = "(.+)_test.go"
+    linters = ["funlen"]

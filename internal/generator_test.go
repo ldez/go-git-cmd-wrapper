@@ -71,7 +71,6 @@ func Test_newMeta(t *testing.T) {
 
 	for _, test := range testCases {
 		t.Run(test.name, func(t *testing.T) {
-
 			meta := newMeta(test.rawMethodName, test.rawArg, test.cmd, test.cmdType, test.description, test.arguments)
 
 			if !reflect.DeepEqual(meta, test.expectedMeta) {

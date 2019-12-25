@@ -168,7 +168,6 @@ func main() {
 
 	for _, jsonModel := range jsonModels {
 		if len(jsonModel.CommandName) != 0 && jsonModel.Enabled {
-
 			cmdModel := newGenCmdModel(jsonModel)
 
 			data, err := generateFileContent(cmdModel)

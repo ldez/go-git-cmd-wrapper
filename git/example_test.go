@@ -53,7 +53,6 @@ func ExampleClone() {
 }
 
 func ExampleRemote() {
-
 	out, _ := Remote(remote.Add("upstream", "git@github.com:johndoe/go-git-cmd-wrapper.git"), CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
