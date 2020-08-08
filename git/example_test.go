@@ -1,9 +1,10 @@
-package git
+package git_test
 
 import (
 	"fmt"
 	"strings"
 
+	"github.com/ldez/go-git-cmd-wrapper/git"
 	"github.com/ldez/go-git-cmd-wrapper/status"
 	"github.com/ldez/go-git-cmd-wrapper/tag"
 
@@ -26,105 +27,105 @@ import (
 )
 
 func ExampleInit() {
-	out, _ := Init(ginit.Bare, ginit.Quiet, ginit.Directory("foobar"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Init(ginit.Bare, ginit.Quiet, ginit.Directory("foobar"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git init --bare --quiet foobar
 }
 
 func ExamplePush() {
-	out, _ := Push(push.All, push.FollowTags, push.ReceivePack("aaa"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Push(push.All, push.FollowTags, push.ReceivePack("aaa"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git push --all --follow-tags --receive-pack=aaa
 }
 
 func ExamplePull() {
-	out, _ := Pull(pull.All, pull.Force, pull.Repository("upstream"), pull.Refspec("master"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Pull(pull.All, pull.Force, pull.Repository("upstream"), pull.Refspec("master"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git pull --all --force upstream master
 }
 
 func ExampleClone() {
-	out, _ := Clone(clone.Repository("git@github.com:ldez/go-git-cmd-wrapper.git"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Clone(clone.Repository("git@github.com:ldez/go-git-cmd-wrapper.git"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git clone git@github.com:ldez/go-git-cmd-wrapper.git
 }
 
 func ExampleRemote() {
-	out, _ := Remote(remote.Add("upstream", "git@github.com:johndoe/go-git-cmd-wrapper.git"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Remote(remote.Add("upstream", "git@github.com:johndoe/go-git-cmd-wrapper.git"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git remote add upstream git@github.com:johndoe/go-git-cmd-wrapper.git
 }
 
 func ExampleFetch() {
-	out, _ := Fetch(fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("myBranchName"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Fetch(fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("myBranchName"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git fetch --no-tags upstream myBranchName
 }
 
 func ExampleRebase() {
-	out, _ := Rebase(rebase.PreserveMerges, rebase.Branch(fmt.Sprintf("%s/%s", "upstream", "master")), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Rebase(rebase.PreserveMerges, rebase.Branch(fmt.Sprintf("%s/%s", "upstream", "master")), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git rebase --preserve-merges upstream/master
 }
 
 func ExampleCheckout() {
-	out, _ := Checkout(checkout.NewBranch("myBranchName"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Checkout(checkout.NewBranch("myBranchName"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git checkout -b myBranchName
 }
 
 func ExampleConfig() {
-	out, _ := Config(config.Entry("rebase.autoSquash", "true"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Config(config.Entry("rebase.autoSquash", "true"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git config rebase.autoSquash true
 }
 
 func ExampleBranch() {
-	out, _ := Branch(branch.DeleteForce, branch.BranchName("myBranch"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Branch(branch.DeleteForce, branch.BranchName("myBranch"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git branch -D myBranch
 }
 
 func ExampleRevParse() {
-	out, _ := RevParse(revparse.AbbrevRef(""), revparse.Args("HEAD"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.RevParse(revparse.AbbrevRef(""), revparse.Args("HEAD"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git rev-parse --abbrev-ref HEAD
 }
 
 func ExampleReset() {
-	out, _ := Reset(reset.Soft, reset.Commit("e41f083"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Reset(reset.Soft, reset.Commit("e41f083"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git reset --soft e41f083
 }
 
 func ExampleCommit() {
-	out, _ := Commit(commit.Amend, commit.Message("chore: foo"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Commit(commit.Amend, commit.Message("chore: foo"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git commit --amend --message="chore: foo"
 }
 
 func ExampleAdd() {
-	out, _ := Add(add.All, CmdExecutor(cmdExecutorMock))
+	out, _ := git.Add(add.All, git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git add --all
 }
 
 func ExampleMerge() {
-	out, _ := Merge(merge.Squash, merge.Commits("myBranch"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Merge(merge.Squash, merge.Commits("myBranch"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git merge --squash myBranch
@@ -132,12 +133,12 @@ func ExampleMerge() {
 
 func ExampleCond() {
 	param := false
-	out, _ := Push(push.All, Cond(param, push.DryRun), push.FollowTags, push.ReceivePack("aaa"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Push(push.All, git.Cond(param, push.DryRun), push.FollowTags, push.ReceivePack("aaa"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Print(out)
 
 	param = true
-	out, _ = Push(push.All, Cond(param, push.DryRun), push.FollowTags, push.ReceivePack("aaa"), CmdExecutor(cmdExecutorMock))
+	out, _ = git.Push(push.All, git.Cond(param, push.DryRun), push.FollowTags, push.ReceivePack("aaa"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Print(out)
 
@@ -147,21 +148,21 @@ func ExampleCond() {
 }
 
 func ExampleWorktree() {
-	out, _ := Worktree(worktree.Add("v1.0", "origin/v1.0"), CmdExecutor(cmdExecutorMock))
+	out, _ := git.Worktree(worktree.Add("v1.0", "origin/v1.0"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git worktree add v1.0 origin/v1.0
 }
 
 func ExampleTag() {
-	out, _ := Tag(tag.List, CmdExecutor(cmdExecutorMock))
+	out, _ := git.Tag(tag.List, git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git tag --list
 }
 
 func ExampleStatus() {
-	out, _ := Status(status.Short, status.Branch, CmdExecutor(cmdExecutorMock))
+	out, _ := git.Status(status.Short, status.Branch, git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
 	// Output: git status --short --branch
