@@ -1,7 +1,6 @@
 package types
 
 import (
-	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -34,12 +33,11 @@ func NewCmd(name string) *Cmd {
 
 // Cmd Command.
 type Cmd struct {
-	Debug     bool
-	Base      string
-	Options   []string
-	LogOutput io.Writer
-	Logger    logger
-	Executor  Executor
+	Debug    bool
+	Base     string
+	Options  []string
+	Logger   logger
+	Executor Executor
 }
 
 // Option Command option.

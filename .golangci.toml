@@ -25,19 +25,25 @@
   disable = [
     "maligned",
     "lll",
-    "gas",
     "dupl",
     "prealloc",
     "scopelint",
     "wsl",
     "stylecheck",
+    "testpackage",
+    "nlreturn",
+    "godot",
   ]
 
 [issues]
   exclude-use-default = false
   max-per-linter = 0
   max-same = 0
-  exclude = []
+  exclude = ["G204"]
+
+ [[issues.exclude-rules]]
+    path = "(.+)_test.go"
+    linters = ["funlen"]
 
   [[issues.exclude-rules]]
     path = "branch/branch.go"
@@ -51,6 +57,6 @@
   [[issues.exclude-rules]]
     path = "internal/generator.go"
     text = "`expCmd(.+)` is a global variable"
- [[issues.exclude-rules]]
-    path = "(.+)_test.go"
-    linters = ["funlen"]
+  [[issues.exclude-rules]]
+    path = "internal/generator.go"
+    text = "G306:"

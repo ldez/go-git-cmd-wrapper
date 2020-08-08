@@ -8,10 +8,10 @@ when -u is not used, the default is normal, i.e. show untracked files and direct
 package untracked
 
 const (
-	// No Show no untracked files
+	// No Show no untracked files.
 	No = "no"
 
-	// Normal Shows untracked files and directories
+	// Normal Shows untracked files and directories.
 	Normal = "normal"
 
 	// All Also shows individual files in untracked directories.

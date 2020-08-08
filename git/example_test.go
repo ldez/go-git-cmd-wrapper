@@ -4,10 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ldez/go-git-cmd-wrapper/git"
-	"github.com/ldez/go-git-cmd-wrapper/status"
-	"github.com/ldez/go-git-cmd-wrapper/tag"
-
 	"github.com/ldez/go-git-cmd-wrapper/add"
 	"github.com/ldez/go-git-cmd-wrapper/branch"
 	"github.com/ldez/go-git-cmd-wrapper/checkout"
@@ -15,6 +11,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/commit"
 	"github.com/ldez/go-git-cmd-wrapper/config"
 	"github.com/ldez/go-git-cmd-wrapper/fetch"
+	"github.com/ldez/go-git-cmd-wrapper/git"
 	ginit "github.com/ldez/go-git-cmd-wrapper/init"
 	"github.com/ldez/go-git-cmd-wrapper/merge"
 	"github.com/ldez/go-git-cmd-wrapper/pull"
@@ -23,6 +20,8 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/remote"
 	"github.com/ldez/go-git-cmd-wrapper/reset"
 	"github.com/ldez/go-git-cmd-wrapper/revparse"
+	"github.com/ldez/go-git-cmd-wrapper/status"
+	"github.com/ldez/go-git-cmd-wrapper/tag"
 	"github.com/ldez/go-git-cmd-wrapper/worktree"
 )
 
