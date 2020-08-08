@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/ldez/go-git-cmd-wrapper/status"
 	"github.com/ldez/go-git-cmd-wrapper/tag"
 
 	"github.com/ldez/go-git-cmd-wrapper/add"
@@ -157,6 +158,13 @@ func ExampleTag() {
 
 	fmt.Println(out)
 	// Output: git tag --list
+}
+
+func ExampleStatus() {
+	out, _ := Status(status.Short, status.Branch, CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git status --short --branch
 }
 
 func cmdExecutorMock(name string, _ bool, args ...string) (string, error) {

@@ -1719,90 +1719,202 @@
         "argument": "--annotate",
         "arguments": "-a, --annotate",
         "description": "Make an unsigned, annotated tag object."
-      },{
+      },
+      {
         "argument": "--sign",
         "arguments": "-s, --sign",
         "description": "Make a GPG-signed tag, using the default e-mail address’s key."
-      },{
+      },
+      {
         "argument": "--local-user=<keyid>",
         "arguments": "-u <keyid>, --local-user=<keyid>",
         "description": "Make a GPG-signed tag, using the given key."
-      },{
+      },
+      {
         "argument": "--force",
         "arguments": "-f, --force",
-        "description":  "Replace an existing tag with the given name (instead of failing)."
-      },{
+        "description": "Replace an existing tag with the given name (instead of failing)."
+      },
+      {
         "argument": "--verify",
         "arguments": "-v, --verify",
         "description": "Verify the GPG signature of the given tag names."
-      },{
+      },
+      {
         "argument": "-n<num>",
         "arguments": "-n<num>",
         "description": "<num> specifies how many lines from the annotation, if any, are printed when using -l. Implies --list.\n\nThe default is not to print any annotation lines. If no number is given to -n, only the first line is printed. If the tag is not annotated, the commit message is displayed instead."
-      },{
+      },
+      {
         "argument": "--list",
         "arguments": "-l, --list",
         "description": "List tags. With optional <pattern>..., e.g.  git tag --list 'v-*', list only the tags that match the pattern(s).\n\nRunning \"git tag\" without arguments also lists all tags. The pattern is a shell wildcard (i.e., matched using fnmatch(3)). Multiple patterns may be given; if any of them matches, the tag is shown.\n\nThis option is implicitly supplied if any other list-like option such as --contains is provided. See the documentation for each of those options for details."
-      },{
+      },
+      {
         "argument": "--sort=<key>",
         "arguments": "--sort=<key>",
         "description": "Sort based on the key given. Prefix - to sort in descending order of the value. You may use the --sort=<key> option multiple times, in which case the last key becomes the primary key. Also\nsupports \"version:refname\" or \"v:refname\" (tag names are treated as versions). The \"version:refname\" sort order can also be affected by the \"versionsort.suffix\" configuration variable. The keys \nsupported are the same as those in git for-each-ref. Sort order defaults to the value configured for the tag.sort variable if it exists, or lexicographic order otherwise. See git-config(1)."
-      },{
+      },
+      {
         "argument": "--color[=<when>]",
         "arguments": "--color[=<when>]",
         "description": "Respect any colors specified in the --format option. The <when> field must be one of always, never, or auto (if <when> is absent, behave as if always was given)."
-      },{
+      },
+      {
         "argument": "--ignore-case",
         "arguments": "-i, --ignore-case",
         "description": "Sorting and filtering tags are case insensitive."
-      },{
+      },
+      {
         "argument": "--column[=<options>]",
         "arguments": "--column[=<options>]",
         "description": "Display tag listing in columns. See configuration variable column.tag for option syntax.--column and --no-column without options are equivalent to always and never respectively.\n\n This option is only applicable when listing tags without annotation lines."
-      },{
+      },
+      {
         "argument": "--no-column",
         "arguments": "--no-column",
         "description": "Display tag listing in columns. See configuration variable column.tag for option syntax.--column and --no-column without options are equivalent to always and never respectively.\n\n This option is only applicable when listing tags without annotation lines."
-      },{
+      },
+      {
         "argument": "--contains [<commit>]",
         "arguments": "--contains [<commit>]",
         "description": "Only list tags which contain the specified commit (HEAD if not specified). Implies --list."
-      },{
+      },
+      {
         "argument": "--no-contains [<commit>]",
         "arguments": "--no-contains [<commit>]",
         "description": "Only list tags which don’t contain the specified commit (HEAD if not specified). Implies --list."
-      },{
+      },
+      {
         "argument": "--merged [<commit>]",
         "arguments": "--merged [<commit>]",
         "description": "Only list tags whose commits are reachable from the specified commit (HEAD if not specified), incompatible with --no-merged."
-      },{
+      },
+      {
         "argument": "--no-merged [<commit>]",
         "arguments": "--no-merged [<commit>]",
         "description": "Only list tags whose commits are not reachable from the specified commit (HEAD if not specified), incompatible with --merged."
-      },{
+      },
+      {
         "argument": "--points-at <object>",
         "arguments": "--points-at <object>",
         "description": "Only list tags of the given object (HEAD if not specified). Implies --list."
-      },{
+      },
+      {
         "argument": "--message=<msg>",
         "arguments": "-m <msg>, --message=<msg>",
         "description": "Use the given tag message (instead of prompting). If multiple -m options are given, their values are concatenated as separate paragraphs. Implies -a if none of -a, -s, or -u <keyid> is given."
-      },{
+      },
+      {
         "argument": "--file=<file>",
         "arguments": "-F <file>, --file=<file>",
         "description": "Take the tag message from the given file. Use - to read the message from the standard input. Implies -a if none of -a, -s, or -u <keyid> is given."
-      },{
+      },
+      {
         "argument": "-e, --edit",
         "arguments": "-e, --edit",
         "description": "The message taken from file with -F and command line with -m are usually used as the tag message unmodified. This option lets you further edit the message taken from these sources."
-      },{
+      },
+      {
         "argument": "--cleanup=<mode>",
         "arguments": "--cleanup=<mode>",
         "description": "This option sets how the tag message is cleaned up. The <mode> can be one of verbatim, whitespace and strip. The strip mode is default. The verbatim mode does not change message at all, whitespace\n removes just leading/trailing whitespace lines and strip removes both whitespace and commentary."
-      },{
+      },
+      {
         "argument": "--create-reflog",
         "arguments": "--create-reflog",
         "description": "Create a reflog for the tag. To globally enable reflogs for tags, see core.logAllRefUpdates in git-config(1). The negated form --no-create-reflog only overrides an earlier --create-reflog, but\n currently does not negate the setting of core.logAllRefUpdates."
+      }
+    ]
+  },
+  {
+    "command_name": "status",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--short",
+        "arguments": "-s, --short",
+        "description": "Give the output in the short-format."
+      },
+      {
+        "argument": "--branch",
+        "arguments": "-b, --branch",
+        "description": "Show the branch and tracking info even in short-format."
+      },
+      {
+        "argument": "--show-stash",
+        "arguments": "--show-stash",
+        "description": "Show the number of entries currently stashed away."
+      },
+      {
+        "argument": "--porcelain[=<version>]",
+        "arguments": "--porcelain[=<version>]",
+        "description": "Give the output in an easy-to-parse format for scripts. This is similar to the short output, but will remain stable across Git versions and regardless of user configuration. See below for details. The version parameter is used to specify the format version. This is optional and defaults to the original version v1 format."
+      },
+      {
+        "argument": "--long",
+        "arguments": "--long",
+        "description": "Give the output in the long-format. This is the default."
+      },
+      {
+        "argument": "--verbose",
+        "arguments": "-v, --verbose",
+        "description": "In addition to the names of files that have been changed, also show the textual changes that are staged to be committed (i.e., like the output of git diff --cached). If -v is specified twice, then also show the changes in the working tree that have not yet been staged (i.e., like the output of git diff)."
+      },
+      {
+        "argument": "--untracked-files[=<mode>]",
+        "arguments": "-u[<mode>], --untracked-files[=<mode>]",
+        "description": "Show untracked files.\n\nThe mode parameter is used to specify the handling of untracked files. It is optional: it defaults to all, and if specified, it must be stuck to the option (e.g.  -uno, but not -u no).\n\nThe possible options are:\n\n•   no - Show no untracked files.\n•   normal - Shows untracked files and directories.\n•   all - Also shows individual files in untracked directories.\n\nWhen -u option is not used, untracked files and directories are shown (i.e. the same as specifying normal), to help you avoid forgetting to add newly created files. Because it takes extra\nwork to find untracked files in the filesystem, this mode may take some time in a large working tree. Consider enabling untracked cache and split index if supported (see git update-index\n--untracked-cache and git update-index --split-index), Otherwise you can use no to have git status return more quickly without showing untracked files.\n\nThe default can be changed using the status.showUntrackedFiles configuration variable documented in git-config(1)."
+      },
+      {
+        "argument": "--ignore-submodules[=<when>]",
+        "arguments": "--ignore-submodules[=<when>]",
+        "description": "Ignore changes to submodules when looking for changes. <when> can be either \"none\", \"untracked\", \"dirty\" or \"all\", which is the default. Using \"none\" will consider the submodule modified when it either contains untracked or modified files or its HEAD differs from the commit recorded in the superproject and can be used to override any settings of the ignore option in git- config(1) or gitmodules(5). When \"untracked\" is used submodules are not considered dirty when they only contain untracked content (but they are still scanned for modified content). Using \"dirty\" ignores all changes to the work tree of submodules, only changes to the commits stored in the superproject are shown (this was the behavior before 1.7.0). Using \"all\" hides all changes to submodules (and suppresses the output of submodule summaries when the config option status.submoduleSummary is set)."
+      },
+      {
+        "argument": "--ignored[=<mode>]",
+        "arguments": "--ignored[=<mode>]",
+        "description": "Show ignored files as well.\n\nThe mode parameter is used to specify the handling of ignored files. It is optional: it defaults to traditional.\n\nThe possible options are:\n\n•   traditional - Shows ignored files and directories, unless --untracked-files=all is specified, in which case individual files in ignored directories are displayed.\n•   no - Show no ignored files.\n•   matching - Shows ignored files and directories matching an ignore pattern.\n\nWhen matching mode is specified, paths that explicitly match an ignored pattern are shown. If a directory matches an ignore pattern, then it is shown, but not paths contained in the ignored directory. If a directory does not match an ignore pattern, but all contents are ignored, then the directory is not shown, but all contents are shown."
+      },
+      {
+        "argument": "--null",
+        "arguments": "-z, --null",
+        "description": "Terminate entries with NUL, instead of LF. This implies the --porcelain=v1 output format if no other format is given."
+      },
+      {
+        "argument": "--column[=<options>]",
+        "arguments": "--column[=<options>], --no-column",
+        "description": "Display untracked files in columns. See configuration variable column.status for option syntax. --column and --no-column without options are equivalent to always and never respectively."
+      },
+      {
+        "argument": "--no-column",
+        "arguments": "--column[=<options>], --no-column",
+        "description": "Display untracked files in columns. See configuration variable column.status for option syntax. --column and --no-column without options are equivalent to always and never respectively."
+      },
+      {
+        "argument": "--ahead-behind",
+        "arguments": "--ahead-behind, --no-ahead-behind",
+        "description": "Display or do not display detailed ahead/behind counts for the branch relative to its upstream branch. Defaults to true."
+      },
+      {
+        "argument": "--no-ahead-behind",
+        "arguments": "--ahead-behind, --no-ahead-behind",
+        "description": "Display or do not display detailed ahead/behind counts for the branch relative to its upstream branch. Defaults to true."
+      },
+      {
+        "argument": "--renames",
+        "arguments": "--renames, --no-renames",
+        "description": "Turn on/off rename detection regardless of user configuration. See also git-diff(1) --no-renames."
+      },
+      {
+        "argument": "--no-renames",
+        "arguments": "--renames, --no-renames",
+        "description": "Turn on/off rename detection regardless of user configuration. See also git-diff(1) --no-renames."
+      },
+      {
+        "argument": "--find-renames[=<n>]",
+        "arguments": "-M, --find-renames[=<n>]",
+        "description": "Turn on rename detection, optionally setting the similarity threshold. See also git-diff(1) --find-renames."
       }
     ]
   },
