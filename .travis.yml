@@ -18,5 +18,6 @@ before_install:
 install:
   - go mod tidy
   - git diff --exit-code go.mod
-  - git diff --exit-code go.sum
+  # there is no dependencies so no go.sum
+  #  - git diff --exit-code go.sum
   - go mod download
