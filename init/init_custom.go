@@ -3,7 +3,7 @@ package init
 import (
 	"fmt"
 
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // SharedWithPerms Shared Specify that the Git repository is to be shared amongst several users.

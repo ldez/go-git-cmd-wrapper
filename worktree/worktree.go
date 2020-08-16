@@ -1,7 +1,7 @@
 package worktree
 
 import (
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // Add git worktree add [-f] [--detach] [--checkout] [--lock] [-b <new-branch>] <path> [<branch>]
@@ -41,7 +41,7 @@ func UnLock(worktree string) func(*types.Cmd) {
 	}
 }
 
-// Force [-f | --forcce]
+// Force [-f | --force]
 func Force(g *types.Cmd) {
 	g.AddOptions("--force")
 }

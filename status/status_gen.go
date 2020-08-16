@@ -6,7 +6,7 @@ package status
 import (
 	"fmt"
 
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // AheadBehind Display or do not display detailed ahead/behind counts for the branch relative to its upstream branch. Defaults to true.

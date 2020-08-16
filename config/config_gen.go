@@ -3,7 +3,7 @@ package config
 // CODE GENERATED AUTOMATICALLY
 // THIS FILE MUST NOT BE EDITED BY HAND
 
-import "github.com/ldez/go-git-cmd-wrapper/types"
+import "github.com/ldez/go-git-cmd-wrapper/v2/types"
 
 // Blob Similar to --file but use the given blob instead of a file. E.g. you can use master:.gitmodules to read values from the file .gitmodules in the master branch. See 'SPECIFYING REVISIONS' section in gitrevisions(7) for a more complete list of ways to spell blob names.
 // --blob <blob>

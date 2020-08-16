@@ -1,7 +1,7 @@
 package revparse
 
 import (
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // Args Flags and parameters to be parsed.

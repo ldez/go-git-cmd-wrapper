@@ -6,7 +6,7 @@ package push
 import (
 	"fmt"
 
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // All Push all branches (i.e. refs under refs/heads/); cannot be used with other <refspec>.

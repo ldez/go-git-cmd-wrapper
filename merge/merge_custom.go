@@ -1,6 +1,6 @@
 package merge
 
-import "github.com/ldez/go-git-cmd-wrapper/types"
+import "github.com/ldez/go-git-cmd-wrapper/v2/types"
 
 // Commits <commit>...
 // Commits, usually other branch heads, to merge into our branch.

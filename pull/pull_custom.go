@@ -1,7 +1,7 @@
 package pull
 
 import (
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // Repository The "remote" repository that is the source of a fetch or pull operation.

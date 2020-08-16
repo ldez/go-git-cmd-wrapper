@@ -1,14 +1,14 @@
 package tag
 
-import "github.com/ldez/go-git-cmd-wrapper/types"
+import "github.com/ldez/go-git-cmd-wrapper/v2/types"
 
-// Tagname [<tagname>]
+// Name [<tagname>]
 // The name of the tag to create, delete, or describe.
 // The new tag name must pass all checks defined by git-check-ref-format(1).
 // Some of these checks may restrict the characters allowed in a tag name.
-func Tagname(tagname string) func(*types.Cmd) {
+func Name(tagName string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		g.AddOptions(tagname)
+		g.AddOptions(tagName)
 	}
 }
 

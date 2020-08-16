@@ -3,7 +3,7 @@ package config
 import (
 	"strconv"
 
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // Entry Adds a configuration entry.
@@ -62,7 +62,7 @@ func GetAll(name, valueRegex string) func(*types.Cmd) {
 }
 
 // GetRegexp Like --get-all, but interprets the name as a regular expression and writes out the key names. Regular expression matching is currently case-sensitive and done against a canonicalized version of the key in which section and variable names are lowercased, but subsection names are not.
-//--get-regexp
+// --get-regexp
 func GetRegexp(nameRegexp, valueRegex string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get-regexp")

@@ -1,7 +1,7 @@
 package rebase
 
 import (
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // Upstream Upstream branch to compare against. May be any valid commit, not just an existing branch name.

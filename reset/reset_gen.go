@@ -3,7 +3,7 @@ package reset
 // CODE GENERATED AUTOMATICALLY
 // THIS FILE MUST NOT BE EDITED BY HAND
 
-import "github.com/ldez/go-git-cmd-wrapper/types"
+import "github.com/ldez/go-git-cmd-wrapper/v2/types"
 
 // Hard Resets the index and working tree. Any changes to tracked files in the working tree since <commit> are discarded.
 // --hard

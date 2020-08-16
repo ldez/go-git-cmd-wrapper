@@ -1,7 +1,7 @@
 package checkout
 
 import (
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // Branch to checkout; if it refers to a branch (i.e., a name that, when prepended with 'refs/heads/', is a valid ref), then that branch is checked out.

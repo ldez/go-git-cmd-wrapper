@@ -6,7 +6,7 @@ package tag
 import (
 	"fmt"
 
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // Annotate Make an unsigned, annotated tag object.

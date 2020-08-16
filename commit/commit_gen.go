@@ -6,7 +6,7 @@ package commit
 import (
 	"fmt"
 
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // All Tell the command to automatically stage files that have been modified and deleted, but new files you have not told Git about are not affected.

@@ -3,7 +3,7 @@ package remote
 import (
 	"fmt"
 
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // Add git remote add [-t <branch>] [-m <master>] [-f] [--[no-]tags] [--mirror=<fetch|push>] <name> <url>
@@ -168,6 +168,3 @@ func Mirror(option string) func(*types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--mirror=%s", option))
 	}
 }
-
-//[-n]
-//git remote [-v | --verbose] update [-p | --prune] [(<group> | <remote>)…​]

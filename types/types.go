@@ -1,6 +1,7 @@
 package types
 
 import (
+	"context"
 	"log"
 	"os"
 	"os/exec"
@@ -16,7 +17,7 @@ type logger interface {
 }
 
 // Executor The Git command call function.
-type Executor func(name string, debug bool, args ...string) (string, error)
+type Executor func(ctx context.Context, name string, debug bool, args ...string) (string, error)
 
 // NewCmd Creates a new Cmd.
 func NewCmd(name string) *Cmd {
@@ -56,17 +57,17 @@ func (g *Cmd) ApplyOptions(options ...Option) {
 }
 
 // Exec Execute the Git command call.
-func (g *Cmd) Exec(name string, debug bool, args ...string) (string, error) {
-	return g.Executor(name, debug, args...)
+func (g *Cmd) Exec(ctx context.Context, name string, debug bool, args ...string) (string, error) {
+	return g.Executor(ctx, name, debug, args...)
 }
 
 func defaultExecutor(g *Cmd) Executor {
-	return func(name string, debug bool, args ...string) (string, error) {
+	return func(ctx context.Context, name string, debug bool, args ...string) (string, error) {
 		if debug {
 			g.Logger.Println(name, strings.Join(args, " "))
 		}
 
-		output, err := exec.Command(name, args...).CombinedOutput()
+		output, err := exec.CommandContext(ctx, name, args...).CombinedOutput()
 
 		return string(output), err
 	}

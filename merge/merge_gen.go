@@ -6,7 +6,7 @@ package merge
 import (
 	"fmt"
 
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // Abort Abort the current conflict resolution process, and try to reconstruct the pre-merge state.

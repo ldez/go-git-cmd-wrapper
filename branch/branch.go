@@ -3,7 +3,7 @@ package branch
 import (
 	"fmt"
 
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
 // Verbose show hash and subject, give twice for upstream branch
@@ -13,13 +13,13 @@ func Verbose(g *types.Cmd) {
 }
 
 // Quiet suppress informational messages
-//-q, --quiet
+// -q, --quiet
 func Quiet(g *types.Cmd) {
 	g.AddOptions("--quiet")
 }
 
 // Track set up tracking mode (see git-pull(1))
-//-t, --track
+// -t, --track
 func Track(g *types.Cmd) {
 	g.AddOptions("--track")
 }

@@ -59,9 +59,9 @@ const (
 {{if .ImportFMT }}import (
 	"fmt"
 
-	"github.com/ldez/go-git-cmd-wrapper/types"
+	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
-{{else}}import "github.com/ldez/go-git-cmd-wrapper/types"
+{{else}}import "github.com/ldez/go-git-cmd-wrapper/v2/types"
 {{end -}}
 
 {{range .Metas -}}

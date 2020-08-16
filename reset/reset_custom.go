@@ -1,6 +1,6 @@
 package reset
 
-import "github.com/ldez/go-git-cmd-wrapper/types"
+import "github.com/ldez/go-git-cmd-wrapper/v2/types"
 
 // HyphenHyphen add `--`
 func HyphenHyphen(g *types.Cmd) {

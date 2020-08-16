@@ -3,12 +3,12 @@ Package go_git_cmd_wrapper A simple wrapper around `git` command.
 
 		import (
 			// ...
-			"github.com/ldez/go-git-cmd-wrapper/git"
+			"github.com/ldez/go-git-cmd-wrapper/v2/git"
 			// ...
-			"github.com/ldez/go-git-cmd-wrapper/clone"
-			"github.com/ldez/go-git-cmd-wrapper/config"
-			"github.com/ldez/go-git-cmd-wrapper/fetch"
-			"github.com/ldez/go-git-cmd-wrapper/remote"
+			"github.com/ldez/go-git-cmd-wrapper/v2/clone"
+			"github.com/ldez/go-git-cmd-wrapper/v2/config"
+			"github.com/ldez/go-git-cmd-wrapper/v2/fetch"
+			"github.com/ldez/go-git-cmd-wrapper/v2/remote"
 		)
 
 		// clone
