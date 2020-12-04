@@ -148,5 +148,5 @@ func GetColorBool(name string, stdoutIsTTY bool) func(*types.Cmd) {
 	}
 }
 
-//--[no-]includes
-//Respect include.*  directives in config files when looking up values. Defaults to off when a specific file is given (e.g., using --file, --global, etc) and on when searching all config files.
+// --[no-]includes
+// Respect include.*  directives in config files when looking up values. Defaults to off when a specific file is given (e.g., using --file, --global, etc) and on when searching all config files.

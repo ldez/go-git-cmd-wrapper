@@ -29,9 +29,14 @@
     "prealloc",
     "scopelint",
     "wsl",
+    "nlreturn",
     "stylecheck",
     "testpackage",
-    "nlreturn",
+    "paralleltest",
+    "tparallel",
+    "tparallel",
+    "wrapcheck",
+    "exhaustivestruct",
     "godot",
   ]
 

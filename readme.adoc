@@ -1,6 +1,6 @@
 = Go Git Cmd Wrapper
 
-image:https://travis-ci.org/ldez/go-git-cmd-wrapper.svg?branch=master["Build Status", link="https://travis-ci.org/ldez/go-git-cmd-wrapper"]
+image:https://github.com/ldez/go-git-cmd-wrapper/workflows/Main/badge.svg?branch=master["Build Status", link="https://github.com/ldez/go-git-cmd-wrapper/actions"]
 image:https://godoc.org/github.com/ldez/go-git-cmd-wrapper?status.svg["GoDoc", link="https://pkg.go.dev/github.com/ldez/go-git-cmd-wrapper"]
 image:https://goreportcard.com/badge/github.com/ldez/go-git-cmd-wrapper["Go Report Card", link="https://goreportcard.com/report/github.com/ldez/go-git-cmd-wrapper"]
 
