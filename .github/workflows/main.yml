@@ -45,7 +45,7 @@ jobs:
         run: |
           go mod tidy
           git diff --exit-code go.mod
-          git diff --exit-code go.sum
+          # git diff --exit-code go.sum
           go mod download
 
       # https://golangci-lint.run/usage/install#other-ci
