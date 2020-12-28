@@ -34,10 +34,11 @@
     "testpackage",
     "paralleltest",
     "tparallel",
-    "tparallel",
     "wrapcheck",
     "exhaustivestruct",
     "godot",
+    "makezero",
+    "forbidigo",
   ]
 
 [issues]

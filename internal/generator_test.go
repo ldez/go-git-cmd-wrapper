@@ -126,6 +126,8 @@ func Test_toGoName_should(t *testing.T) {
 }
 
 func assertEquals(t *testing.T, value, expectedValue string) {
+	t.Helper()
+
 	if value != expectedValue {
 		t.Fatalf("Got: %s, expected: %s.", value, expectedValue)
 	}
