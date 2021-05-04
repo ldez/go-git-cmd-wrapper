@@ -1919,6 +1919,22 @@
     ]
   },
   {
+    "command_name": "notes",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--force",
+        "arguments": "--force, -f",
+        "description": "When adding notes to an object that already has notes, overwrite the existing notes (instead of aborting)."
+      },
+      {
+        "argument": "--ref=<notes-ref>",
+        "arguments": "--ref=<notes-ref>",
+        "description": "use notes from <notes-ref>"
+      }
+    ]
+  },
+  {
     "command_name": "",
     "enabled": false,
     "options": [
