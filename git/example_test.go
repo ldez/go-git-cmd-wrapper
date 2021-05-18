@@ -288,10 +288,10 @@ func ExampleNotes_list() {
 }
 
 func ExampleNotes_listWithRef() {
-	out, _ := git.Notes(notes.List, notes.Ref("notes_ref"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := git.Notes(notes.Ref("notes_ref"), notes.List, git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Print(out)
-	// Output: git notes list --ref=notes_ref
+	// Output: git notes --ref=notes_ref list
 }
 
 func ExampleNotes_show() {
