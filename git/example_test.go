@@ -196,17 +196,17 @@ func ExampleResetWithContext() {
 }
 
 func ExampleCommit() {
-	out, _ := git.Commit(commit.Amend, commit.Message("chore: foo"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := git.Commit(commit.Amend, commit.Message("foo"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
-	// Output: git commit --amend --message="chore: foo"
+	// Output: git commit --amend --message=foo
 }
 
 func ExampleCommitWithContext() {
-	out, _ := git.CommitWithContext(context.Background(), commit.Amend, commit.Message("chore: foo"), git.CmdExecutor(cmdExecutorMock))
+	out, _ := git.CommitWithContext(context.Background(), commit.Amend, commit.Message("foo"), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
-	// Output: git commit --amend --message="chore: foo"
+	// Output: git commit --amend --message=foo
 }
 
 func ExampleAdd() {

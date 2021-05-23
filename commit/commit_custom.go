@@ -25,6 +25,6 @@ func Files(files ...string) func(*types.Cmd) {
 // -m <msg>, --message=<msg>
 func Message(msg string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		g.AddOptions(fmt.Sprintf("--message=\"%s\"", msg))
+		g.AddOptions(fmt.Sprintf("--message=%s", msg))
 	}
 }
