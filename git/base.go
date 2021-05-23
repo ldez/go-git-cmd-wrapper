@@ -198,19 +198,19 @@ func RawWithContext(ctx context.Context, cmd string, options ...types.Option) (s
 	return command(ctx, cmd, options...)
 }
 
-// Debug display command line
+// Debug display command line.
 func Debug(g *types.Cmd) {
 	g.Debug = true
 }
 
-// Debugger display command line
+// Debugger display command line.
 func Debugger(debug bool) types.Option {
 	return func(g *types.Cmd) {
 		g.Debug = debug
 	}
 }
 
-// Cond apply conditionally some options
+// Cond apply conditionally some options.
 func Cond(apply bool, options ...types.Option) types.Option {
 	if apply {
 		return func(g *types.Cmd) {
@@ -230,7 +230,7 @@ func LogOutput(w io.Writer) types.Option {
 	}
 }
 
-// CmdExecutor Allow to override the Git command call (useful for testing purpose)
+// CmdExecutor Allow to override the Git command call (useful for testing purpose).
 func CmdExecutor(executor types.Executor) types.Option {
 	return func(g *types.Cmd) {
 		g.Executor = executor

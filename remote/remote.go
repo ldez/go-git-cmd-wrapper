@@ -65,7 +65,7 @@ func SetURL(name, newurl, oldurl string) func(*types.Cmd) {
 		g.AddOptions("set-url")
 		g.AddOptions(name)
 		g.AddOptions(newurl)
-		if len(oldurl) != 0 {
+		if oldurl != "" {
 			g.AddOptions(oldurl)
 		}
 	}

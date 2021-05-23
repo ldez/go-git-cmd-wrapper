@@ -1,0 +1,104 @@
+run:
+  deadline: 2m
+
+linters-settings:
+  govet:
+    enable-all: true
+    disable:
+      - fieldalignment
+  gocyclo:
+    min-complexity: 15
+  maligned:
+    suggest-new: true
+  goconst:
+    min-len: 5
+    min-occurrences: 3
+  misspell:
+    locale: US
+    ignore-words:
+      - hardlinked
+      - behaviour
+  funlen:
+    lines: -1
+    statements: 50
+  godox:
+    keywords:
+      - FIXME
+  gofumpt:
+    extra-rules: true
+  depguard:
+    list-type: blacklist
+    include-go-root: false
+    packages:
+      - github.com/sirupsen/logrus
+      - github.com/pkg/errors
+  gocritic:
+    enabled-tags:
+      - diagnostic
+      - style
+      - performance
+    disabled-checks:
+      - sloppyReassign
+      - rangeValCopy
+      - octalLiteral
+      - paramTypeCombine # already handle by gofumpt.extra-rules
+#    settings:
+#      hugeParam:
+#        sizeThreshold: 220 # todo must be improved
+  forbidigo:
+    forbid:
+      - ^print(ln)?$
+      - ^spew\.Print(f|ln)?$
+      - ^spew\.Dump$
+  tagliatelle:
+    case:
+      rules:
+        json: snake
+
+linters:
+  enable-all: true
+  disable:
+    - maligned # deprecated
+    - interfacer # deprecated
+    - scopelint # deprecated
+    - golint # deprecated
+    - sqlclosecheck # not relevant (SQL)
+    - rowserrcheck # not relevant (SQL)
+    - cyclop # duplicate of gocyclo
+    - lll
+    - dupl
+    - prealloc
+    - scopelint
+    - wsl
+    - nlreturn
+    - stylecheck
+    - testpackage
+    - paralleltest
+    - tparallel
+    - wrapcheck
+    - exhaustive
+    - exhaustivestruct
+    - makezero
+    - ifshort
+    - godot
+
+issues:
+  exclude-use-default: false
+  max-per-linter: 0
+  max-same-issues: 0
+  exclude:
+    - G204
+  exclude-rules:
+    - path: (.+)_test.go
+      linters:
+        - funlen
+    - path: branch/branch.go
+      text: func name will be used as branch.BranchName by other packages
+    - path: push/push_gen.go
+      text: func name will be used as push.PushOption by other packages
+    - path: doc.go
+      text: don't use an underscore in package name
+    - path: internal/generator.go
+      text: '`expCmd(.+)` is a global variable'
+    - path: internal/generator.go
+      text: 'G306:'

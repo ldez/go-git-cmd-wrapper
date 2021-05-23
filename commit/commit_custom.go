@@ -6,7 +6,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
-// HyphenHyphen add `--`
+// HyphenHyphen add `--`.
 func HyphenHyphen(g *types.Cmd) {
 	g.AddOptions("--")
 }

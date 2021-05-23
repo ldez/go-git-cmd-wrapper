@@ -130,26 +130,26 @@ func {{ .Method }}({{ .Argument }} string) func(*types.Cmd) {
 
 var (
 	// --quiet
-	expCmdSimple = regexp.MustCompile(`^(-{1,2}([\w\d\-]+))$`)
+	expCmdSimple = regexp.MustCompile(`^(-{1,2}([\w\-]+))$`)
 
 	// --strategy=<strategy>
-	expCmdEqualNoOptional = regexp.MustCompile(`^(-{1,2}([\w\d\-]+))=<([\w\d\- ]+)>$`)
+	expCmdEqualNoOptional = regexp.MustCompile(`^(-{1,2}([\w\-]+))=<([\w\- ]+)>$`)
 
 	// --no-recurse-submodules[=yes|on-demand|no]
-	expCmdEqualOptionalWithoutName = regexp.MustCompile(`^(-{1,2}([\w\d\-]+))\[=[\w\d\-()|]+]$`)
+	expCmdEqualOptionalWithoutName = regexp.MustCompile(`^(-{1,2}([\w\-]+))\[=[\w\-()|]+]$`)
 
 	// --recurse-submodules-default=[yes|on-demand]
 	// --sign=(true|false|if-asked)
-	expCmdEqualWithoutName = regexp.MustCompile(`^(-{1,2}([\w\d\-]+))=[\[(][\w\d\-|()]+[])]$`)
+	expCmdEqualWithoutName = regexp.MustCompile(`^(-{1,2}([\w\-]+))=[\[(][\w\-|()]+[])]$`)
 
 	// --log[=<n>]
-	expCmdEqualOptionalWithName = regexp.MustCompile(`^(-{1,2}([\w\d\-]+))\[=<([\w\d\-)]+)>]$`)
+	expCmdEqualOptionalWithName = regexp.MustCompile(`^(-{1,2}([\w\-]+))\[=<([\w\-)]+)>]$`)
 
 	// --foo <bar>
-	expCmdWithParameter = regexp.MustCompile(`^(-{1,2}([\w\d\-]+)) ?<([\w\d\-)]+)>$`)
+	expCmdWithParameter = regexp.MustCompile(`^(-{1,2}([\w\-]+)) ?<([\w\-)]+)>$`)
 
 	// --foo [bar]
-	expCmdWithOptionalParameter = regexp.MustCompile(`^(-{1,2}([\w\d\-]+)) ?\[([\w\d\-)]+)]$`)
+	expCmdWithOptionalParameter = regexp.MustCompile(`^(-{1,2}([\w\-]+)) ?\[([\w\-)]+)]$`)
 )
 
 func main() {
@@ -167,28 +167,30 @@ func main() {
 	}
 
 	for _, jsonModel := range jsonModels {
-		if len(jsonModel.CommandName) != 0 && jsonModel.Enabled {
-			cmdModel := newGenCmdModel(jsonModel)
+		if jsonModel.CommandName == "" || !jsonModel.Enabled {
+			continue
+		}
 
-			data, err := generateFileContent(cmdModel)
-			if err != nil {
-				log.Fatal(err)
-			}
+		cmdModel := newGenCmdModel(jsonModel)
 
-			genFilePath := fmt.Sprintf("../%[1]s/%[1]s_gen.go", jsonModel.CommandName)
+		data, err := generateFileContent(cmdModel)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-			fmt.Println(genFilePath)
+		genFilePath := fmt.Sprintf("../%[1]s/%[1]s_gen.go", jsonModel.CommandName)
 
-			// gofmt
-			source, err := format.Source([]byte(data))
-			if err != nil {
-				log.Fatal(err)
-			}
+		fmt.Println(genFilePath)
 
-			err = ioutil.WriteFile(genFilePath, source, 0644)
-			if err != nil {
-				log.Fatal(err)
-			}
+		// gofmt
+		source, err := format.Source([]byte(data))
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		err = ioutil.WriteFile(genFilePath, source, 0644)
+		if err != nil {
+			log.Fatal(err)
 		}
 	}
 }
@@ -362,7 +364,7 @@ func newMetaCmdWithParameter(jsonCmdModel jsonCmdModel) cmdMeta {
 }
 
 func methodName(raw string, jsonCmdModel jsonCmdModel) string {
-	if len(jsonCmdModel.MethodName) == 0 {
+	if jsonCmdModel.MethodName == "" {
 		return raw
 	}
 	return jsonCmdModel.MethodName
@@ -370,8 +372,8 @@ func methodName(raw string, jsonCmdModel jsonCmdModel) string {
 
 type metaBuilder func(subMatch []string) cmdMeta
 
-func newMetaCmd(regexp *regexp.Regexp, jsonCmdModel jsonCmdModel, builder metaBuilder) cmdMeta {
-	subMatch := regexp.FindStringSubmatch(jsonCmdModel.Argument)
+func newMetaCmd(exp *regexp.Regexp, jsonCmdModel jsonCmdModel, builder metaBuilder) cmdMeta {
+	subMatch := exp.FindStringSubmatch(jsonCmdModel.Argument)
 	return builder(subMatch)
 }
 
@@ -379,7 +381,7 @@ func newMeta(rawMethodName, rawArg, cmd, cmdType, description, arguments string)
 	method := toGoName(rawMethodName, true)
 
 	var arg string
-	if len(rawArg) != 0 {
+	if rawArg != "" {
 		arg = toGoName(rawArg, false)
 		if strings.EqualFold(method, arg) {
 			arg = "value"

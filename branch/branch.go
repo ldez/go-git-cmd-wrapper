@@ -126,7 +126,7 @@ func Column(style string) func(*types.Cmd) {
 	}
 }
 
-// BranchName branch name
+// BranchName branch name.
 func BranchName(name string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions(name)

@@ -13,7 +13,7 @@ import (
 // --shared[=(false|true|umask|group|all|world|everybody|0xxx)]
 func SharedWithPerms(permissions string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(permissions) == 0 {
+		if permissions == "" {
 			g.AddOptions("--shared")
 		} else {
 			g.AddOptions(fmt.Sprintf("--shared=%s", permissions))

@@ -1,30 +1,25 @@
 package init
 
 import (
-	"io/ioutil"
 	"log"
 	"os"
-	"path"
+	"path/filepath"
 	"testing"
 
 	"github.com/ldez/go-git-cmd-wrapper/v2/git"
 )
 
 func TestInit(t *testing.T) {
-	dir, err := ioutil.TempDir("", "go-git-cmd-wrapper")
-	if err != nil {
-		t.Fatal(err)
-	}
+	dir := t.TempDir()
 
 	// clean up
-	defer func() {
+	t.Cleanup(func() {
 		if errRm := os.RemoveAll(dir); errRm != nil {
 			log.Println(errRm)
 		}
-	}()
+	})
 
-	err = os.Chdir(dir)
-	if err != nil {
+	if err := os.Chdir(dir); err != nil {
 		t.Fatal(err)
 	}
 
@@ -33,7 +28,7 @@ func TestInit(t *testing.T) {
 		t.Fatal(msg, err)
 	}
 
-	if ff, err := os.Stat(path.Join(dir, "test")); os.IsNotExist(err) {
+	if ff, err := os.Stat(filepath.Join(dir, "test")); os.IsNotExist(err) {
 		t.Fatal("Repository not created.", ff)
 	}
 }

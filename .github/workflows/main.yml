@@ -14,8 +14,8 @@ jobs:
     name: Main Process
     runs-on: ubuntu-latest
     env:
-      GO_VERSION: 1.15
-      GOLANGCI_LINT_VERSION: v1.34.0
+      GO_VERSION: 1.16
+      GOLANGCI_LINT_VERSION: v1.40.1
       CGO_ENABLED: 0
 
     steps:
@@ -43,10 +43,10 @@ jobs:
 
       - name: Check and get dependencies
         run: |
+          go mod download
           go mod tidy
           git diff --exit-code go.mod
           # git diff --exit-code go.sum
-          go mod download
 
       # https://golangci-lint.run/usage/install#other-ci
       - name: Install golangci-lint ${{ env.GOLANGCI_LINT_VERSION }}
