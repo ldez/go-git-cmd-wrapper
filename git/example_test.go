@@ -15,6 +15,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/v2/git"
 	ginit "github.com/ldez/go-git-cmd-wrapper/v2/init"
 	"github.com/ldez/go-git-cmd-wrapper/v2/merge"
+	"github.com/ldez/go-git-cmd-wrapper/v2/notes"
 	"github.com/ldez/go-git-cmd-wrapper/v2/pull"
 	"github.com/ldez/go-git-cmd-wrapper/v2/push"
 	"github.com/ldez/go-git-cmd-wrapper/v2/rebase"
@@ -277,6 +278,160 @@ func ExampleStatusWithContext() {
 
 	fmt.Println(out)
 	// Output: git status --short --branch
+}
+
+func ExampleNotes_list() {
+	out, _ := git.Notes(notes.List(""), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes list
+}
+
+func ExampleNotes_list_ref() {
+	out, _ := git.Notes(notes.Ref("c9718bfd46a7261d1120ac2e50ef6b298bb2394a"), notes.List(""), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes --ref c9718bfd46a7261d1120ac2e50ef6b298bb2394a list
+}
+
+func ExampleNotes_add() {
+	out, _ := git.Notes(notes.Add("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes add --message=foo
+}
+
+func ExampleNotes_copy() {
+	out, _ := git.Notes(notes.Copy(notes.Object("cb17b52c17fb36a807f135245725dee88603cc08", "c9718bfd46a7261d1120ac2e50ef6b298bb2394a")), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes copy cb17b52c17fb36a807f135245725dee88603cc08 c9718bfd46a7261d1120ac2e50ef6b298bb2394a
+}
+
+func ExampleNotes_append() {
+	out, _ := git.Notes(notes.Append("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes append --message=foo
+}
+
+func ExampleNotes_edit() {
+	out, _ := git.Notes(notes.Edit("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes edit --message=foo
+}
+
+func ExampleNotes_show() {
+	out, _ := git.Notes(notes.Show(""), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes show
+}
+
+func ExampleNotes_merge() {
+	out, _ := git.Notes(notes.Merge(notes.Commit, notes.NotesRef("cb17b52c17fb36a807f135245725dee88603cc08")), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes merge --commit cb17b52c17fb36a807f135245725dee88603cc08
+}
+
+func ExampleNotes_remove() {
+	out, _ := git.Notes(notes.Remove("", notes.Stdin), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes remove --stdin
+}
+
+func ExampleNotes_prune() {
+	out, _ := git.Notes(notes.Prune(notes.Verbose), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes prune
+}
+
+func ExampleNotes_getRef() {
+	out, _ := git.Notes(notes.GetRef(), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes get-ref
+}
+
+func ExampleNotesWithContext_list() {
+	out, _ := git.NotesWithContext(context.Background(), notes.List(""), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes list
+}
+
+func ExampleNotesWithContext_list_ref() {
+	out, _ := git.Notes(notes.Ref("c9718bfd46a7261d1120ac2e50ef6b298bb2394a"), notes.List(""), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes --ref c9718bfd46a7261d1120ac2e50ef6b298bb2394a list
+}
+
+func ExampleNotesWithContext_add() {
+	out, _ := git.NotesWithContext(context.Background(), notes.Add("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes add --message=foo
+}
+
+func ExampleNotesWithContext_copy() {
+	out, _ := git.NotesWithContext(context.Background(), notes.Copy(notes.Stdin), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes copy --stdin
+}
+
+func ExampleNotesWithContext_append() {
+	out, _ := git.NotesWithContext(context.Background(), notes.Append("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes append --message=foo
+}
+
+func ExampleNotesWithContext_edit() {
+	out, _ := git.NotesWithContext(context.Background(), notes.Edit("", notes.Message("foo")), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes edit --message=foo
+}
+
+func ExampleNotesWithContext_show() {
+	out, _ := git.NotesWithContext(context.Background(), notes.Show(""), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes show
+}
+
+func ExampleNotesWithContext_merge() {
+	out, _ := git.NotesWithContext(context.Background(), notes.Merge(notes.Commit), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes merge --commit
+}
+
+func ExampleNotesWithContext_remove() {
+	out, _ := git.NotesWithContext(context.Background(), notes.Remove("", notes.Stdin), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes remove --stdin
+}
+
+func ExampleNotesWithContext_prune() {
+	out, _ := git.NotesWithContext(context.Background(), notes.Prune(notes.Verbose), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes prune
+}
+
+func ExampleNotesWithContext_getRef() {
+	out, _ := git.NotesWithContext(context.Background(), notes.GetRef(), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git notes get-ref
 }
 
 func ExampleRaw() {

@@ -1919,6 +1919,87 @@
     ]
   },
   {
+    "command_name": "notes",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--force",
+        "arguments": "-f, --force",
+        "description": "When adding notes to an object that already has notes, overwrite the existing notes (instead of aborting)."
+      },
+      {
+        "argument": "--message=<msg>",
+        "arguments": "-m <msg>, --message=<msg>",
+        "description": "Use the given note message (instead of prompting).\nIf multiple -m options are given, their values are concatenated as separate paragraphs.\nLines starting with # and empty lines other than a single line between paragraphs will be stripped out."
+      },
+      {
+        "argument": "--file=<file>",
+        "arguments": "-F <file>, --file=<file>",
+        "description": "Take the note message from the given file.\nUse - to read the note message from the standard input.\nLines starting with # and empty lines other than a single line between paragraphs will be stripped out."
+      },
+      {
+        "argument": "--reuse-message=<object>",
+        "arguments": "-C <object>, --reuse-message=<object>",
+        "description": "Take the given blob object (for example, another note) as the note message.\n(Use git notes copy <object> instead to copy notes between objects.)"
+      },
+      {
+        "argument": "--reedit-message=<object>",
+        "arguments": "-c <object>, --reedit-message=<object>",
+        "description": "Like -C, but with -c the editor is invoked, so that the user can further edit the note message."
+      },
+      {
+        "argument": "--allow-empty",
+        "arguments": "--allow-empty",
+        "description": "Allow an empty note object to be stored. The default behavior is to automatically remove empty notes."
+      },
+      {
+        "argument": "--ref <ref>",
+        "arguments": "--ref <ref>",
+        "description": "Manipulate the notes tree in <ref>. This overrides GIT_NOTES_REF and the \"core.notesRef\" configuration.\nThe ref specifies the full refname when it begins with refs/notes/;\nwhen it begins with notes/, refs/ and otherwise refs/notes/ is prefixed to form a full name of the ref."
+      },
+      {
+        "argument": "--ignore-missing",
+        "arguments": "--ignore-missing",
+        "description": "Do not consider it an error to request removing notes from an object that does not have notes attached to it."
+      },
+      {
+        "argument": "--stdin",
+        "arguments": "--stdin",
+        "description": "Also read the object names to remove notes from the standard input (there is no reason you cannot combine this with object names from the command line)."
+      },
+      {
+        "argument": "--dry-run",
+        "arguments": "-n, --dry-run",
+        "description": "Do not remove anything; just report the object names whose notes would be removed."
+      },
+      {
+        "argument": "--strategy=<strategy>",
+        "arguments": "-s <strategy>, --strategy=<strategy>",
+        "description": "When merging notes, resolve notes conflicts using the given strategy.\nThe following strategies are recognized: \"manual\" (default), \"ours\", \"theirs\", \"union\" and \"cat_sort_uniq\".\nThis option overrides the \"notes.mergeStrategy\" configuration setting.\nSee the \"NOTES MERGE STRATEGIES\" section below for more information on each notes merge strategy."
+      },
+      {
+        "argument": "--commit",
+        "arguments": "--commit",
+        "description": "Finalize an in-progress git notes merge.\nUse this option when you have resolved the conflicts that git notes merge stored in .git/NOTES_MERGE_WORKTREE.\nThis amends the partial merge commit created by git notes merge (stored in .git/NOTES_MERGE_PARTIAL) by adding the notes in .git/NOTES_MERGE_WORKTREE.\nThe notes ref stored in the .git/NOTES_MERGE_REF symref is updated to the resulting commit."
+      },
+      {
+        "argument": "--abort",
+        "arguments": "--abort",
+        "description": "Abort/reset an in-progress git notes merge, i.e. a notes merge with conflicts.\nThis simply removes all files related to the notes merge."
+      },
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "When merging notes, operate quietly."
+      },
+      {
+        "argument": "--verbose",
+        "arguments": "-v, --verbose",
+        "description": "When merging notes, be more verbose.\nWhen pruning notes, report all object names whose notes are removed."
+      }
+    ]
+  },
+  {
     "command_name": "",
     "enabled": false,
     "options": [

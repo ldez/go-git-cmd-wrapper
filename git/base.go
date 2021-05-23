@@ -188,6 +188,16 @@ func StatusWithContext(ctx context.Context, options ...types.Option) (string, er
 	return command(ctx, "status", options...)
 }
 
+// Notes https://git-scm.com/docs/git-notes
+func Notes(subCommand ...types.Option) (string, error) {
+	return command(context.Background(), "notes", subCommand...)
+}
+
+// NotesWithContext https://git-scm.com/docs/git-notes
+func NotesWithContext(ctx context.Context, subCommand ...types.Option) (string, error) {
+	return command(ctx, "notes", subCommand...)
+}
+
 // Raw use to execute arbitrary git commands.
 func Raw(cmd string, options ...types.Option) (string, error) {
 	return command(context.Background(), cmd, options...)
