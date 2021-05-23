@@ -96,6 +96,8 @@ issues:
       text: func name will be used as branch.BranchName by other packages
     - path: push/push_gen.go
       text: func name will be used as push.PushOption by other packages
+    - path: notes/notes_custom.go
+      text: func name will be used as notes.NotesRef by other packages
     - path: doc.go
       text: don't use an underscore in package name
     - path: internal/generator.go
