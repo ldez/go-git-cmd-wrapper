@@ -15,7 +15,6 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/v2/git"
 	ginit "github.com/ldez/go-git-cmd-wrapper/v2/init"
 	"github.com/ldez/go-git-cmd-wrapper/v2/merge"
-	"github.com/ldez/go-git-cmd-wrapper/v2/notes"
 	"github.com/ldez/go-git-cmd-wrapper/v2/pull"
 	"github.com/ldez/go-git-cmd-wrapper/v2/push"
 	"github.com/ldez/go-git-cmd-wrapper/v2/rebase"
@@ -278,48 +277,6 @@ func ExampleStatusWithContext() {
 
 	fmt.Println(out)
 	// Output: git status --short --branch
-}
-
-func ExampleNotes_list() {
-	out, _ := git.Notes(notes.List, git.CmdExecutor(cmdExecutorMock))
-
-	fmt.Print(out)
-	// Output: git notes list
-}
-
-func ExampleNotes_listWithRef() {
-	out, _ := git.Notes(notes.Ref("notes_ref"), notes.List, git.CmdExecutor(cmdExecutorMock))
-
-	fmt.Print(out)
-	// Output: git notes --ref=notes_ref list
-}
-
-func ExampleNotes_show() {
-	out, _ := git.Notes(notes.Show(""), git.CmdExecutor(cmdExecutorMock))
-
-	fmt.Print(out)
-	// Output: git notes show
-}
-
-func ExampleNotes_showObjectID() {
-	out, _ := git.Notes(notes.Show("object_id"), git.CmdExecutor(cmdExecutorMock))
-
-	fmt.Print(out)
-	// Output: git notes show object_id
-}
-
-func ExampleNotes_add() {
-	out, _ := git.Notes(notes.Add, notes.Message("my_note_message"), git.CmdExecutor(cmdExecutorMock))
-
-	fmt.Print(out)
-	// Output: git notes add --message=my_note_message
-}
-
-func ExampleNotes_addForce() {
-	out, _ := git.Notes(notes.Add, notes.Force, notes.Message("my_note_message"), git.CmdExecutor(cmdExecutorMock))
-
-	fmt.Print(out)
-	// Output: git notes add --force --message=my_note_message
 }
 
 func ExampleRaw() {
