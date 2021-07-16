@@ -104,3 +104,5 @@ issues:
       text: '`expCmd(.+)` is a global variable'
     - path: internal/generator.go
       text: 'G306:'
+    - path: internal/generator.go
+      text: 'mnd: Magic number: 0644, in <argument> detected'
