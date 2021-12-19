@@ -7,8 +7,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"go/format"
-	"io/ioutil"
 	"log"
+	"os"
 	"regexp"
 	"sort"
 	"strings"
@@ -155,7 +155,7 @@ var (
 func main() {
 	filePath := "descriptions.json"
 
-	file, err := ioutil.ReadFile(filePath)
+	file, err := os.ReadFile(filePath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -188,7 +188,7 @@ func main() {
 			log.Fatal(err)
 		}
 
-		err = ioutil.WriteFile(genFilePath, source, 0644)
+		err = os.WriteFile(genFilePath, source, 0o644)
 		if err != nil {
 			log.Fatal(err)
 		}

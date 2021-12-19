@@ -8,11 +8,13 @@ linters-settings:
       - fieldalignment
   gocyclo:
     min-complexity: 15
-  maligned:
-    suggest-new: true
   goconst:
     min-len: 5
     min-occurrences: 3
+  gomnd:
+    settings:
+      mnd:
+        ignored-functions: os.*
   misspell:
     locale: US
     ignore-words:
@@ -81,6 +83,8 @@ linters:
     - makezero
     - ifshort
     - godot
+    - varnamelen
+    - nilnil
 
 issues:
   exclude-use-default: false
