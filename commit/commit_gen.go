@@ -105,12 +105,12 @@ func Fixup(commit string) func(*types.Cmd) {
 // GpgSign GPG-sign commits.
 // The keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space.
 // -S[<keyid>], --gpg-sign[=<keyid>]
-func GpgSign(keyid string) func(*types.Cmd) {
+func GpgSign(keyID string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(keyid) == 0 {
+		if len(keyID) == 0 {
 			g.AddOptions("--gpg-sign")
 		} else {
-			g.AddOptions(fmt.Sprintf("--gpg-sign=%s", keyid))
+			g.AddOptions(fmt.Sprintf("--gpg-sign=%s", keyID))
 		}
 	}
 }
@@ -231,7 +231,7 @@ func Short(g *types.Cmd) {
 }
 
 // Signoff Add Signed-off-by line by the committer at the end of the commit log message.
-// The meaning of a signoff depends on the project, but it typically certifies that committer has the rights to submit this work under the same license and agrees to a Developer Certificate of Origin (see http://developercertificate.org/ for more information).
+// The meaning of a signoff depends on the project, but it typically certifies that committer has the rights to submit this work under the same license and agrees to a Developer Certificate of Origin (see https://developercertificate.org/ for more information).
 // -s, --signoff
 func Signoff(g *types.Cmd) {
 	g.AddOptions("--signoff")

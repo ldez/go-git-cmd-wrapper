@@ -1234,7 +1234,7 @@
       {
         "argument": "--signoff",
         "arguments": "-s, --signoff",
-        "description": "Add Signed-off-by line by the committer at the end of the commit log message.\nThe meaning of a signoff depends on the project, but it typically certifies that committer has the rights to submit this work under the same license and agrees to a Developer Certificate of Origin (see http://developercertificate.org/ for more information)."
+        "description": "Add Signed-off-by line by the committer at the end of the commit log message.\nThe meaning of a signoff depends on the project, but it typically certifies that committer has the rights to submit this work under the same license and agrees to a Developer Certificate of Origin (see https://developercertificate.org/ for more information)."
       },
       {
         "argument": "--no-verify",
@@ -1317,7 +1317,7 @@
         "description": "Do not include the output of git-status(1) in the commit message template when using an editor to prepare the default commit message."
       },
       {
-        "argument": "--gpg-sign[=<keyid>]",
+        "argument": "--gpg-sign[=<keyID>]",
         "arguments": "-S[<keyid>], --gpg-sign[=<keyid>]",
         "description": "GPG-sign commits.\nThe keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space."
       },
@@ -1524,7 +1524,7 @@
         "description": "By default, git merge command refuses to merge histories that do not share a common ancestor.\nThis option can be used to override this safety when merging histories of two projects that started their lives independently.\nAs that is a very rare occasion, no configuration variable to enable this by default exists and will not be added."
       },
       {
-        "argument": "--gpg-sign[=<keyid>]",
+        "argument": "--gpg-sign[=<keyID>]",
         "arguments": "-S[<keyid>], --gpg-sign[=<keyid>]",
         "description": "GPG-sign the resulting merge commit.\nThe keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space."
       },
@@ -1796,7 +1796,7 @@
         "description": "Make a GPG-signed tag, using the default e-mail address’s key."
       },
       {
-        "argument": "--local-user=<keyid>",
+        "argument": "--local-user=<keyID>",
         "arguments": "-u <keyid>, --local-user=<keyid>",
         "description": "Make a GPG-signed tag, using the given key."
       },
@@ -1873,7 +1873,7 @@
       {
         "argument": "--message=<msg>",
         "arguments": "-m <msg>, --message=<msg>",
-        "description": "Use the given tag message (instead of prompting). If multiple -m options are given, their values are concatenated as separate paragraphs. Implies -a if none of -a, -s, or -u <keyid> is given."
+        "description": "Use the given tag message (instead of prompting).\nIf multiple -m options are given, their values are concatenated as separate paragraphs. Implies -a if none of -a, -s, or -u <keyid> is given."
       },
       {
         "argument": "--file=<file>",

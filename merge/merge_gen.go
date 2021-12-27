@@ -66,12 +66,12 @@ func FfOnly(g *types.Cmd) {
 // GpgSign GPG-sign the resulting merge commit.
 // The keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space.
 // -S[<keyid>], --gpg-sign[=<keyid>]
-func GpgSign(keyid string) func(*types.Cmd) {
+func GpgSign(keyID string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		if len(keyid) == 0 {
+		if len(keyID) == 0 {
 			g.AddOptions("--gpg-sign")
 		} else {
-			g.AddOptions(fmt.Sprintf("--gpg-sign=%s", keyid))
+			g.AddOptions(fmt.Sprintf("--gpg-sign=%s", keyID))
 		}
 	}
 }
