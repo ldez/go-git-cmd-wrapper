@@ -1,6 +1,7 @@
 package init
 
 import (
+	"log"
 	"os"
 	"path/filepath"
 	"testing"
@@ -9,9 +10,20 @@ import (
 )
 
 func TestInit(t *testing.T) {
-	dir := t.TempDir()
+	// don't use `t.TempDir()` because of a bug with Windows on the CI
+	dir, err := os.MkdirTemp("", "go-git-cmd-wrapper")
+	if err != nil {
+		t.Fatal(err)
+	}
 
-	if err := os.Chdir(dir); err != nil {
+	// clean up
+	t.Cleanup(func() {
+		if errRm := os.RemoveAll(dir); errRm != nil {
+			log.Println(errRm)
+		}
+	})
+
+	if err = os.Chdir(dir); err != nil {
 		t.Fatal(err)
 	}
 
