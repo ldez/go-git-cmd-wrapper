@@ -50,11 +50,30 @@ func Column(options string) func(*types.Cmd) {
 	}
 }
 
+// Contains Only list tags which contain the specified commit (HEAD if not specified). Implies --list.
+// --contains [<commit>]
+func Contains(commit string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		if len(commit) == 0 {
+			g.AddOptions("--contains")
+		} else {
+			g.AddOptions(fmt.Sprintf("--contains=%s", commit))
+		}
+	}
+}
+
 // CreateReflog Create a reflog for the tag. To globally enable reflogs for tags, see core.logAllRefUpdates in git-config(1). The negated form --no-create-reflog only overrides an earlier --create-reflog, but
 //  currently does not negate the setting of core.logAllRefUpdates.
 // --create-reflog
 func CreateReflog(g *types.Cmd) {
 	g.AddOptions("--create-reflog")
+}
+
+// Edit The message taken from file with -F and command line with -m are usually used as the tag message unmodified.
+// This option lets you further edit the message taken from these sources.
+// -e, --edit
+func Edit(g *types.Cmd) {
+	g.AddOptions("--edit")
 }
 
 // File Take the tag message from the given file. Use - to read the message from the standard input. Implies -a if none of -a, -s, or -u <keyid> is given.
@@ -89,13 +108,26 @@ func List(g *types.Cmd) {
 
 // LocalUser Make a GPG-signed tag, using the given key.
 // -u <keyid>, --local-user=<keyid>
-func LocalUser(keyid string) func(*types.Cmd) {
+func LocalUser(keyID string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
-		g.AddOptions(fmt.Sprintf("--local-user=%s", keyid))
+		g.AddOptions(fmt.Sprintf("--local-user=%s", keyID))
 	}
 }
 
-// Message Use the given tag message (instead of prompting). If multiple -m options are given, their values are concatenated as separate paragraphs. Implies -a if none of -a, -s, or -u <keyid> is given.
+// Merged Only list tags whose commits are reachable from the specified commit (HEAD if not specified), incompatible with --no-merged.
+// --merged [<commit>]
+func Merged(commit string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		if len(commit) == 0 {
+			g.AddOptions("--merged")
+		} else {
+			g.AddOptions(fmt.Sprintf("--merged=%s", commit))
+		}
+	}
+}
+
+// Message Use the given tag message (instead of prompting).
+// If multiple -m options are given, their values are concatenated as separate paragraphs. Implies -a if none of -a, -s, or -u <keyid> is given.
 // -m <msg>, --message=<msg>
 func Message(msg string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
@@ -120,6 +152,30 @@ func N(num string) func(*types.Cmd) {
 // --no-column
 func NoColumn(g *types.Cmd) {
 	g.AddOptions("--no-column")
+}
+
+// NoContains Only list tags which don’t contain the specified commit (HEAD if not specified). Implies --list.
+// --no-contains [<commit>]
+func NoContains(commit string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		if len(commit) == 0 {
+			g.AddOptions("--no-contains")
+		} else {
+			g.AddOptions(fmt.Sprintf("--no-contains=%s", commit))
+		}
+	}
+}
+
+// NoMerged Only list tags whose commits are not reachable from the specified commit (HEAD if not specified), incompatible with --merged.
+// --no-merged [<commit>]
+func NoMerged(commit string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		if len(commit) == 0 {
+			g.AddOptions("--no-merged")
+		} else {
+			g.AddOptions(fmt.Sprintf("--no-merged=%s", commit))
+		}
+	}
 }
 
 // PointsAt Only list tags of the given object (HEAD if not specified). Implies --list.

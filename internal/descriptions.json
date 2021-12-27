@@ -1846,22 +1846,22 @@
         "description": "Display tag listing in columns. See configuration variable column.tag for option syntax.--column and --no-column without options are equivalent to always and never respectively.\n\n This option is only applicable when listing tags without annotation lines."
       },
       {
-        "argument": "--contains [<commit>]",
+        "argument": "--contains[=<commit>]",
         "arguments": "--contains [<commit>]",
         "description": "Only list tags which contain the specified commit (HEAD if not specified). Implies --list."
       },
       {
-        "argument": "--no-contains [<commit>]",
+        "argument": "--no-contains[=<commit>]",
         "arguments": "--no-contains [<commit>]",
         "description": "Only list tags which don’t contain the specified commit (HEAD if not specified). Implies --list."
       },
       {
-        "argument": "--merged [<commit>]",
+        "argument": "--merged[=<commit>]",
         "arguments": "--merged [<commit>]",
         "description": "Only list tags whose commits are reachable from the specified commit (HEAD if not specified), incompatible with --no-merged."
       },
       {
-        "argument": "--no-merged [<commit>]",
+        "argument": "--no-merged[=<commit>]",
         "arguments": "--no-merged [<commit>]",
         "description": "Only list tags whose commits are not reachable from the specified commit (HEAD if not specified), incompatible with --merged."
       },
@@ -1881,9 +1881,9 @@
         "description": "Take the tag message from the given file. Use - to read the message from the standard input. Implies -a if none of -a, -s, or -u <keyid> is given."
       },
       {
-        "argument": "-e, --edit",
+        "argument": "--edit",
         "arguments": "-e, --edit",
-        "description": "The message taken from file with -F and command line with -m are usually used as the tag message unmodified. This option lets you further edit the message taken from these sources."
+        "description": "The message taken from file with -F and command line with -m are usually used as the tag message unmodified.\nThis option lets you further edit the message taken from these sources."
       },
       {
         "argument": "--cleanup=<mode>",
