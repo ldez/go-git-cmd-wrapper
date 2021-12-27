@@ -18,3 +18,9 @@ func Branch(name string) func(*types.Cmd) {
 		g.AddOptions(name)
 	}
 }
+
+// PreserveMerges --preserve-merges was replaced by --rebase-merges.
+// Deprecated
+func PreserveMerges(g *types.Cmd) {
+	g.AddOptions("--preserve-merges")
+}

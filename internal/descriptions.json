@@ -399,7 +399,12 @@
       {
         "argument": "--onto <newbase>",
         "arguments": "--onto <newbase>",
-        "description": "Starting point at which to create the new commits.\nIf the --onto option is not specified, the starting point is <upstream>.\nMay be any valid commit, and not just an existing branch name."
+        "description": "Starting point at which to create the new commits.\nIf the --onto option is not specified, the starting point is <upstream>.\nMay be any valid commit, and not just an existing branch name.\nAs a special case, you may use \"A...B\" as a shortcut for the merge base of A and B if there is exactly one merge base.\nYou can leave out at most one of A and B, in which case it defaults to HEAD."
+      },
+      {
+        "argument": "--keep-base",
+        "arguments": "--keep-base",
+        "description": "Set the starting point at which to create the new commits to the merge base of <upstream> <branch>.\nRunning git rebase --keep-base <upstream> <branch> is equivalent to running git rebase --onto <upstream>... <upstream>.\n\nThis option is useful in the case where one is developing a feature on top of an upstream branch.\nWhile the feature is being worked on, the upstream branch may advance and it may not be the best idea to keep rebasing on top of the upstream but to keep the base commit as-is.\n\nAlthough both this option and --fork-point find the merge base between <upstream> and <branch>, this option uses the merge base as the starting point on which new commits will be created, whereas --fork-point uses the merge base to determine the set of commits which will be rebased."
       },
       {
         "argument": "--continue",
@@ -414,12 +419,42 @@
       {
         "argument": "--quit",
         "arguments": "--quit",
-        "description": "Abort the rebase operation but HEAD is not reset back to the original branch.\nThe index and working tree are also left unchanged as a result."
+        "description": "Abort the rebase operation but HEAD is not reset back to the original branch.\nThe index and working tree are also left unchanged as a result.\nIf a temporary stash entry was created using --autostash, it will be saved to the stash list."
+      },
+      {
+        "argument": "--apply",
+        "arguments": "--apply",
+        "description": "Use applying strategies to rebase (calling git-am internally).\nThis option may become a no-op in the future once the merge backend handles everything the apply one does."
+      },
+      {
+        "argument": "--empty=(drop|keep|ask)",
+        "arguments": "--empty={drop,keep,ask}",
+        "description": "How to handle commits that are not empty to start and are not clean cherry-picks of any upstream commit, but which become empty after rebasing (because they contain a subset of already upstream changes).\nWith drop (the default), commits that become empty are dropped.\nWith keep, such commits are kept.\nWith ask (implied by --interactive), the rebase will halt when an empty commit is applied allowing you to choose whether to drop it, edit files more, or just commit the empty changes.\nOther options, like --exec, will use the default of drop unless -i/--interactive is explicitly specified.\n\nNote that commits which start empty are kept (unless --no-keep-empty is specified), and commits which are clean cherry-picks (as determined by git log --cherry-mark ...) are detected and dropped as a preliminary step (unless --reapply-cherry-picks is passed)."
+      },
+      {
+        "argument": "--no-keep-empty",
+        "arguments": "--no-keep-empty, --keep-empty",
+        "description": "Do not keep commits that start empty before the rebase (i.e. that do not change anything from its parent) in the result.\nThe default is to keep commits which start empty, since creating such commits requires passing the --allow-empty override flag to git commit, signifying that a user is very intentionally creating such a commit and thus wants to keep it.\n\nUsage of this flag will probably be rare, since you can get rid of commits that start empty by just firing up an interactive rebase and removing the lines corresponding to the commits you don’t want.\nThis flag exists as a convenient shortcut, such as for cases where\nexternal tools generate many empty commits and you want them all removed.\n\nFor commits which do not start empty but become empty after rebasing, see the --empty flag."
       },
       {
         "argument": "--keep-empty",
-        "arguments": "--keep-empty",
-        "description": "Keep the commits that do not change anything from its parents in the result."
+        "arguments": "--no-keep-empty, --keep-empty",
+        "description": "Do not keep commits that start empty before the rebase (i.e. that do not change anything from its parent) in the result.\nThe default is to keep commits which start empty, since creating such commits requires passing the --allow-empty override flag to git commit, signifying that a user is very intentionally creating such a commit and thus wants to keep it.\n\nUsage of this flag will probably be rare, since you can get rid of commits that start empty by just firing up an interactive rebase and removing the lines corresponding to the commits you don’t want.\nThis flag exists as a convenient shortcut, such as for cases where\nexternal tools generate many empty commits and you want them all removed.\n\nFor commits which do not start empty but become empty after rebasing, see the --empty flag."
+      },
+      {
+        "argument": "--reapply-cherry-picks",
+        "arguments": "--reapply-cherry-picks, --no-reapply-cherry-picks",
+        "description": "Reapply all clean cherry-picks of any upstream commit instead of preemptively dropping them.\n(If these commits then become empty after rebasing, because they contain a subset of already upstream changes, the behavior towards them is controlled by the --empty flag.)\n\nBy default (or if --no-reapply-cherry-picks is given), these commits will be automatically dropped.\nBecause this necessitates reading all upstream commits, this can be expensive in repos with a large number of upstream commits that need to be read.\nWhen using the merge backend, warnings will be issued for each dropped commit (unless --quiet is given).\nAdvice will also be issued unless advice.skippedCherryPicks is set to false (see git-config(1)).\n--reapply-cherry-picks allows rebase to forgo reading all upstream commits, potentially improving performance."
+      },
+      {
+        "argument": "--no-reapply-cherry-picks",
+        "arguments": "--reapply-cherry-picks, --no-reapply-cherry-picks",
+        "description": "Reapply all clean cherry-picks of any upstream commit instead of preemptively dropping them.\n(If these commits then become empty after rebasing, because they contain a subset of already upstream changes, the behavior towards them is controlled by the --empty flag.)\n\nBy default (or if --no-reapply-cherry-picks is given), these commits will be automatically dropped.\nBecause this necessitates reading all upstream commits, this can be expensive in repos with a large number of upstream commits that need to be read.\nWhen using the merge backend, warnings will be issued for each dropped commit (unless --quiet is given).\nAdvice will also be issued unless advice.skippedCherryPicks is set to false (see git-config(1)).\n--reapply-cherry-picks allows rebase to forgo reading all upstream commits, potentially improving performance."
+      },
+      {
+        "argument": "--allow-empty-message",
+        "arguments": "--allow-empty-message",
+        "description": "No-op.\nRebasing commits with an empty message used to fail and this option would override that behavior, allowing commits with empty messages to be rebased.\nNow commits with an empty message do not cause rebasing to halt."
       },
       {
         "argument": "--skip",
@@ -432,24 +467,44 @@
         "description": "Edit the todo list during an interactive rebase."
       },
       {
+        "argument": "--show-current-patch",
+        "arguments": "--show-current-patch",
+        "description": "Show the current patch in an interactive rebase or when rebase is stopped because of conflicts.\nThis is the equivalent of git show REBASE_HEAD."
+      },
+      {
         "argument": "--merge",
         "arguments": "-m, --merge",
-        "description": "Use merging strategies to rebase.\nWhen the recursive (default) merge strategy is used, this allows rebase to be aware of renames on the upstream side."
+        "description": "Using merging strategies to rebase (default).\n\nNote that a rebase merge works by replaying each commit from the working branch on top of the <upstream> branch.\nBecause of this, when a merge conflict happens, the side reported as ours is the so-far rebased series, starting with <upstream>, and theirs is the working branch.\nIn other words, the sides are swapped."
       },
       {
         "argument": "--strategy=<strategy>",
         "arguments": "-s <strategy>, --strategy=<strategy>",
-        "description": "Use the given merge strategy.\nIf there is no -s option git merge-recursive is used instead.\nThis implies --merge."
+        "description": "Use the given merge strategy, instead of the default ort.\nThis implies --merge.\n\nBecause git rebase replays each commit from the working branch on top of the <upstream> branch using the given strategy, using the ours strategy simply empties all patches from the <branch>, which makes little sense."
       },
       {
         "argument": "--strategy-option=<strategy-option>",
         "arguments": "-X <strategy-option>, --strategy-option=<strategy-option>",
-        "description": "Pass the <strategy-option> through to the merge strategy.\nThis implies --merge and, if no strategy has been specified, -s recursive.\nNote the reversal of ours and theirs as noted above for the -m option."
+        "description": "Pass the <strategy-option> through to the merge strategy.\nThis implies --merge and, if no strategy has been specified, -s ort.\nNote the reversal of ours and theirs as noted above for the -m option."
       },
       {
-        "argument": "--gpg-sign[=<keyid>]",
-        "arguments": "-S[<keyid>], --gpg-sign[=<keyid>]",
-        "description": "GPG-sign commits.\nThe keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space."
+        "argument": "--rerere-autoupdate",
+        "arguments": "--rerere-autoupdate, --no-rerere-autoupdate",
+        "description": "Allow the rerere mechanism to update the index with the result of auto-conflict resolution if possible."
+      },
+      {
+        "argument": "--no-rerere-autoupdate",
+        "arguments": "--rerere-autoupdate, --no-rerere-autoupdate",
+        "description": "Allow the rerere mechanism to update the index with the result of auto-conflict resolution if possible."
+      },
+      {
+        "argument": "--gpg-sign[=<keyID>]",
+        "arguments": "-S[<keyid>], --gpg-sign[=<keyid>], --no-gpg-sign",
+        "description": "GPG-sign commits.\nThe keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space.\n--no-gpg-sign is useful to countermand both commit.gpgSign configuration variable, and earlier --gpg-sign."
+      },
+      {
+        "argument": "--no-gpg-sign",
+        "arguments": "-S[<keyid>], --gpg-sign[=<keyid>], --no-gpg-sign",
+        "description": "GPG-sign commits.\nThe keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space.\n--no-gpg-sign is useful to countermand both commit.gpgSign configuration variable, and earlier --gpg-sign."
       },
       {
         "argument": "--quiet",
@@ -485,92 +540,107 @@
         "method_name": "EnsureContext",
         "argument": "-C<n>",
         "arguments": "-C<n>",
-        "description": "Ensure at least <n> lines of surrounding context match before and after each change.\nWhen fewer lines of surrounding context exist they all must match.\nBy default no context is ever ignored."
+        "description": "Ensure at least <n> lines of surrounding context match before and after each change.\nWhen fewer lines of surrounding context exist they all must match.\nBy default no context is ever ignored.\nImplies --apply."
+      },
+      {
+        "argument": "--no-ff",
+        "arguments": "--no-ff, --force-rebase, -f",
+        "description": "Individually replay all rebased commits instead of fast-forwarding over the unchanged ones.\nThis ensures that the entire history of the rebased branch is composed of new commits.\n\nYou may find this helpful after reverting a topic branch merge, as this option recreates the topic branch with fresh commits so it can be remerged successfully without needing to \"revert the reversion\" (see the revert-a-faulty-merge How-To[1] for details)."
       },
       {
         "argument": "--force-rebase",
-        "arguments": "-f, --force-rebase",
-        "description": "Force a rebase even if the current branch is up-to-date and the command without --force would return without doing anything."
+        "arguments": "--no-ff, --force-rebase, -f",
+        "description": "Individually replay all rebased commits instead of fast-forwarding over the unchanged ones.\nThis ensures that the entire history of the rebased branch is composed of new commits.\n\nYou may find this helpful after reverting a topic branch merge, as this option recreates the topic branch with fresh commits so it can be remerged successfully without needing to \"revert the reversion\" (see the revert-a-faulty-merge How-To[1] for details)."
       },
       {
         "argument": "--fork-point",
         "arguments": "--fork-point, --no-fork-point",
-        "description": "Use reflog to find a better common ancestor between <upstream> and <branch> when calculating which commits have been introduced by <branch>."
+        "description": "Use reflog to find a better common ancestor between <upstream> and <branch> when calculating which commits have been introduced by <branch>.\n\nWhen --fork-point is active, fork_point will be used instead of <upstream> to calculate the set of commits to rebase, where fork_point is the result of git merge-base --fork-point <upstream> <branch> command (see git-merge-base(1)).\nIf fork_point ends up being empty, the <upstream> will be used as a fallback.\n\nIf <upstream> is given on the command line, then the default is --no-fork-point, otherwise the default is --fork-point.\nSee also rebase.forkpoint in git-config(1).\n\nIf your branch was based on <upstream> but <upstream> was rewound and your branch contains commits which were dropped, this option can be used with --keep-base in order to drop those commits from your branch."
       },
       {
         "argument": "--no-fork-point",
         "arguments": "--fork-point, --no-fork-point",
-        "description": "Use reflog to find a better common ancestor between <upstream> and <branch> when calculating which commits have been introduced by <branch>."
+        "description": "Use reflog to find a better common ancestor between <upstream> and <branch> when calculating which commits have been introduced by <branch>.\n\nWhen --fork-point is active, fork_point will be used instead of <upstream> to calculate the set of commits to rebase, where fork_point is the result of git merge-base --fork-point <upstream> <branch> command (see git-merge-base(1)).\nIf fork_point ends up being empty, the <upstream> will be used as a fallback.\n\nIf <upstream> is given on the command line, then the default is --no-fork-point, otherwise the default is --fork-point.\nSee also rebase.forkpoint in git-config(1).\n\nIf your branch was based on <upstream> but <upstream> was rewound and your branch contains commits which were dropped, this option can be used with --keep-base in order to drop those commits from your branch."
       },
       {
         "argument": "--ignore-whitespace",
         "arguments": "--ignore-whitespace",
-        "description": "These flag are passed to the git apply program (see git-apply(1)) that applies the patch.\nIncompatible with the --interactive option."
+        "description": "Ignore whitespace differences when trying to reconcile differences.\nCurrently, each backend implements an approximation of this behavior:\n\napply backend: When applying a patch, ignore changes in whitespace in context lines.\nUnfortunately, this means that if the \"old\" lines being replaced by the patch differ only in whitespace from the existing file, you will get a merge conflict instead of a successful patch application.\n\nmerge backend: Treat lines with only whitespace changes as unchanged when merging.\nUnfortunately, this means that any patch hunks that were intended to modify whitespace and nothing else will be dropped, even if the other side had no changes that conflicted."
       },
       {
         "argument": "--whitespace=<option>",
         "arguments": "--whitespace=<option>",
-        "description": "These flag are passed to the git apply program (see git-apply(1)) that applies the patch.\nIncompatible with the --interactive option."
+        "description": "This flag is passed to the git apply program (see git-apply(1)) that applies the patch.\nImplies --apply."
       },
       {
         "argument": "--committer-date-is-author-date",
-        "arguments": "--ignore-date",
-        "description": "These flags are passed to git am to easily change the dates of the rebased commits (see git-am(1)).\nIncompatible with the --interactive option."
+        "arguments": "--committer-date-is-author-date",
+        "description": "Instead of using the current time as the committer date, use the author date of the commit being rebased as the committer date.\nThis option implies --force-rebase."
       },
       {
         "argument": "--ignore-date",
-        "arguments": "--ignore-date",
-        "description": "These flags are passed to git am to easily change the dates of the rebased commits (see git-am(1)).\nIncompatible with the --interactive option."
+        "arguments": "--ignore-date, --reset-author-date",
+        "description": "Instead of using the author date of the original commit, use the current time as the author date of the rebased commit.\nThis option implies --force-rebase."
+      },
+      {
+        "argument": "--reset-author-date",
+        "arguments": "--ignore-date, --reset-author-date",
+        "description": "Instead of using the author date of the original commit, use the current time as the author date of the rebased commit.\nThis option implies --force-rebase."
       },
       {
         "argument": "--signoff",
         "arguments": "--signoff",
-        "description": "This flag is passed to git am to sign off all the rebased commits (see git-am(1)).\nIncompatible with the --interactive option."
+        "description": "Add a Signed-off-by trailer to all the rebased commits.\nNote that if --interactive is given then only commits marked to be picked, edited or reworded will have the trailer added."
       },
       {
         "argument": "--interactive",
         "arguments": "-i, --interactive",
-        "description": "Make a list of the commits which are about to be rebased.\nLet the user edit that list before rebasing.\nThis mode can also be used to split commits (see SPLITTING COMMITS below)."
+        "description": "Make a list of the commits which are about to be rebased.\nLet the user edit that list before rebasing.\nThis mode can also be used to split commits (see SPLITTING COMMITS below).\n\nThe commit list format can be changed by setting the configuration option rebase.instructionFormat.\nA customized instruction format will automatically have the long commit hash prepended to the format."
       },
       {
-        "argument": "--preserve-merges",
-        "arguments": "-p, --preserve-merges",
-        "description": "Recreate merge commits instead of flattening the history by replaying commits a merge commit introduces.\nMerge conflict resolutions or manual amendments to merge commits are not preserved."
+        "argument": "--rebase-merges[=(rebase-cousins|no-rebase-cousins)]",
+        "arguments": "-r, --rebase-merges[=(rebase-cousins|no-rebase-cousins)]",
+        "description": "By default, a rebase will simply drop merge commits from the todo list, and put the rebased commits into a single, linear branch.\nWith --rebase-merges, the rebase will instead try to preserve the branching structure within the commits that are to be rebased, by recreating the merge commits.\nAny resolved merge conflicts or manual amendments in these merge commits will have to be resolved/re-applied manually.\n\nBy default, or when no-rebase-cousins was specified, commits which do not have <upstream> as direct ancestor will keep their original branch point, i.e. commits that would be excluded by git-log(1)'s --ancestry-path option will keep their original ancestry by default.\nIf the rebase-cousins mode is turned on, such commits are instead rebased onto <upstream> (or <onto>, if specified).\n\nIt is currently only possible to recreate the merge commits using the ort merge strategy; different merge strategies can be used only via explicit exec git merge -s <strategy> [...]  commands."
       },
       {
         "argument": "--exec <cmd>",
         "arguments": "-x <cmd>, --exec <cmd>",
-        "description": "Append 'exec <cmd>' after each line creating a commit in the final history.\n<cmd> will be interpreted as one or more shell commands."
+        "description": "Append \"exec <cmd>\" after each line creating a commit in the final history.\n<cmd> will be interpreted as one or more shell commands.\nAny command that fails will interrupt the rebase, with exit code 1."
       },
       {
         "argument": "--root",
         "arguments": "--root",
-        "description": "Rebase all commits reachable from <branch>, instead of limiting them with an <upstream>.\nThis allows you to rebase the root commit(s) on a branch.\nWhen used with --onto, it will skip changes already contained in <newbase> (instead of <upstream>) whereas without --onto it will operate on every change.\nWhen used together with both --onto and --preserve-merges, all root commits will be rewritten to have <newbase> as parent instead."
+        "description": "Rebase all commits reachable from <branch>, instead of limiting them with an <upstream>.\nThis allows you to rebase the root commit(s) on a branch.\nWhen used with --onto, it will skip changes already contained in <newbase> (instead of <upstream>) whereas without\n--onto it will operate on every change."
       },
       {
         "argument": "--autosquash",
         "arguments": "--autosquash, --no-autosquash",
-        "description": "When the commit log message begins with 'squash! ...' (or 'fixup! ...'), and there is a commit whose title begins with the same ..., automatically modify the todo list of rebase -i so that the commit marked for squashing comes right after the commit to be modified, and change the action of the moved commit from pick to squash (or fixup).\nIgnores subsequent 'fixup! ' or 'squash! ' after the first, in case you referred to an earlier fixup/squash with git commit --fixup/--squash.\nThis option is only valid when the --interactive option is used."
+        "description": "When the commit log message begins with \"squash! ...\" or \"fixup! ...\" or \"amend! ...\", and there is already a commit in the todo list that matches the same ..., automatically modify the todo list of rebase -i, so that the commit marked for squashing comes right after the commit to be modified, and change the action of the moved commit from pick to squash or fixup or fixup -C respectively.\nA commit matches the ...  if the commit subject matches, or if the ...  refers to the commit’s hash.\nAs a fall-back, partial matches of the commit subject work, too.\nThe recommended way to create fixup/amend/squash commits is by using the --fixup, --fixup=amend: or --fixup=reword: and --squash options respectively of git-commit(1).\n\nIf the --autosquash option is enabled by default using the configuration variable rebase.autoSquash, this option can be used to override and disable this setting."
       },
       {
         "argument": "--no-autosquash",
         "arguments": "--autosquash, --no-autosquash",
-        "description": "When the commit log message begins with 'squash! ...' (or 'fixup! ...'), and there is a commit whose title begins with the same ..., automatically modify the todo list of rebase -i so that the commit marked for squashing comes right after the commit to be modified, and change the action of the moved commit from pick to squash (or fixup).\nIgnores subsequent 'fixup! ' or 'squash! ' after the first, in case you referred to an earlier fixup/squash with git commit --fixup/--squash.\nThis option is only valid when the --interactive option is used."
+        "description": "When the commit log message begins with \"squash! ...\" or \"fixup! ...\" or \"amend! ...\", and there is already a commit in the todo list that matches the same ..., automatically modify the todo list of rebase -i, so that the commit marked for squashing comes right after the commit to be modified, and change the action of the moved commit from pick to squash or fixup or fixup -C respectively.\nA commit matches the ...  if the commit subject matches, or if the ...  refers to the commit’s hash.\nAs a fall-back, partial matches of the commit subject work, too.\nThe recommended way to create fixup/amend/squash commits is by using the --fixup, --fixup=amend: or --fixup=reword: and --squash options respectively of git-commit(1).\n\nIf the --autosquash option is enabled by default using the configuration variable rebase.autoSquash, this option can be used to override and disable this setting."
       },
       {
         "argument": "--autostash",
         "arguments": "--autostash, --no-autostash",
-        "description": "Automatically create a temporary stash before the operation begins, and apply it after the operation ends.\nThis means that you can run rebase on a dirty worktree.\nHowever, use with care: the final stash application after a successful rebase might result in non-trivial conflicts."
+        "description": "Automatically create a temporary stash entry before the operation begins, and apply it after the operation ends.\nThis means that you can run rebase on a dirty worktree.\nHowever, use with care: the final stash application after a successful rebase might result in non-trivial conflicts."
       },
       {
         "argument": "--no-autostash",
         "arguments": "--autostash, --no-autostash",
-        "description": "Automatically create a temporary stash before the operation begins, and apply it after the operation ends.\nThis means that you can run rebase on a dirty worktree.\nHowever, use with care: the final stash application after a successful rebase might result in non-trivial conflicts."
+        "description": "Automatically create a temporary stash entry before the operation begins, and apply it after the operation ends.\nThis means that you can run rebase on a dirty worktree.\nHowever, use with care: the final stash application after a successful rebase might result in non-trivial conflicts."
       },
       {
-        "argument": "--no-ff",
-        "arguments": "--no-ff",
-        "description": "With --interactive, cherry-pick all rebased commits instead of fast-forwarding over the unchanged ones.\nThis ensures that the entire history of the rebased branch is composed of new commits.\nWithout --interactive, this is a synonym for --force-rebase."
+        "argument": "--reschedule-failed-exec",
+        "arguments": "--reschedule-failed-exec, --no-reschedule-failed-exec",
+        "description": "Automatically reschedule exec commands that failed.\nThis only makes sense in interactive mode (or when an --exec option was provided).\n\nEven though this option applies once a rebase is started, it’s set for the whole rebase at the start based on either the rebase.rescheduleFailedExec configuration (see git-config(1) or \"CONFIGURATION\" below) or whether this option is provided.\nOtherwise an explicit --no-reschedule-failed-exec at the start would be overridden by the presence of rebase.rescheduleFailedExec=true configuration."
+      },
+      {
+        "argument": "--no-reschedule-failed-exec",
+        "arguments": "--reschedule-failed-exec, --no-reschedule-failed-exec",
+        "description": "Automatically reschedule exec commands that failed.\nThis only makes sense in interactive mode (or when an --exec option was provided).\n\nEven though this option applies once a rebase is started, it’s set for the whole rebase at the start based on either the rebase.rescheduleFailedExec configuration (see git-config(1) or \"CONFIGURATION\" below) or whether this option is provided.\nOtherwise an explicit --no-reschedule-failed-exec at the start would be overridden by the presence of rebase.rescheduleFailedExec=true configuration."
       }
     ]
   },
