@@ -1,8 +1,6 @@
 package init
 
 import (
-	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
 	"testing"
@@ -11,19 +9,9 @@ import (
 )
 
 func TestInit(t *testing.T) {
-	dir, err := ioutil.TempDir("", "go-git-cmd-wrapper")
-	if err != nil {
-		t.Fatal(err)
-	}
+	dir := t.TempDir()
 
-	// clean up
-	t.Cleanup(func() {
-		if errRm := os.RemoveAll(dir); errRm != nil {
-			log.Println(errRm)
-		}
-	})
-
-	if err = os.Chdir(dir); err != nil {
+	if err := os.Chdir(dir); err != nil {
 		t.Fatal(err)
 	}
 
