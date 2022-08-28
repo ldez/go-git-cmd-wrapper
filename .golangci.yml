@@ -1,5 +1,5 @@
 run:
-  deadline: 2m
+  timeout: 2m
 
 linters-settings:
   govet:
@@ -56,14 +56,24 @@ linters-settings:
     case:
       rules:
         json: snake
+  gosec:
+    excludes:
+      - G204
 
 linters:
   enable-all: true
   disable:
-    - maligned # deprecated
-    - interfacer # deprecated
     - scopelint # deprecated
+    - interfacer # deprecated
+    - maligned # deprecated
     - golint # deprecated
+    - exhaustivestruct # deprecated
+    - scopelint # deprecated
+    - varcheck # deprecated
+    - structcheck # deprecated
+    - nosnakecase # deprecated
+    - deadcode # deprecated
+    - ifshort # deprecated
     - sqlclosecheck # not relevant (SQL)
     - rowserrcheck # not relevant (SQL)
     - cyclop # duplicate of gocyclo
@@ -79,7 +89,7 @@ linters:
     - tparallel
     - wrapcheck
     - exhaustive
-    - exhaustivestruct
+    - exhaustruct
     - makezero
     - ifshort
     - godot
@@ -91,7 +101,7 @@ issues:
   max-per-linter: 0
   max-same-issues: 0
   exclude:
-    - G204
+    - 'package-comments: should have a package comment'
   exclude-rules:
     - path: (.+)_test.go
       linters:

@@ -16,7 +16,9 @@ func Annotate(g *types.Cmd) {
 }
 
 // Cleanup This option sets how the tag message is cleaned up. The <mode> can be one of verbatim, whitespace and strip. The strip mode is default. The verbatim mode does not change message at all, whitespace
-//  removes just leading/trailing whitespace lines and strip removes both whitespace and commentary.
+//
+//	removes just leading/trailing whitespace lines and strip removes both whitespace and commentary.
+//
 // --cleanup=<mode>
 func Cleanup(mode string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
@@ -38,7 +40,8 @@ func Color(when string) func(*types.Cmd) {
 
 // Column Display tag listing in columns. See configuration variable column.tag for option syntax.--column and --no-column without options are equivalent to always and never respectively.
 //
-//  This option is only applicable when listing tags without annotation lines.
+//	This option is only applicable when listing tags without annotation lines.
+//
 // --column[=<options>]
 func Column(options string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
@@ -63,7 +66,9 @@ func Contains(commit string) func(*types.Cmd) {
 }
 
 // CreateReflog Create a reflog for the tag. To globally enable reflogs for tags, see core.logAllRefUpdates in git-config(1). The negated form --no-create-reflog only overrides an earlier --create-reflog, but
-//  currently does not negate the setting of core.logAllRefUpdates.
+//
+//	currently does not negate the setting of core.logAllRefUpdates.
+//
 // --create-reflog
 func CreateReflog(g *types.Cmd) {
 	g.AddOptions("--create-reflog")
@@ -148,7 +153,8 @@ func N(num string) func(*types.Cmd) {
 
 // NoColumn Display tag listing in columns. See configuration variable column.tag for option syntax.--column and --no-column without options are equivalent to always and never respectively.
 //
-//  This option is only applicable when listing tags without annotation lines.
+//	This option is only applicable when listing tags without annotation lines.
+//
 // --no-column
 func NoColumn(g *types.Cmd) {
 	g.AddOptions("--no-column")

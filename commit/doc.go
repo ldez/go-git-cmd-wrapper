@@ -1,18 +1,18 @@
 /*
 Package commit git-commit - Record changes to the repository.
 
-SYNOPSIS
+# SYNOPSIS
 
 Reference: https://git-scm.com/docs/git-commit
 
-		git commit [-a | --interactive | --patch] [-s] [-v] [-u<mode>] [--amend]
-				[--dry-run] [(-c | -C | --fixup | --squash) <commit>]
-				[-F <file> | -m <msg>] [--reset-author] [--allow-empty]
-				[--allow-empty-message] [--no-verify] [-e] [--author=<author>]
-				[--date=<date>] [--cleanup=<mode>] [--[no-]status]
-				[-i | -o] [-S[<keyid>]] [--] [<file>...]
+	git commit [-a | --interactive | --patch] [-s] [-v] [-u<mode>] [--amend]
+			[--dry-run] [(-c | -C | --fixup | --squash) <commit>]
+			[-F <file> | -m <msg>] [--reset-author] [--allow-empty]
+			[--allow-empty-message] [--no-verify] [-e] [--author=<author>]
+			[--date=<date>] [--cleanup=<mode>] [--[no-]status]
+			[-i | -o] [-S[<keyid>]] [--] [<file>...]
 
-DESCRIPTION
+# DESCRIPTION
 
 Stores the current contents of the index in a new commit along with a log message from the user describing the changes.
 
@@ -31,6 +31,5 @@ The content to be added can be specified in several ways:
 The --dry-run option can be used to obtain a summary of what is included by any of the above for the next commit by giving the same set of parameters (options and paths).
 
 If you make a commit and then find a mistake immediately after that, you can recover from it with git reset.
-
 */
 package commit

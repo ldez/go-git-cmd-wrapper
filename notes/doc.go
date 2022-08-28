@@ -1,24 +1,24 @@
 /*
 Package notes git-notes - Add or inspect object notes.
 
-SYNOPSIS
+# SYNOPSIS
 
 Reference: https://git-scm.com/docs/git-notes
 
-		git notes [list [<object>]]
-		git notes add [-f] [--allow-empty] [-F <file> | -m <msg> | (-c | -C) <object>] [<object>]
-		git notes copy [-f] ( --stdin | <from-object> [<to-object>] )
-		git notes append [--allow-empty] [-F <file> | -m <msg> | (-c | -C) <object>] [<object>]
-		git notes edit [--allow-empty] [<object>]
-		git notes show [<object>]
-		git notes merge [-v | -q] [-s <strategy> ] <notes-ref>
-		git notes merge --commit [-v | -q]
-		git notes merge --abort [-v | -q]
-		git notes remove [--ignore-missing] [--stdin] [<object>…​]
-		git notes prune [-n] [-v]
-		git notes get-ref
+	git notes [list [<object>]]
+	git notes add [-f] [--allow-empty] [-F <file> | -m <msg> | (-c | -C) <object>] [<object>]
+	git notes copy [-f] ( --stdin | <from-object> [<to-object>] )
+	git notes append [--allow-empty] [-F <file> | -m <msg> | (-c | -C) <object>] [<object>]
+	git notes edit [--allow-empty] [<object>]
+	git notes show [<object>]
+	git notes merge [-v | -q] [-s <strategy> ] <notes-ref>
+	git notes merge --commit [-v | -q]
+	git notes merge --abort [-v | -q]
+	git notes remove [--ignore-missing] [--stdin] [<object>…​]
+	git notes prune [-n] [-v]
+	git notes get-ref
 
-DESCRIPTION
+# DESCRIPTION
 
 Adds, removes, or reads notes attached to objects, without touching the objects themselves.
 
@@ -34,6 +34,5 @@ Notes can also be added to patches prepared with git format-patch by using the -
 To change which notes are shown by git log, see the "notes.displayRef" configuration in git-log[1].
 
 See the "notes.rewrite.<command>" configuration for a way to carry notes across commands that rewrite commits.
-
 */
 package notes

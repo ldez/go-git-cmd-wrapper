@@ -1,16 +1,16 @@
 /*
 Package fetch git-fetch - Download objects and refs from another repository.
 
-SYNOPSIS
+# SYNOPSIS
 
 Reference: https://git-scm.com/docs/git-fetch
 
-		git fetch [<options>] [<repository> [<refspec>...]]
-		git fetch [<options>] <group>
-		git fetch --multiple [<options>] [(<repository> | <group>)...]
-		git fetch --all [<options>]
+	git fetch [<options>] [<repository> [<refspec>...]]
+	git fetch [<options>] <group>
+	git fetch --multiple [<options>] [(<repository> | <group>)...]
+	git fetch --all [<options>]
 
-DESCRIPTION
+# DESCRIPTION
 
 Fetch branches and/or tags (collectively, "refs") from one or more other repositories, along with the objects necessary to complete their histories.
 Remote-tracking branches are updated (see the description of <refspec> below for ways to control this behavior).
@@ -24,6 +24,5 @@ git fetch can fetch from either a single named repository or URL, or from severa
 When no remote is specified, by default the origin remote will be used, unless there’s an upstream branch configured for the current branch.
 
 The names of refs that are fetched, together with the object names they point at, are written to .git/FETCH_HEAD. This information may be used by scripts or other git commands, such as git-pull(1).
-
 */
 package fetch

@@ -1,15 +1,15 @@
 /*
 Package init git-init - Create an empty Git repository or reinitialize an existing one.
 
-SYNOPSIS
+# SYNOPSIS
 
 Reference: https://git-scm.com/docs/git-init
 
-		git init [-q | --quiet] [--bare] [--template=<template_directory>]
-						 [--separate-git-dir <git dir>]
-						 [--shared[=<permissions>]] [directory]
+	git init [-q | --quiet] [--bare] [--template=<template_directory>]
+					 [--separate-git-dir <git dir>]
+					 [--shared[=<permissions>]] [directory]
 
-DESCRIPTION
+# DESCRIPTION
 
 This command creates an empty Git repository - basically a .git directory with subdirectories for objects, refs/heads, refs/tags, and template files. An initial HEAD file that references the HEAD of the master branch is also
 created.
@@ -20,6 +20,5 @@ If the object storage directory is specified via the $GIT_OBJECT_DIRECTORY envir
 
 Running git init in an existing repository is safe. It will not overwrite things that are already there. The primary reason for rerunning git init is to pick up newly added templates (or to move the repository to another
 place if --separate-git-dir is given).
-
 */
 package init

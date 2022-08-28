@@ -1,3 +1,3 @@
 module github.com/ldez/go-git-cmd-wrapper/v2
 
-go 1.16
+go 1.18

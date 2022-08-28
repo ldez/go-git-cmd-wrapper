@@ -1,27 +1,27 @@
 /*
 Package config git-config - Get and set repository or global options.
 
-SYNOPSIS
+# SYNOPSIS
 
 Reference: https://git-scm.com/docs/git-config
 
-		git config [<file-option>] [type] [--show-origin] [-z|--null] name [value [value_regex]]
-		git config [<file-option>] [type] --add name value
-		git config [<file-option>] [type] --replace-all name value [value_regex]
-		git config [<file-option>] [type] [--show-origin] [-z|--null] --get name [value_regex]
-		git config [<file-option>] [type] [--show-origin] [-z|--null] --get-all name [value_regex]
-		git config [<file-option>] [type] [--show-origin] [-z|--null] [--name-only] --get-regexp name_regex [value_regex]
-		git config [<file-option>] [type] [-z|--null] --get-urlmatch name URL
-		git config [<file-option>] --unset name [value_regex]
-		git config [<file-option>] --unset-all name [value_regex]
-		git config [<file-option>] --rename-section old_name new_name
-		git config [<file-option>] --remove-section name
-		git config [<file-option>] [--show-origin] [-z|--null] [--name-only] -l | --list
-		git config [<file-option>] --get-color name [default]
-		git config [<file-option>] --get-colorbool name [stdout-is-tty]
-		git config [<file-option>] -e | --edit
+	git config [<file-option>] [type] [--show-origin] [-z|--null] name [value [value_regex]]
+	git config [<file-option>] [type] --add name value
+	git config [<file-option>] [type] --replace-all name value [value_regex]
+	git config [<file-option>] [type] [--show-origin] [-z|--null] --get name [value_regex]
+	git config [<file-option>] [type] [--show-origin] [-z|--null] --get-all name [value_regex]
+	git config [<file-option>] [type] [--show-origin] [-z|--null] [--name-only] --get-regexp name_regex [value_regex]
+	git config [<file-option>] [type] [-z|--null] --get-urlmatch name URL
+	git config [<file-option>] --unset name [value_regex]
+	git config [<file-option>] --unset-all name [value_regex]
+	git config [<file-option>] --rename-section old_name new_name
+	git config [<file-option>] --remove-section name
+	git config [<file-option>] [--show-origin] [-z|--null] [--name-only] -l | --list
+	git config [<file-option>] --get-color name [default]
+	git config [<file-option>] --get-colorbool name [stdout-is-tty]
+	git config [<file-option>] -e | --edit
 
-DESCRIPTION
+# DESCRIPTION
 
 You can query/set/replace/unset options with this command. The name is actually the section and the key separated by a dot, and the value will be escaped.
 
@@ -48,6 +48,5 @@ This command will fail with non-zero status upon error. Some exit codes are:
 - you try to use an invalid regexp (ret=6).
 
 On success, the command returns the exit code 0.
-
 */
 package config

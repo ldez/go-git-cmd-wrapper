@@ -1,16 +1,16 @@
 /*
 Package add git-add - Add file contents to the index.
 
-SYNOPSIS
+# SYNOPSIS
 
 Reference: https://git-scm.com/docs/git-add
 
-		git add [--verbose | -v] [--dry-run | -n] [--force | -f] [--interactive | -i] [--patch | -p]
-				[--edit | -e] [--[no-]all | --[no-]ignore-removal | [--update | -u]]
-				[--intent-to-add | -N] [--refresh] [--ignore-errors] [--ignore-missing]
-				[--chmod=(+|-)x] [--] [<pathspec>...]
+	git add [--verbose | -v] [--dry-run | -n] [--force | -f] [--interactive | -i] [--patch | -p]
+			[--edit | -e] [--[no-]all | --[no-]ignore-removal | [--update | -u]]
+			[--intent-to-add | -N] [--refresh] [--ignore-errors] [--ignore-missing]
+			[--chmod=(+|-)x] [--] [<pathspec>...]
 
-DESCRIPTION
+# DESCRIPTION
 
 This command updates the index using the current content found in the working tree, to prepare the content staged for the next commit. It typically adds the current content of existing paths as a whole, but with some options it can also be used to add content with only part of the changes made to the working tree files applied, or remove paths that do not exist in the working tree anymore.
 
@@ -23,6 +23,5 @@ The git status command can be used to obtain a summary of which files have chang
 The git add command will not add ignored files by default. If any ignored files were explicitly specified on the command line, git add will fail with a list of ignored files. Ignored files reached by directory recursion or filename globbing performed by Git (quote your globs before the shell) will be silently ignored. The git add command can be used to add ignored files with the -f (force) option.
 
 Please see git-commit(1) for alternative ways to add content to a commit.
-
 */
 package add

@@ -19,7 +19,9 @@ func Keep(g *types.Cmd) {
 
 // Merge Resets the index and updates the files in the working tree that are different between <commit> and HEAD, but keeps those which are different between the index and working tree (i.e. which have changes which have not been added).
 // If a file that is different between <commit> and the index has unstaged changes, reset is aborted.
-//  In other words, --merge does something like a git read-tree -u -m <commit>, but carries forward unmerged index entries.
+//
+//	In other words, --merge does something like a git read-tree -u -m <commit>, but carries forward unmerged index entries.
+//
 // --merge
 func Merge(g *types.Cmd) {
 	g.AddOptions("--merge")

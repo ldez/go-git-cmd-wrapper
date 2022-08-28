@@ -17,15 +17,15 @@ func List(object string) types.Option {
 // Add notes for a given object (defaults to `HEAD`).
 // usage: git notes add [<options>] [<object>]
 //
-//     -m, --message <message>
-//                           note contents as a string
-//     -F, --file <file>     note contents in a file
-//     -c, --reedit-message <object>
-//                           reuse and edit specified note object
-//     -C, --reuse-message <object>
-//                           reuse specified note object
-//     --allow-empty         allow storing empty note
-//     -f, --force           replace existing notes
+//	-m, --message <message>
+//	                      note contents as a string
+//	-F, --file <file>     note contents in a file
+//	-c, --reedit-message <object>
+//	                      reuse and edit specified note object
+//	-C, --reuse-message <object>
+//	                      reuse specified note object
+//	--allow-empty         allow storing empty note
+//	-f, --force           replace existing notes
 func Add(object string, opts ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("add")
@@ -42,12 +42,13 @@ func Add(object string, opts ...types.Option) types.Option {
 
 // Copy the notes for the first object onto the second object (defaults to `HEAD`).
 // usage: git notes copy [<options>] <from-object> <to-object>
-//    or: git notes copy --stdin [<from-object> <to-object>]...
 //
-//     -f, --force           replace existing notes
-//     --stdin               read objects from stdin
-//     --for-rewrite <command>
-//                           load rewriting config for <command> (implies --stdin)
+//	or: git notes copy --stdin [<from-object> <to-object>]...
+//
+//	 -f, --force           replace existing notes
+//	 --stdin               read objects from stdin
+//	 --for-rewrite <command>
+//	                       load rewriting config for <command> (implies --stdin)
 func Copy(opts ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("copy")
@@ -61,14 +62,14 @@ func Copy(opts ...types.Option) types.Option {
 // Append to the notes of an existing object (defaults to `HEAD`). Creates a new notes object if needed.
 // usage: git notes append [<options>] [<object>]
 //
-//     -m, --message <message>
-//                           note contents as a string
-//     -F, --file <file>     note contents in a file
-//     -c, --reedit-message <object>
-//                           reuse and edit specified note object
-//     -C, --reuse-message <object>
-//                           reuse specified note object
-//     --allow-empty         allow storing empty note
+//	-m, --message <message>
+//	                      note contents as a string
+//	-F, --file <file>     note contents in a file
+//	-c, --reedit-message <object>
+//	                      reuse and edit specified note object
+//	-C, --reuse-message <object>
+//	                      reuse specified note object
+//	--allow-empty         allow storing empty note
 func Append(object string, opts ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("append")
@@ -86,14 +87,14 @@ func Append(object string, opts ...types.Option) types.Option {
 // Edit the notes for a given object (defaults to `HEAD`).
 // usage: git notes edit [<object>]
 //
-//     -m, --message <message>
-//                           note contents as a string
-//     -F, --file <file>     note contents in a file
-//     -c, --reedit-message <object>
-//                           reuse and edit specified note object
-//     -C, --reuse-message <object>
-//                           reuse specified note object
-//     --allow-empty         allow storing empty note
+//	-m, --message <message>
+//	                      note contents as a string
+//	-F, --file <file>     note contents in a file
+//	-c, --reedit-message <object>
+//	                      reuse and edit specified note object
+//	-C, --reuse-message <object>
+//	                      reuse specified note object
+//	--allow-empty         allow storing empty note
 func Edit(object string, opts ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("edit")
@@ -122,22 +123,27 @@ func Show(object string) types.Option {
 
 // Merge the given notes ref into the current notes ref.
 // usage: git notes merge [<options>] <notes-ref>
-//    or: git notes merge --commit [<options>]
-//    or: git notes merge --abort [<options>]
+//
+//	or: git notes merge --commit [<options>]
+//	or: git notes merge --abort [<options>]
 //
 // General options
-//     -v, --verbose         be more verbose
-//     -q, --quiet           be more quiet
+//
+//	-v, --verbose         be more verbose
+//	-q, --quiet           be more quiet
 //
 // Merge options
-//     -s, --strategy <strategy>
-//                           resolve notes conflicts using the given strategy (manual/ours/theirs/union/cat_sort_uniq)
+//
+//	-s, --strategy <strategy>
+//	                      resolve notes conflicts using the given strategy (manual/ours/theirs/union/cat_sort_uniq)
 //
 // Committing unmerged notes
-//     --commit              finalize notes merge by committing unmerged notes
+//
+//	--commit              finalize notes merge by committing unmerged notes
 //
 // Aborting notes merge resolution
-//     --abort               abort notes merge
+//
+//	--abort               abort notes merge
 func Merge(opts ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("merge")
@@ -151,8 +157,8 @@ func Merge(opts ...types.Option) types.Option {
 // Remove the notes for given objects (defaults to `HEAD`).
 // usage: git notes remove [<object>]
 //
-//     --ignore-missing      attempt to remove non-existent note is not an error
-//     --stdin               read object names from the standard input
+//	--ignore-missing      attempt to remove non-existent note is not an error
+//	--stdin               read object names from the standard input
 func Remove(object string, opts ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("remove")
@@ -170,8 +176,8 @@ func Remove(object string, opts ...types.Option) types.Option {
 // Prune Remove all notes for non-existing/unreachable objects.
 // usage: git notes prune [<options>]
 //
-//     -n, --dry-run         do not remove, show only
-//     -v, --verbose         report pruned notes
+//	-n, --dry-run         do not remove, show only
+//	-v, --verbose         report pruned notes
 func Prune(opts ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("prune")
