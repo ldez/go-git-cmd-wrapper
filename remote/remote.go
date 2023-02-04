@@ -168,3 +168,8 @@ func Mirror(option string) func(*types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--mirror=%s", option))
 	}
 }
+
+// Update git remote update ... (for updating a git mirror)
+func Update(g *types.Cmd) {
+	g.AddOptions("update")
+}
