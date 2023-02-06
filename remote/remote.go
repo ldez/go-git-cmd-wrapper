@@ -91,6 +91,16 @@ func Prune(names ...string) func(*types.Cmd) {
 	}
 }
 
+// Update Fetch updates for remotes or remote groups in the repository as defined by remotes.<group>.
+func Update(remotes ...string) func(*types.Cmd) {
+	return func(g *types.Cmd) {
+		g.AddOptions("update")
+		for _, name := range remotes {
+			g.AddOptions(name)
+		}
+	}
+}
+
 // Verbose [-v | --verbose]
 func Verbose(g *types.Cmd) {
 	g.AddOptions("--verbose")
