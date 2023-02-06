@@ -4,7 +4,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/v2/types"
 )
 
-// Upstream Upstream branch to compare against. May be any valid commit, not just an existing branch name.
+// Upstream branch to compare against. It may be any valid commit, not just an existing branch name.
 // Defaults to the configured upstream for the current branch.
 func Upstream(name string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
