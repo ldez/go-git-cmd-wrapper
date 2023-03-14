@@ -5,13 +5,16 @@ Package branch git-branch - List, create, or delete branches.
 
 Reference: https://git-scm.com/docs/git-branch
 
-	git branch [--color[=<when>] | --no-color] [-r | -a]
-		[--list] [-v [--abbrev=<length> | --no-abbrev]]
+	git branch [--color[=<when>] | --no-color] [--show-current]
+		[-v [--abbrev=<n> | --no-abbrev]]
 		[--column[=<options>] | --no-column] [--sort=<key>]
-		[(--merged | --no-merged) [<commit>]]
-		[--contains [<commit]] [--no-contains [<commit>]]
-		[--points-at <object>] [--format=<format>] [<pattern>…​]
-	git branch [--track | --no-track] [-l] [-f] <branchname> [<start-point>]
+		[--merged [<commit>]] [--no-merged [<commit>]]
+		[--contains [<commit>]] [--no-contains [<commit>]]
+		[--points-at <object>] [--format=<format>]
+		[(-r | --remotes) | (-a | --all)]
+		[--list] [<pattern>...]
+	git branch [--track[=(direct|inherit)] | --no-track] [-f]
+		[--recurse-submodules] <branchname> [<start-point>]
 	git branch (--set-upstream-to=<upstream> | -u <upstream>) [<branchname>]
 	git branch --unset-upstream [<branchname>]
 	git branch (-m | -M) [<oldbranch>] <newbranch>

@@ -18,6 +18,12 @@ func Quiet(g *types.Cmd) {
 	g.AddOptions("--quiet")
 }
 
+// ShowCurrent print the name of the current branch. In detached HEAD state, nothing is printed.
+// --show-current
+func ShowCurrent(g *types.Cmd) {
+	g.AddOptions("--show-current")
+}
+
 // Track set up tracking mode (see git-pull(1))
 // -t, --track
 func Track(g *types.Cmd) {
