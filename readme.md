@@ -1,6 +1,6 @@
 # Go Git Cmd Wrapper
 
-[![Build Status](https://github.com/ldez/go-git-cmd-wrapper/workflows/Main/badge.svg?branch=master)](https://github.com/ldez/go-git-cmd-wrapper/actions)
+[![Build Status](https://github.com/ldez/go-git-cmd-wrapper/workflows/Main/badge.svg?branch=main)](https://github.com/ldez/go-git-cmd-wrapper/actions)
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/ldez/go-git-cmd-wrapper)](https://pkg.go.dev/github.com/ldez/go-git-cmd-wrapper/v2)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ldez/go-git-cmd-wrapper)](https://goreportcard.com/report/github.com/ldez/go-git-cmd-wrapper)
 
