@@ -14,6 +14,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/v2/fetch"
 	"github.com/ldez/go-git-cmd-wrapper/v2/git"
 	ginit "github.com/ldez/go-git-cmd-wrapper/v2/init"
+	"github.com/ldez/go-git-cmd-wrapper/v2/lsfiles"
 	"github.com/ldez/go-git-cmd-wrapper/v2/merge"
 	"github.com/ldez/go-git-cmd-wrapper/v2/notes"
 	"github.com/ldez/go-git-cmd-wrapper/v2/pull"
@@ -278,6 +279,20 @@ func ExampleStatusWithContext() {
 
 	fmt.Println(out)
 	// Output: git status --short --branch
+}
+
+func ExampleLsFiles() {
+	out, _ := git.LsFiles(lsfiles.Z, lsfiles.ExcludeStandard, lsfiles.Others, lsfiles.Cached, git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git ls-files -z --exclude-standard --others --cached
+}
+
+func ExampleLsFilesWithContext() {
+	out, _ := git.LsFilesWithContext(context.Background(), lsfiles.Z, lsfiles.ExcludeStandard, lsfiles.Others, lsfiles.Cached, git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git ls-files -z --exclude-standard --others --cached
 }
 
 func ExampleNotes_list() {

@@ -198,6 +198,16 @@ func NotesWithContext(ctx context.Context, subCommand ...types.Option) (string, 
 	return command(ctx, "notes", subCommand...)
 }
 
+// LsFiles https://git-scm.com/docs/git-ls-files
+func LsFiles(subCommand ...types.Option) (string, error) {
+	return command(context.Background(), "ls-files", subCommand...)
+}
+
+// LsFilesWithContext https://git-scm.com/docs/git-ls-files
+func LsFilesWithContext(ctx context.Context, subCommand ...types.Option) (string, error) {
+	return command(ctx, "ls-files", subCommand...)
+}
+
 // Raw use to execute arbitrary git commands.
 func Raw(cmd string, options ...types.Option) (string, error) {
 	return command(context.Background(), cmd, options...)

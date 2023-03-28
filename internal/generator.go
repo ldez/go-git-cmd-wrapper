@@ -51,7 +51,7 @@ func (r byMethodName) Swap(i, j int)      { r[i], r[j] = r[j], r[i] }
 func (r byMethodName) Less(i, j int) bool { return r[i].Method < r[j].Method }
 
 const (
-	fileTemplate = `package {{ .Name }}
+	fileTemplate = `package {{ Normalize .Name }}
 
 // CODE GENERATED AUTOMATICALLY
 // THIS FILE MUST NOT BE EDITED BY HAND
@@ -178,7 +178,7 @@ func main() {
 			log.Fatal(err)
 		}
 
-		genFilePath := fmt.Sprintf("../%[1]s/%[1]s_gen.go", jsonModel.CommandName)
+		genFilePath := fmt.Sprintf("../%[1]s/%[1]s_gen.go", strings.ReplaceAll(jsonModel.CommandName, "-", ""))
 
 		fmt.Println(genFilePath)
 
@@ -196,7 +196,11 @@ func main() {
 }
 
 func generateFileContent(model genCmdModel) (string, error) {
-	base := template.New(model.Name)
+	base := template.New(model.Name).Funcs(map[string]any{
+		"Normalize": func(name string) string {
+			return strings.ReplaceAll(name, "-", "")
+		},
+	})
 
 	_, err := base.New("templateCmdSimple").Parse(templateCmdSimple)
 	if err != nil {
