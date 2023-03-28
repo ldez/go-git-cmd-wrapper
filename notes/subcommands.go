@@ -181,12 +181,16 @@ func Remove(object string, opts ...types.Option) types.Option {
 func Prune(opts ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("prune")
+
+		for _, opt := range opts {
+			opt(g)
+		}
 	}
 }
 
 // GetRef Print the current notes ref. This provides an easy way to retrieve the current notes ref (e.g. from scripts).
 // usage: git notes get-ref
-func GetRef(opts ...types.Option) types.Option {
+func GetRef(_ ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("get-ref")
 	}

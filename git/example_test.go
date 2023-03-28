@@ -362,7 +362,7 @@ func ExampleNotes_prune() {
 	out, _ := git.Notes(notes.Prune(notes.Verbose), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
-	// Output: git notes prune
+	// Output: git notes prune --verbose
 }
 
 func ExampleNotes_getRef() {
@@ -439,7 +439,7 @@ func ExampleNotesWithContext_prune() {
 	out, _ := git.NotesWithContext(context.Background(), notes.Prune(notes.Verbose), git.CmdExecutor(cmdExecutorMock))
 
 	fmt.Println(out)
-	// Output: git notes prune
+	// Output: git notes prune --verbose
 }
 
 func ExampleNotesWithContext_getRef() {
