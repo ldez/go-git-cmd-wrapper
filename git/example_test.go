@@ -284,12 +284,16 @@ func ExampleStatusWithContext() {
 func ExampleLsFiles() {
 	out, _ := git.LsFiles(lsfiles.Z, lsfiles.ExcludeStandard, lsfiles.Others, lsfiles.Cached, git.CmdExecutor(cmdExecutorMock))
 
+	// Notes: to parse the output you can use `fmt.Println(strings.Split(out, "\x00"))`
+
 	fmt.Println(out)
 	// Output: git ls-files -z --exclude-standard --others --cached
 }
 
 func ExampleLsFilesWithContext() {
 	out, _ := git.LsFilesWithContext(context.Background(), lsfiles.Z, lsfiles.ExcludeStandard, lsfiles.Others, lsfiles.Cached, git.CmdExecutor(cmdExecutorMock))
+
+	// Notes: to parse the output you can use `fmt.Println(strings.Split(out, "\x00"))`
 
 	fmt.Println(out)
 	// Output: git ls-files -z --exclude-standard --others --cached
