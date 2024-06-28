@@ -208,6 +208,16 @@ func LsFilesWithContext(ctx context.Context, subCommand ...types.Option) (string
 	return command(ctx, "ls-files", subCommand...)
 }
 
+// Stash https://git-scm.com/docs/git-stash
+func Stash(options ...types.Option) (string, error) {
+	return command(context.Background(), "stash", options...)
+}
+
+// StashWithContext https://git-scm.com/docs/git-stash
+func StashWithContext(ctx context.Context, options ...types.Option) (string, error) {
+	return command(ctx, "stash", options...)
+}
+
 // Raw use to execute arbitrary git commands.
 func Raw(cmd string, options ...types.Option) (string, error) {
 	return command(context.Background(), cmd, options...)

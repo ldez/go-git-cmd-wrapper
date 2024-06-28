@@ -2216,6 +2216,72 @@
     ]
   },
   {
+    "command_name": "stash",
+    "enabled": true,
+    "options": [
+      {
+        "argument": "--all",
+        "arguments": "-a, --all",
+        "description": "This option is only valid for push and save commands.\nAll ignored and untracked files are also stashed and then cleaned up with git clean."
+      },
+      {
+        "argument": "--include-untracked",
+        "arguments": "-u, --include-untracked",
+        "description": "When used with the push and save commands, all untracked files are also stashed and then cleaned up with git clean.\nWhen used with the show command, show the untracked files in the stash entry as part of the diff."
+      },
+      {
+        "argument": "--no-include-untracked",
+        "arguments": "--no-include-untracked",
+        "description": "Opposite of --include-untracked."
+      },
+      {
+        "argument": "--only-untracked",
+        "arguments": "--only-untracked",
+        "description": "This option is only valid for the show command.\nShow only the untracked files in the stash entry as part of the diff."
+      },
+      {
+        "argument": "--index",
+        "arguments": "--index",
+        "description": "This option is only valid for pop and apply commands.\nTries to reinstate not only the working tree’s changes, but also the index’s ones.\nHowever, this can fail, when you have conflicts (which are stored in the index, where you therefore can no longer apply the changes as they were originally)."
+      },
+      {
+        "argument": "--keep-index",
+        "arguments": "-k, --keep-index",
+        "description": "This option is only valid for push and save commands.\nAll changes already added to the index are left intact."
+      },
+      {
+        "argument": "--no-keep-index",
+        "arguments": "--no-keep-index",
+        "description": "Opposite of --keep-index."
+      },
+      {
+        "argument": "--patch",
+        "arguments": "-p, --patch",
+        "description": "This option is only valid for push and save commands.\nInteractively select hunks from the diff between HEAD and the working tree to be stashed.\nThe stash entry is constructed such that its index state is the same as the index state of your repository, and its worktree contains only the changes you selected interactively.\nThe selected changes are then rolled back from your worktree.\nSee the “Interactive Mode” section of git-add(1) to learn how to operate the --patch mode.\nThe --patch option implies --keep-index.\nYou can use --no-keep-index to override this."
+      },
+      {
+        "argument": "--staged",
+        "arguments": "-S, --staged",
+        "description": "This option is only valid for push and save commands.\nStash only the changes that are currently staged.\nThis is similar to basic git commit except the state is committed to the stash instead of current branch.\nThe --patch option has priority over this one."
+      },
+      {
+        "argument": "--pathspec-from-file=<file>",
+        "arguments": "--pathspec-from-file=<file>",
+        "description": "This option is only valid for push command.\nPathspec is passed in <file> instead of commandline args.\nIf <file> is exactly - then standard input is used. Pathspec elements are separated by LF or CR/LF.\nPathspec elements can be quoted as explained for the configuration variable core.quotePath (see git-config(1)).\nSee also --pathspec-file-nul and global --literal-pathspecs."
+      },
+      {
+        "argument": "--pathspec-file-nul",
+        "arguments": "--pathspec-file-nul",
+        "description": "This option is only valid for push command.\nOnly meaningful with --pathspec-from-file. Pathspec elements are separated with NUL character and all other characters are taken literally (including newlines and quotes)."
+      },
+      {
+        "argument": "--quiet",
+        "arguments": "-q, --quiet",
+        "description": "This option is only valid for apply, drop, pop, push, save, store commands.\nQuiet, suppress feedback messages."
+      }
+    ]
+  },
+  {
     "command_name": "",
     "enabled": false,
     "options": [

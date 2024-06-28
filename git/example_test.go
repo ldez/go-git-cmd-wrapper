@@ -23,6 +23,7 @@ import (
 	"github.com/ldez/go-git-cmd-wrapper/v2/remote"
 	"github.com/ldez/go-git-cmd-wrapper/v2/reset"
 	"github.com/ldez/go-git-cmd-wrapper/v2/revparse"
+	"github.com/ldez/go-git-cmd-wrapper/v2/stash"
 	"github.com/ldez/go-git-cmd-wrapper/v2/status"
 	"github.com/ldez/go-git-cmd-wrapper/v2/tag"
 	"github.com/ldez/go-git-cmd-wrapper/v2/types"
@@ -451,6 +452,160 @@ func ExampleNotesWithContext_getRef() {
 
 	fmt.Println(out)
 	// Output: git notes get-ref
+}
+
+func ExampleStash_push() {
+	out, _ := git.Stash(stash.Push("foo", stash.All), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash push --all foo
+}
+
+func ExampleStash_save() {
+	out, _ := git.Stash(stash.Save("foo", stash.Patch), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash save --patch foo
+}
+
+func ExampleStash_list() {
+	out, _ := git.Stash(stash.List(), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash list
+}
+
+func ExampleStash_show() {
+	out, _ := git.Stash(stash.Show("stash@{1}", stash.IncludeUntracked), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash show --include-untracked stash@{1}
+}
+
+func ExampleStash_pop() {
+	out, _ := git.Stash(stash.Pop("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash pop --quiet stash@{1}
+}
+
+func ExampleStash_apply() {
+	out, _ := git.Stash(stash.Apply("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash apply --quiet stash@{1}
+}
+
+func ExampleStash_branch() {
+	out, _ := git.Stash(stash.Branch("foo", "stash@{1}"), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash branch foo stash@{1}
+}
+
+func ExampleStash_clear() {
+	out, _ := git.Stash(stash.Clear(), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash clear
+}
+
+func ExampleStash_drop() {
+	out, _ := git.Stash(stash.Drop("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash drop --quiet stash@{1}
+}
+
+func ExampleStash_create() {
+	out, _ := git.Stash(stash.Create(), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash create
+}
+
+func ExampleStash_store() {
+	out, _ := git.Stash(stash.Store(), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash store
+}
+
+func ExampleStashWithContext_push() {
+	out, _ := git.StashWithContext(context.Background(), stash.Push("foo", stash.All), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash push --all foo
+}
+
+func ExampleStashWithContext_save() {
+	out, _ := git.StashWithContext(context.Background(), stash.Save("foo", stash.Patch), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash save --patch foo
+}
+
+func ExampleStashWithContext_list() {
+	out, _ := git.StashWithContext(context.Background(), stash.List(), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash list
+}
+
+func ExampleStashWithContext_show() {
+	out, _ := git.StashWithContext(context.Background(), stash.Show("stash@{1}", stash.IncludeUntracked), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash show --include-untracked stash@{1}
+}
+
+func ExampleStashWithContext_pop() {
+	out, _ := git.StashWithContext(context.Background(), stash.Pop("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash pop --quiet stash@{1}
+}
+
+func ExampleStashWithContext_apply() {
+	out, _ := git.StashWithContext(context.Background(), stash.Apply("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash apply --quiet stash@{1}
+}
+
+func ExampleStashWithContext_branch() {
+	out, _ := git.StashWithContext(context.Background(), stash.Branch("foo", "stash@{1}"), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash branch foo stash@{1}
+}
+
+func ExampleStashWithContext_clear() {
+	out, _ := git.StashWithContext(context.Background(), stash.Clear(), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash clear
+}
+
+func ExampleStashWithContext_drop() {
+	out, _ := git.StashWithContext(context.Background(), stash.Drop("stash@{1}", stash.Quiet), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash drop --quiet stash@{1}
+}
+
+func ExampleStashWithContext_create() {
+	out, _ := git.StashWithContext(context.Background(), stash.Create(), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash create
+}
+
+func ExampleStashWithContext_store() {
+	out, _ := git.StashWithContext(context.Background(), stash.Store(), git.CmdExecutor(cmdExecutorMock))
+
+	fmt.Println(out)
+	// Output: git stash store
 }
 
 func ExampleRaw() {
