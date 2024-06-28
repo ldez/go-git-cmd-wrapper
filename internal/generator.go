@@ -157,13 +157,13 @@ func main() {
 
 	file, err := os.ReadFile(filePath)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("read JSON file: %v", err)
 	}
 
 	var jsonModels []jsonModel
 	err = json.Unmarshal(file, &jsonModels)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("unmarshal file content: %v", err)
 	}
 
 	for _, jsonModel := range jsonModels {
@@ -175,7 +175,7 @@ func main() {
 
 		data, err := generateFileContent(cmdModel)
 		if err != nil {
-			log.Fatal(err)
+			log.Fatalf("generate content: %v", err)
 		}
 
 		genFilePath := fmt.Sprintf("../%[1]s/%[1]s_gen.go", strings.ReplaceAll(jsonModel.CommandName, "-", ""))
@@ -185,12 +185,12 @@ func main() {
 		// gofmt
 		source, err := format.Source([]byte(data))
 		if err != nil {
-			log.Fatal(err)
+			log.Fatalf("format source: %v", err)
 		}
 
 		err = os.WriteFile(genFilePath, source, 0o644)
 		if err != nil {
-			log.Fatal(err)
+			log.Fatalf("write file: %v", err)
 		}
 	}
 }
