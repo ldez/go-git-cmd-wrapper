@@ -114,3 +114,8 @@ func Store() func(*types.Cmd) {
 		g.AddOptions("store")
 	}
 }
+
+// HyphenHyphen add `--`
+func HyphenHyphen(g *types.Cmd) {
+	g.AddOptions("--")
+}
