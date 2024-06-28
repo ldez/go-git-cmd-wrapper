@@ -19,7 +19,7 @@ Reference: https://git-scm.com/docs/git-branch
 	git branch --unset-upstream [<branchname>]
 	git branch (-m | -M) [<oldbranch>] <newbranch>
 	git branch (-c | -C) [<oldbranch>] <newbranch>
-	git branch (-d | -D) [-r] <branchname>…​
+	git branch (-d | -D) [-r] <branchname>…
 	git branch --edit-description [<branchname>]
 */
 package branch

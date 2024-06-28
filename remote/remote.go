@@ -40,7 +40,7 @@ func SetHead(name string) func(*types.Cmd) {
 	}
 }
 
-// SetBranches git remote set-branches [--add] <name> <branch>…​
+// SetBranches git remote set-branches [--add] <name> <branch>…
 func SetBranches(name, branch string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("set-branches")
@@ -71,7 +71,7 @@ func SetURL(name, newurl, oldurl string) func(*types.Cmd) {
 	}
 }
 
-// Show git remote [-v | --verbose] show [-n] <name>…​
+// Show git remote [-v | --verbose] show [-n] <name>…
 func Show(names ...string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("show")
@@ -81,7 +81,7 @@ func Show(names ...string) func(*types.Cmd) {
 	}
 }
 
-// Prune git remote prune [-n | --dry-run] <name>…​
+// Prune git remote prune [-n | --dry-run] <name>…
 func Prune(names ...string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("prune")

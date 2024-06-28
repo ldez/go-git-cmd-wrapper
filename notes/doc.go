@@ -14,7 +14,7 @@ Reference: https://git-scm.com/docs/git-notes
 	git notes merge [-v | -q] [-s <strategy> ] <notes-ref>
 	git notes merge --commit [-v | -q]
 	git notes merge --abort [-v | -q]
-	git notes remove [--ignore-missing] [--stdin] [<object>…​]
+	git notes remove [--ignore-missing] [--stdin] [<object>…]
 	git notes prune [-n] [-v]
 	git notes get-ref
 
