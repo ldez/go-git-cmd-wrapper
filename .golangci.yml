@@ -1,6 +1,31 @@
 run:
   timeout: 2m
 
+linters:
+  enable-all: true
+  disable:
+    - gomnd # deprecated
+    - execinquery # deprecated
+    - sqlclosecheck # not relevant (SQL)
+    - rowserrcheck # not relevant (SQL)
+    - cyclop # duplicate of gocyclo
+    - lll
+    - dupl
+    - prealloc
+    - wsl
+    - nlreturn
+    - stylecheck
+    - testpackage
+    - paralleltest
+    - tparallel
+    - wrapcheck
+    - exhaustive
+    - exhaustruct
+    - makezero
+    - godot
+    - varnamelen
+    - nilnil
+
 linters-settings:
   govet:
     enable-all: true
@@ -11,10 +36,9 @@ linters-settings:
   goconst:
     min-len: 5
     min-occurrences: 3
-  gomnd:
-    settings:
-      mnd:
-        ignored-functions: os.*
+  mnd:
+    ignored-functions:
+      - os.*
   misspell:
     locale: US
     ignore-words:
@@ -61,42 +85,11 @@ linters-settings:
   gosec:
     excludes:
       - G204
-
-linters:
-  enable-all: true
-  disable:
-    - scopelint # deprecated
-    - interfacer # deprecated
-    - maligned # deprecated
-    - golint # deprecated
-    - exhaustivestruct # deprecated
-    - scopelint # deprecated
-    - varcheck # deprecated
-    - structcheck # deprecated
-    - nosnakecase # deprecated
-    - deadcode # deprecated
-    - ifshort # deprecated
-    - sqlclosecheck # not relevant (SQL)
-    - rowserrcheck # not relevant (SQL)
-    - cyclop # duplicate of gocyclo
-    - lll
-    - dupl
-    - prealloc
-    - scopelint
-    - wsl
-    - nlreturn
-    - stylecheck
-    - testpackage
-    - paralleltest
-    - tparallel
-    - wrapcheck
-    - exhaustive
-    - exhaustruct
-    - makezero
-    - ifshort
-    - godot
-    - varnamelen
-    - nilnil
+  perfsprint:
+    err-error: true
+    errorf: true
+    sprintf1: true
+    strconcat: false
 
 issues:
   exclude-use-default: false
@@ -122,3 +115,6 @@ issues:
       text: 'G306:'
     - path: internal/generator.go
       text: 'mnd: Magic number: 0644, in <argument> detected'
+
+output:
+  show-stats: true
