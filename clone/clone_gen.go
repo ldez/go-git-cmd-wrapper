@@ -84,6 +84,12 @@ func NoSingleBranch(g *types.Cmd) {
 	g.AddOptions("--no-single-branch")
 }
 
+// NoTags Don’t clone any tags, and set remote.<remote>.tagOpt=--no-tags in the config, ensuring that future git pull and git fetch operations won’t follow any tags. Subsequent explicit tag fetches will still work,
+// --no-tags
+func NoTags(g *types.Cmd) {
+	g.AddOptions("--no-tags")
+}
+
 // Origin Instead of using the remote name origin to keep track of the upstream repository, use <name>.
 // --origin <name>, -o <name>
 func Origin(name string) func(*types.Cmd) {

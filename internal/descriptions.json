@@ -923,6 +923,11 @@
         "argument": "--jobs <n>",
         "arguments": "-j <n>, --jobs <n>",
         "description": "The number of submodules fetched at the same time. Defaults to the submodule.fetchJobs option."
+      },
+      {
+        "argument": "--no-tags",
+        "arguments": "--no-tags",
+        "description": "Don’t clone any tags, and set remote.<remote>.tagOpt=--no-tags in the config, ensuring that future git pull and git fetch operations won’t follow any tags. Subsequent explicit tag fetches will still work,"
       }
     ]
   },
