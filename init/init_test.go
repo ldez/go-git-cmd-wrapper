@@ -10,7 +10,7 @@ import (
 )
 
 func TestInit(t *testing.T) {
-	// don't use `t.TempDir()` because of a bug with Windows on the CI
+	//nolint:usetesting // Don't use `t.TempDir()` because of a bug with Windows on the CI
 	dir, err := os.MkdirTemp("", "go-git-cmd-wrapper")
 	if err != nil {
 		t.Fatal(err)
