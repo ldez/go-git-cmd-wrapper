@@ -9,15 +9,24 @@ import (
 )
 
 type logger interface {
-	Fatal(args ...interface{})
-	Fatalf(format string, args ...interface{})
-	Print(args ...interface{})
-	Println(args ...interface{})
-	Printf(format string, args ...interface{})
+	Fatal(args ...any)
+	Fatalf(format string, args ...any)
+	Print(args ...any)
+	Println(args ...any)
+	Printf(format string, args ...any)
 }
 
 // Executor The Git command call function.
 type Executor func(ctx context.Context, name string, debug bool, args ...string) (string, error)
+
+// Cmd Command.
+type Cmd struct {
+	Debug    bool
+	Base     string
+	Options  []string
+	Logger   logger
+	Executor Executor
+}
 
 // NewCmd Creates a new Cmd.
 func NewCmd(name string) *Cmd {
@@ -30,15 +39,6 @@ func NewCmd(name string) *Cmd {
 	g.Executor = defaultExecutor(g)
 
 	return g
-}
-
-// Cmd Command.
-type Cmd struct {
-	Debug    bool
-	Base     string
-	Options  []string
-	Logger   logger
-	Executor Executor
 }
 
 // Option Command option.
