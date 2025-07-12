@@ -9,7 +9,7 @@ import (
 // <branch>
 // or
 // <new_branch> Name for the new branch.
-func Branch(name string) func(*types.Cmd) {
+func Branch(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
@@ -18,14 +18,14 @@ func Branch(name string) func(*types.Cmd) {
 // StartPoint The name of a commit at which to start the new branch; see git-branch(1) for details.
 // Defaults to HEAD.
 // <start_point>
-func StartPoint(name string) func(*types.Cmd) {
+func StartPoint(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
 }
 
 // Path <paths>...
-func Path(values ...string) func(*types.Cmd) {
+func Path(values ...string) types.Option {
 	return func(g *types.Cmd) {
 		for _, value := range values {
 			g.AddOptions(value)
@@ -36,7 +36,7 @@ func Path(values ...string) func(*types.Cmd) {
 // TreeIsh Tree to checkout from (when paths are given).
 // If not specified, the index will be used.
 // <tree-ish>
-func TreeIsh(value string) func(*types.Cmd) {
+func TreeIsh(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(value)
 	}

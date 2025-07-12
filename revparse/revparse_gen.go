@@ -11,7 +11,7 @@ import (
 // AbbrevRef A non-ambiguous short name of the objects name.
 // The option core.warnAmbiguousRefs is used to select the strict abbreviation mode.
 // --abbrev-ref[=(strict|loose)]
-func AbbrevRef(value string) func(*types.Cmd) {
+func AbbrevRef(value string) types.Option {
 	return func(g *types.Cmd) {
 		if value == "" {
 			g.AddOptions("--abbrev-ref")
@@ -29,7 +29,7 @@ func AbsoluteGitDir(g *types.Cmd) {
 
 // After Parse the date string, and output the corresponding --max-age= parameter for git rev-list.
 // --since=datestring, --after=datestring
-func After(datestring string) func(*types.Cmd) {
+func After(datestring string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("-after=%s", datestring))
 	}
@@ -43,7 +43,7 @@ func All(g *types.Cmd) {
 
 // Before Parse the date string, and output the corresponding --min-age= parameter for git rev-list.
 // --until=datestring, --before=datestring
-func Before(datestring string) func(*types.Cmd) {
+func Before(datestring string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--before=%s", datestring))
 	}
@@ -53,7 +53,7 @@ func Before(datestring string) func(*types.Cmd) {
 // If a pattern is given, only refs matching the given shell glob are shown.
 // If the pattern does not contain a globbing character (?, *, or [), it is turned into a prefix match by appending /*.
 // --branches[=pattern], --tags[=pattern], --remotes[=pattern]
-func Branches(value string) func(*types.Cmd) {
+func Branches(value string) types.Option {
 	return func(g *types.Cmd) {
 		if value == "" {
 			g.AddOptions("--branches")
@@ -65,7 +65,7 @@ func Branches(value string) func(*types.Cmd) {
 
 // Default If there is no parameter given by the user, use <arg> instead.
 // --default <arg>
-func Default(arg string) func(*types.Cmd) {
+func Default(arg string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--default")
 		g.AddOptions(arg)
@@ -75,7 +75,7 @@ func Default(arg string) func(*types.Cmd) {
 // Disambiguate Show every object whose name begins with the given prefix.
 // The <prefix> must be at least 4 hexadecimal digits long to avoid listing each and every object in the repository by mistake.
 // --disambiguate=<prefix>
-func Disambiguate(prefix string) func(*types.Cmd) {
+func Disambiguate(prefix string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--disambiguate=%s", prefix))
 	}
@@ -86,7 +86,7 @@ func Disambiguate(prefix string) func(*types.Cmd) {
 // The patterns given should not begin with refs/heads, refs/tags, or refs/remotes when applied to --branches, --tags, or --remotes, respectively, and they must begin with refs/ when applied to --glob or --all.
 // If a trailing /* is intended, it must be given explicitly.
 // --exclude=<glob-pattern>
-func Exclude(globPattern string) func(*types.Cmd) {
+func Exclude(globPattern string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--exclude=%s", globPattern))
 	}
@@ -116,7 +116,7 @@ func GitDir(g *types.Cmd) {
 // GitPath Resolve '$GIT_DIR/<path>' and takes other path relocation variables such as $GIT_OBJECT_DIRECTORY, $GIT_INDEX_FILE... into account.
 // For example, if $GIT_OBJECT_DIRECTORY is set to /foo/bar then 'git rev-parse --git-path objects/abc' returns /foo/bar/abc.
 // --git-path <path>
-func GitPath(path string) func(*types.Cmd) {
+func GitPath(path string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--git-path")
 		g.AddOptions(path)
@@ -127,7 +127,7 @@ func GitPath(path string) func(*types.Cmd) {
 // If the pattern does not start with refs/, this is automatically prepended.
 // If the pattern does not contain a globbing character (?, *, or [), it is turned into a prefix match by appending /*.
 // --glob=pattern
-func Glob(pattern string) func(*types.Cmd) {
+func Glob(pattern string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--glob=%s", pattern))
 	}
@@ -193,7 +193,7 @@ func Parseopt(g *types.Cmd) {
 // Any relative filenames are resolved as if they are prefixed by <arg> and will be printed in that form.
 // This can be used to convert arguments to a command run in a subdirectory so that they can still be used after moving to the top-level of the repository.
 // --prefix <arg>
-func Prefix(arg string) func(*types.Cmd) {
+func Prefix(arg string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--prefix")
 		g.AddOptions(arg)
@@ -212,7 +212,7 @@ func Quiet(g *types.Cmd) {
 // If a pattern is given, only refs matching the given shell glob are shown.
 // If the pattern does not contain a globbing character (?, *, or [), it is turned into a prefix match by appending /*.
 // --branches[=pattern], --tags[=pattern], --remotes[=pattern]
-func Remotes(value string) func(*types.Cmd) {
+func Remotes(value string) types.Option {
 	return func(g *types.Cmd) {
 		if value == "" {
 			g.AddOptions("--remotes")
@@ -225,7 +225,7 @@ func Remotes(value string) func(*types.Cmd) {
 // ResolveGitDir Check if <path> is a valid repository or a gitfile that points at a valid repository, and print the location of the repository.
 // If <path> is a gitfile then the resolved path to the real repository is printed.
 // --resolve-git-dir <path>
-func ResolveGitDir(path string) func(*types.Cmd) {
+func ResolveGitDir(path string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--resolve-git-dir")
 		g.AddOptions(path)
@@ -247,7 +247,7 @@ func SharedIndexPath(g *types.Cmd) {
 // Short Same as --verify but shortens the object name to a unique prefix with at least length characters.
 // The minimum length is 4, the default is the effective value of the core.abbrev configuration variable (see git-config(1)).
 // --short[=length]
-func Short(value string) func(*types.Cmd) {
+func Short(value string) types.Option {
 	return func(g *types.Cmd) {
 		if value == "" {
 			g.AddOptions("--short")
@@ -284,7 +284,7 @@ func ShowToplevel(g *types.Cmd) {
 
 // Since Parse the date string, and output the corresponding --max-age= parameter for git rev-list.
 // --since=datestring, --after=datestring
-func Since(datestring string) func(*types.Cmd) {
+func Since(datestring string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--since=%s", datestring))
 	}
@@ -338,7 +338,7 @@ func SymbolicFullName(g *types.Cmd) {
 // If a pattern is given, only refs matching the given shell glob are shown.
 // If the pattern does not contain a globbing character (?, *, or [), it is turned into a prefix match by appending /*.
 // --branches[=pattern], --tags[=pattern], --remotes[=pattern]
-func Tags(value string) func(*types.Cmd) {
+func Tags(value string) types.Option {
 	return func(g *types.Cmd) {
 		if value == "" {
 			g.AddOptions("--tags")
@@ -350,7 +350,7 @@ func Tags(value string) func(*types.Cmd) {
 
 // Until Parse the date string, and output the corresponding --min-age= parameter for git rev-list.
 // --until=datestring, --before=datestring
-func Until(datestring string) func(*types.Cmd) {
+func Until(datestring string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--until=%s", datestring))
 	}

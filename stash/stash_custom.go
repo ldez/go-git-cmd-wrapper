@@ -3,7 +3,7 @@ package stash
 import "github.com/ldez/go-git-cmd-wrapper/v2/types"
 
 // Push git stash push [-p|--patch] [-S|--staged] [-k|--[no-]keep-index] [-u|--include-untracked] [-a|--all] [-q|--quiet] [(-m|--message) <message>] [--pathspec-from-file=<file> [--pathspec-file-nul]] [--] [<pathspec>...]
-func Push(message string, options ...types.Option) func(*types.Cmd) {
+func Push(message string, options ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("push")
 		g.ApplyOptions(options...)
@@ -15,7 +15,7 @@ func Push(message string, options ...types.Option) func(*types.Cmd) {
 }
 
 // Save git stash save [-p|--patch] [-S|--staged] [-k|--[no-]keep-index] [-u|--include-untracked] [-a|--all] [-q|--quiet] [<message>]
-func Save(message string, options ...types.Option) func(*types.Cmd) {
+func Save(message string, options ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("save")
 		g.ApplyOptions(options...)
@@ -27,7 +27,7 @@ func Save(message string, options ...types.Option) func(*types.Cmd) {
 }
 
 // List git stash list [<log-options>]
-func List(options ...types.Option) func(*types.Cmd) {
+func List(options ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("list")
 		g.ApplyOptions(options...)
@@ -35,7 +35,7 @@ func List(options ...types.Option) func(*types.Cmd) {
 }
 
 // Show git stash show [-u|--include-untracked|--only-untracked] [<diff-options>] [<stash>]
-func Show(stash string, options ...types.Option) func(*types.Cmd) {
+func Show(stash string, options ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("show")
 		g.ApplyOptions(options...)
@@ -47,7 +47,7 @@ func Show(stash string, options ...types.Option) func(*types.Cmd) {
 }
 
 // Pop git stash pop [--index] [-q|--quiet] [<stash>]
-func Pop(stash string, options ...types.Option) func(*types.Cmd) {
+func Pop(stash string, options ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("pop")
 		g.ApplyOptions(options...)
@@ -59,7 +59,7 @@ func Pop(stash string, options ...types.Option) func(*types.Cmd) {
 }
 
 // Apply git stash apply [--index] [-q|--quiet] [<stash>]
-func Apply(stash string, options ...types.Option) func(*types.Cmd) {
+func Apply(stash string, options ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("apply")
 		g.ApplyOptions(options...)
@@ -71,7 +71,7 @@ func Apply(stash string, options ...types.Option) func(*types.Cmd) {
 }
 
 // Branch git stash branch <branchname> [<stash>]
-func Branch(branchName, stash string) func(*types.Cmd) {
+func Branch(branchName, stash string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("branch")
 		g.AddOptions(branchName)
@@ -83,14 +83,14 @@ func Branch(branchName, stash string) func(*types.Cmd) {
 }
 
 // Clear git stash clear
-func Clear() func(*types.Cmd) {
+func Clear() types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("clear")
 	}
 }
 
 // Drop git stash drop [-q|--quiet] [<stash>]
-func Drop(stash string, options ...types.Option) func(*types.Cmd) {
+func Drop(stash string, options ...types.Option) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("drop")
 		g.ApplyOptions(options...)
@@ -102,14 +102,14 @@ func Drop(stash string, options ...types.Option) func(*types.Cmd) {
 }
 
 // Create git stash create
-func Create() func(*types.Cmd) {
+func Create() types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("create")
 	}
 }
 
 // Store git stash store
-func Store() func(*types.Cmd) {
+func Store() types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("store")
 	}

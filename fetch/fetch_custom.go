@@ -5,21 +5,21 @@ import (
 )
 
 // Remote name.
-func Remote(name string) func(*types.Cmd) {
+func Remote(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
 }
 
 // Group name.
-func Group(name string) func(*types.Cmd) {
+func Group(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
 }
 
 // RefSpec name.
-func RefSpec(ref string) func(*types.Cmd) {
+func RefSpec(ref string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(ref)
 	}

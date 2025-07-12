@@ -44,7 +44,7 @@ func Commit(g *types.Cmd) {
 
 // Deepen Similar to --depth, except it specifies the number of commits from the current shallow boundary instead of from the tip of each remote branch history.
 // --deepen=<depth>
-func Deepen(depth string) func(*types.Cmd) {
+func Deepen(depth string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--deepen=%s", depth))
 	}
@@ -54,7 +54,7 @@ func Deepen(depth string) func(*types.Cmd) {
 // If fetching to a shallow repository created by git clone with --depth=<depth> option (see git-clone(1)), deepen or shorten the history to the specified number of commits.
 // Tags for the deepened commits are not fetched.
 // --depth=<depth>
-func Depth(value string) func(*types.Cmd) {
+func Depth(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--depth=%s", value))
 	}
@@ -107,7 +107,7 @@ func Keep(g *types.Cmd) {
 // Log In addition to branch names, populate the log message with one-line descriptions from at most <n> actual commits that are being merged.
 // See also git-fmt-merge-msg(1).
 // --log[=<n>]
-func Log(n string) func(*types.Cmd) {
+func Log(n string) types.Option {
 	return func(g *types.Cmd) {
 		if n == "" {
 			g.AddOptions("--log")
@@ -156,7 +156,7 @@ func NoRebase(g *types.Cmd) {
 
 // NoRecurseSubmodules This option controls if new commits of all populated submodules should be fetched too.
 // --no-recurse-submodules[=yes|on-demand|no]
-func NoRecurseSubmodules(value string) func(*types.Cmd) {
+func NoRecurseSubmodules(value string) types.Option {
 	return func(g *types.Cmd) {
 		if value == "" {
 			g.AddOptions("--no-recurse-submodules")
@@ -209,7 +209,7 @@ func Quiet(g *types.Cmd) {
 // Rebase When true, rebase the current branch on top of the upstream branch after fetching.
 // If there is a remote-tracking branch corresponding to the upstream branch and the upstream branch was rebased since last fetched, the rebase uses that information to avoid rebasing non-local changes.
 // -r, --rebase[=false|true|preserve|interactive]
-func Rebase(value string) func(*types.Cmd) {
+func Rebase(value string) types.Option {
 	return func(g *types.Cmd) {
 		if value == "" {
 			g.AddOptions("--rebase")
@@ -221,7 +221,7 @@ func Rebase(value string) func(*types.Cmd) {
 
 // RecurseSubmodules This option controls if new commits of all populated submodules should be fetched too.
 // --recurse-submodules[=yes|on-demand|no]
-func RecurseSubmodules(value string) func(*types.Cmd) {
+func RecurseSubmodules(value string) types.Option {
 	return func(g *types.Cmd) {
 		if value == "" {
 			g.AddOptions("--recurse-submodules")
@@ -234,7 +234,7 @@ func RecurseSubmodules(value string) func(*types.Cmd) {
 // ShallowExclude Deepen or shorten the history of a shallow repository to exclude commits reachable from a specified remote branch or tag.
 // This option can be specified multiple times.
 // --shallow-exclude=<revision>
-func ShallowExclude(revision string) func(*types.Cmd) {
+func ShallowExclude(revision string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--shallow-exclude=%s", revision))
 	}
@@ -242,7 +242,7 @@ func ShallowExclude(revision string) func(*types.Cmd) {
 
 // ShallowSince Deepen or shorten the history of a shallow repository to include all reachable commits after <date>.
 // --shallow-since=<date>
-func ShallowSince(date string) func(*types.Cmd) {
+func ShallowSince(date string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--shallow-since=%s", date))
 	}
@@ -265,7 +265,7 @@ func Stat(g *types.Cmd) {
 // Strategy Use the given merge strategy; can be supplied more than once to specify them in the order they should be tried.
 // If there is no -s option, a built-in list of strategies is used instead (git merge-recursive when merging a single head, git merge-octopus otherwise).
 // -s <strategy>, --strategy=<strategy>
-func Strategy(value string) func(*types.Cmd) {
+func Strategy(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--strategy=%s", value))
 	}
@@ -273,7 +273,7 @@ func Strategy(value string) func(*types.Cmd) {
 
 // StrategyOption Pass merge strategy specific option through to the merge strategy.
 // -X <option>, --strategy-option=<option>
-func StrategyOption(option string) func(*types.Cmd) {
+func StrategyOption(option string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--strategy-option=%s", option))
 	}
@@ -303,7 +303,7 @@ func UpdateShallow(g *types.Cmd) {
 
 // UploadPack When given, and the repository to fetch from is handled by git fetch-pack, --exec=<upload-pack> is passed to the command to specify non-default path for the command run on the other end.
 // --upload-pack <upload-pack>
-func UploadPack(value string) func(*types.Cmd) {
+func UploadPack(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--upload-pack")
 		g.AddOptions(value)

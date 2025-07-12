@@ -8,7 +8,7 @@ import (
 
 // Abbrev use <n> digits to display SHA-1s
 // --abbrev[=<n>]
-func Abbrev(n string) func(*types.Cmd) {
+func Abbrev(n string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--abbrev=%s", n))
 	}
@@ -21,7 +21,7 @@ func All(g *types.Cmd) {
 }
 
 // BranchName branch name.
-func BranchName(name string) func(*types.Cmd) {
+func BranchName(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(name)
 	}
@@ -29,7 +29,7 @@ func BranchName(name string) func(*types.Cmd) {
 
 // Color use colored output
 // --color[=<when>]
-func Color(when string) func(*types.Cmd) {
+func Color(when string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--color=%s", when))
 	}
@@ -37,7 +37,7 @@ func Color(when string) func(*types.Cmd) {
 
 // Column list branches in columns
 // --column[=<style>]
-func Column(style string) func(*types.Cmd) {
+func Column(style string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--column=%s", style))
 	}
@@ -45,7 +45,7 @@ func Column(style string) func(*types.Cmd) {
 
 // Contains print only branches that contain the commit
 // --contains <commit>
-func Contains(commit string) func(*types.Cmd) {
+func Contains(commit string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--contains")
 		g.AddOptions(commit)
@@ -54,7 +54,7 @@ func Contains(commit string) func(*types.Cmd) {
 
 // NoContains print only branches that don't contain the commit
 // --no-contains <commit>
-func NoContains(commit string) func(*types.Cmd) {
+func NoContains(commit string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--no-contains")
 		g.AddOptions(commit)
@@ -93,7 +93,7 @@ func Force(g *types.Cmd) {
 
 // Format format to use for the output
 // --format <format>
-func Format(format string) func(*types.Cmd) {
+func Format(format string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--format")
 		g.AddOptions(format)
@@ -114,7 +114,7 @@ func List(g *types.Cmd) {
 
 // PointsAt print only branches of the object
 // --points-at <object>
-func PointsAt(object string) func(*types.Cmd) {
+func PointsAt(object string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--points-at")
 		g.AddOptions(object)
@@ -123,7 +123,7 @@ func PointsAt(object string) func(*types.Cmd) {
 
 // Merged print only branches that are merged
 // --merged <commit>
-func Merged(commit string) func(*types.Cmd) {
+func Merged(commit string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--merged")
 		g.AddOptions(commit)
@@ -132,7 +132,7 @@ func Merged(commit string) func(*types.Cmd) {
 
 // NoMerged print only branches that are not merged
 // --no-merged <commit>
-func NoMerged(commit string) func(*types.Cmd) {
+func NoMerged(commit string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--no-merged")
 		g.AddOptions(commit)
@@ -183,7 +183,7 @@ func UnsetUpstream(g *types.Cmd) {
 
 // SetUpstreamTo change the upstream info
 // -u, --set-upstream-to <upstream>
-func SetUpstreamTo(upstream string) func(*types.Cmd) {
+func SetUpstreamTo(upstream string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--set-upstream-to")
 		g.AddOptions(upstream)
@@ -192,7 +192,7 @@ func SetUpstreamTo(upstream string) func(*types.Cmd) {
 
 // Sort field name to sort on
 // --sort <key>
-func Sort(key string) func(*types.Cmd) {
+func Sort(key string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--sort")
 		g.AddOptions(key)

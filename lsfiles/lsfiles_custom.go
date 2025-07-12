@@ -11,7 +11,7 @@ func HyphenHyphen(g *types.Cmd) {
 // Files [<file>...].
 // Files to show.
 // If no files are given all files which match the other specified criteria are shown.
-func Files(files ...string) func(*types.Cmd) {
+func Files(files ...string) types.Option {
 	return func(g *types.Cmd) {
 		for _, file := range files {
 			g.AddOptions(file)

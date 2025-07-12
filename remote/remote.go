@@ -7,7 +7,7 @@ import (
 )
 
 // Add git remote add [-t <branch>] [-m <master>] [-f] [--[no-]tags] [--mirror=<fetch|push>] <name> <url>
-func Add(name, url string) func(*types.Cmd) {
+func Add(name, url string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("add")
 		g.AddOptions(name)
@@ -16,7 +16,7 @@ func Add(name, url string) func(*types.Cmd) {
 }
 
 // Rename git remote rename <old> <new>
-func Rename(oldName, newName string) func(*types.Cmd) {
+func Rename(oldName, newName string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("rename")
 		g.AddOptions(oldName)
@@ -25,7 +25,7 @@ func Rename(oldName, newName string) func(*types.Cmd) {
 }
 
 // Remove git remote remove <name>
-func Remove(name string) func(*types.Cmd) {
+func Remove(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("remove")
 		g.AddOptions(name)
@@ -33,7 +33,7 @@ func Remove(name string) func(*types.Cmd) {
 }
 
 // SetHead git remote set-head <name> (-a | --auto | -d | --delete | <branch>)
-func SetHead(name string) func(*types.Cmd) {
+func SetHead(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("set-head")
 		g.AddOptions(name)
@@ -41,7 +41,7 @@ func SetHead(name string) func(*types.Cmd) {
 }
 
 // SetBranches git remote set-branches [--add] <name> <branch>…
-func SetBranches(name, branch string) func(*types.Cmd) {
+func SetBranches(name, branch string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("set-branches")
 		g.AddOptions(name)
@@ -50,7 +50,7 @@ func SetBranches(name, branch string) func(*types.Cmd) {
 }
 
 // GetURL git remote get-url [--push] [--all] <name>
-func GetURL(name string) func(*types.Cmd) {
+func GetURL(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("get-url")
 		g.AddOptions(name)
@@ -60,7 +60,7 @@ func GetURL(name string) func(*types.Cmd) {
 // SetURL git remote set-url [--push] <name> <newurl> [<oldurl>]
 // git remote set-url --add [--push] <name> <newurl>
 // git remote set-url --delete [--push] <name> <url>
-func SetURL(name, newurl, oldurl string) func(*types.Cmd) {
+func SetURL(name, newurl, oldurl string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("set-url")
 		g.AddOptions(name)
@@ -73,7 +73,7 @@ func SetURL(name, newurl, oldurl string) func(*types.Cmd) {
 }
 
 // Show git remote [-v | --verbose] show [-n] <name>…
-func Show(names ...string) func(*types.Cmd) {
+func Show(names ...string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("show")
 
@@ -84,7 +84,7 @@ func Show(names ...string) func(*types.Cmd) {
 }
 
 // Prune git remote prune [-n | --dry-run] <name>…
-func Prune(names ...string) func(*types.Cmd) {
+func Prune(names ...string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("prune")
 
@@ -95,7 +95,7 @@ func Prune(names ...string) func(*types.Cmd) {
 }
 
 // Update Fetch updates for remotes or remote groups in the repository as defined by remotes.<group>.
-func Update(remotes ...string) func(*types.Cmd) {
+func Update(remotes ...string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("update")
 
@@ -161,7 +161,7 @@ func PruneOpt(g *types.Cmd) {
 }
 
 // Master [-m <master>]
-func Master(symRef string) func(*types.Cmd) {
+func Master(symRef string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("-m")
 		g.AddOptions(symRef)
@@ -169,7 +169,7 @@ func Master(symRef string) func(*types.Cmd) {
 }
 
 // Track [-t <branch>]
-func Track(branch string) func(*types.Cmd) {
+func Track(branch string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("-t")
 		g.AddOptions(branch)
@@ -177,7 +177,7 @@ func Track(branch string) func(*types.Cmd) {
 }
 
 // Mirror [--mirror=<fetch|push>]
-func Mirror(option string) func(*types.Cmd) {
+func Mirror(option string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--mirror=%s", option))
 	}

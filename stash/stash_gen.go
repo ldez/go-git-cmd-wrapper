@@ -81,7 +81,7 @@ func PathspecFileNul(g *types.Cmd) {
 // Pathspec elements can be quoted as explained for the configuration variable core.quotePath (see git-config(1)).
 // See also --pathspec-file-nul and global --literal-pathspecs.
 // --pathspec-from-file=<file>
-func PathspecFromFile(file string) func(*types.Cmd) {
+func PathspecFromFile(file string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--pathspec-from-file=%s", file))
 	}

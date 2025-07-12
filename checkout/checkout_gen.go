@@ -11,7 +11,7 @@ import (
 // Conflict The same as --merge option above, but changes the way the conflicting hunks are presented, overriding the merge.conflictStyle configuration variable.
 // Possible values are 'merge' (default) and 'diff3' (in addition to what is shown by 'merge' style, shows the original contents).
 // --conflict=<style>
-func Conflict(style string) func(*types.Cmd) {
+func Conflict(style string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--conflict=%s", style))
 	}
@@ -57,7 +57,7 @@ func Merge(g *types.Cmd) {
 
 // NewBranch Create a new branch named <new_branch> and start it at <start_point>; see git-branch(1) for details.
 // -b [new_branch]
-func NewBranch(value string) func(*types.Cmd) {
+func NewBranch(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("-b")
 		if value != "" {
@@ -69,7 +69,7 @@ func NewBranch(value string) func(*types.Cmd) {
 // NewBranchForce Creates the branch <new_branch> and start it at <start_point>; if it already exists, then reset it to <start_point>.
 // This is equivalent to running 'git branch' with '-f'; see git-branch(1) for details.
 // -B [new_branch]
-func NewBranchForce(newBranch string) func(*types.Cmd) {
+func NewBranchForce(newBranch string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("-B")
 		if newBranch != "" {
@@ -108,7 +108,7 @@ func NoTrack(g *types.Cmd) {
 // Orphan Create a new orphan branch, named <new_branch>, started from <start_point> and switch to it.
 // The first commit made on this new branch will have no parents and it will be the root of a new history totally disconnected from all the other branches and commits.
 // --orphan <new_branch>
-func Orphan(newBranch string) func(*types.Cmd) {
+func Orphan(newBranch string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--orphan")
 		g.AddOptions(newBranch)

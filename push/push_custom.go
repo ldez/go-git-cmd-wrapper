@@ -31,7 +31,7 @@ func NoForceWithLease(g *types.Cmd) {
 // Usually, "git push" refuses to update a remote ref that is not an ancestor of the local ref used to overwrite it.
 // This option overrides this restriction if the current value of the remote ref is the expected value. "git push" fails otherwise.
 // --force-with-lease=<refname>
-func ForceWithLeaseRef(refname string) func(*types.Cmd) {
+func ForceWithLeaseRef(refname string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--force-with-lease=%s", refname))
 	}
@@ -41,7 +41,7 @@ func ForceWithLeaseRef(refname string) func(*types.Cmd) {
 // Usually, "git push" refuses to update a remote ref that is not an ancestor of the local ref used to overwrite it.
 // This option overrides this restriction if the current value of the remote ref is the expected value. "git push" fails otherwise.
 // --force-with-lease=<refname>:<expect>
-func ForceWithLeaseExpect(refname, expect string) func(*types.Cmd) {
+func ForceWithLeaseExpect(refname, expect string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--recurse-submodules=%s:%s", refname, expect))
 	}
@@ -50,7 +50,7 @@ func ForceWithLeaseExpect(refname, expect string) func(*types.Cmd) {
 // Remote The "remote" repository that is destination of a push operation.
 // This parameter can be either a URL (see the section GIT URLS below) or the name of a remote (see the section REMOTES below).
 // <repository>
-func Remote(repository string) func(*types.Cmd) {
+func Remote(repository string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(repository)
 	}
@@ -59,7 +59,7 @@ func Remote(repository string) func(*types.Cmd) {
 // RefSpec Specify what destination ref to update with what source object.
 // The format of a <refspec> parameter is an optional plus +, followed by the source object <src>, followed by a colon :, followed by the destination ref <dst>.
 // <refspec>...
-func RefSpec(refspecs ...string) func(*types.Cmd) {
+func RefSpec(refspecs ...string) types.Option {
 	return func(g *types.Cmd) {
 		for _, refspec := range refspecs {
 			g.AddOptions(refspec)

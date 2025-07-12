@@ -8,7 +8,7 @@ func HyphenHyphen(g *types.Cmd) {
 }
 
 // Path <paths>...
-func Path(values ...string) func(*types.Cmd) {
+func Path(values ...string) types.Option {
 	return func(g *types.Cmd) {
 		for _, value := range values {
 			g.AddOptions(value)
@@ -17,14 +17,14 @@ func Path(values ...string) func(*types.Cmd) {
 }
 
 // Commit [<commit>]
-func Commit(hash string) func(*types.Cmd) {
+func Commit(hash string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(hash)
 	}
 }
 
 // TreeIsh [<tree-ish>]
-func TreeIsh(hash string) func(*types.Cmd) {
+func TreeIsh(hash string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(hash)
 	}

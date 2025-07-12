@@ -38,7 +38,7 @@ func DryRun(g *types.Cmd) {
 // Exec Path to the git-receive-pack program on the remote end.
 // Sometimes useful when pushing to a remote repository over ssh, and you do not have the program in a directory on the default $PATH.
 // --exec=<git-receive-pack>
-func Exec(gitReceivePack string) func(*types.Cmd) {
+func Exec(gitReceivePack string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--exec=%s", gitReceivePack))
 	}
@@ -165,7 +165,7 @@ func Quiet(g *types.Cmd) {
 // ReceivePack Path to the git-receive-pack program on the remote end.
 // Sometimes useful when pushing to a remote repository over ssh, and you do not have the program in a directory on the default $PATH.
 // --receive-pack=<git-receive-pack>
-func ReceivePack(gitReceivePack string) func(*types.Cmd) {
+func ReceivePack(gitReceivePack string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--receive-pack=%s", gitReceivePack))
 	}
@@ -179,7 +179,7 @@ func ReceivePack(gitReceivePack string) func(*types.Cmd) {
 // If only is used all submodules will be recursively pushed while the superproject is left unpushed.
 // A value of no or using --no-recurse-submodules can be used to override the push.recurseSubmodules configuration variable when no submodule recursion is required.
 // --recurse-submodules=(check|on-demand|only|no)
-func RecurseSubmodules(value string) func(*types.Cmd) {
+func RecurseSubmodules(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--recurse-submodules=%s", value))
 	}
@@ -188,7 +188,7 @@ func RecurseSubmodules(value string) func(*types.Cmd) {
 // Repo This option is equivalent to the <repository> argument.
 // If both are specified, the command-line argument takes precedence.
 // --repo=<repository>
-func Repo(repository string) func(*types.Cmd) {
+func Repo(repository string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--repo=%s", repository))
 	}
@@ -208,7 +208,7 @@ func SetUpstream(g *types.Cmd) {
 // The push will also fail if the actual call to gpg --sign fails.
 // See git-receive-pack(1) for the details on the receiving end.
 // --sign=(true|false|if-asked)
-func Sign(value string) func(*types.Cmd) {
+func Sign(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--sign=%s", value))
 	}

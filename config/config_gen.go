@@ -6,7 +6,7 @@ import "github.com/ldez/go-git-cmd-wrapper/v2/types"
 
 // Blob Similar to --file but use the given blob instead of a file. E.g. you can use master:.gitmodules to read values from the file .gitmodules in the master branch. See 'SPECIFYING REVISIONS' section in gitrevisions(7) for a more complete list of ways to spell blob names.
 // --blob <blob>
-func Blob(value string) func(*types.Cmd) {
+func Blob(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--blob")
 		g.AddOptions(value)
@@ -33,7 +33,7 @@ func Edit(g *types.Cmd) {
 
 // File Use the given config file instead of the one specified by GIT_CONFIG.
 // -f <config-file>, --file <config-file>
-func File(configFile string) func(*types.Cmd) {
+func File(configFile string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--file")
 		g.AddOptions(configFile)

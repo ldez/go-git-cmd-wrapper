@@ -19,7 +19,7 @@ func Annotate(g *types.Cmd) {
 //	removes just leading/trailing whitespace lines and strip removes both whitespace and commentary.
 //
 // --cleanup=<mode>
-func Cleanup(mode string) func(*types.Cmd) {
+func Cleanup(mode string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--cleanup=%s", mode))
 	}
@@ -27,7 +27,7 @@ func Cleanup(mode string) func(*types.Cmd) {
 
 // Color Respect any colors specified in the --format option. The <when> field must be one of always, never, or auto (if <when> is absent, behave as if always was given).
 // --color[=<when>]
-func Color(when string) func(*types.Cmd) {
+func Color(when string) types.Option {
 	return func(g *types.Cmd) {
 		if when == "" {
 			g.AddOptions("--color")
@@ -42,7 +42,7 @@ func Color(when string) func(*types.Cmd) {
 //	This option is only applicable when listing tags without annotation lines.
 //
 // --column[=<options>]
-func Column(options string) func(*types.Cmd) {
+func Column(options string) types.Option {
 	return func(g *types.Cmd) {
 		if options == "" {
 			g.AddOptions("--column")
@@ -54,7 +54,7 @@ func Column(options string) func(*types.Cmd) {
 
 // Contains Only list tags which contain the specified commit (HEAD if not specified). Implies --list.
 // --contains [<commit>]
-func Contains(commit string) func(*types.Cmd) {
+func Contains(commit string) types.Option {
 	return func(g *types.Cmd) {
 		if commit == "" {
 			g.AddOptions("--contains")
@@ -82,7 +82,7 @@ func Edit(g *types.Cmd) {
 
 // File Take the tag message from the given file. Use - to read the message from the standard input. Implies -a if none of -a, -s, or -u <keyid> is given.
 // -F <file>, --file=<file>
-func File(value string) func(*types.Cmd) {
+func File(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--file=%s", value))
 	}
@@ -112,7 +112,7 @@ func List(g *types.Cmd) {
 
 // LocalUser Make a GPG-signed tag, using the given key.
 // -u <keyid>, --local-user=<keyid>
-func LocalUser(keyID string) func(*types.Cmd) {
+func LocalUser(keyID string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--local-user=%s", keyID))
 	}
@@ -120,7 +120,7 @@ func LocalUser(keyID string) func(*types.Cmd) {
 
 // Merged Only list tags whose commits are reachable from the specified commit (HEAD if not specified), incompatible with --no-merged.
 // --merged [<commit>]
-func Merged(commit string) func(*types.Cmd) {
+func Merged(commit string) types.Option {
 	return func(g *types.Cmd) {
 		if commit == "" {
 			g.AddOptions("--merged")
@@ -133,7 +133,7 @@ func Merged(commit string) func(*types.Cmd) {
 // Message Use the given tag message (instead of prompting).
 // If multiple -m options are given, their values are concatenated as separate paragraphs. Implies -a if none of -a, -s, or -u <keyid> is given.
 // -m <msg>, --message=<msg>
-func Message(msg string) func(*types.Cmd) {
+func Message(msg string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--message=%s", msg))
 	}
@@ -143,7 +143,7 @@ func Message(msg string) func(*types.Cmd) {
 //
 // The default is not to print any annotation lines. If no number is given to -n, only the first line is printed. If the tag is not annotated, the commit message is displayed instead.
 // -n<num>
-func N(num string) func(*types.Cmd) {
+func N(num string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("-n")
 		g.AddOptions(num)
@@ -161,7 +161,7 @@ func NoColumn(g *types.Cmd) {
 
 // NoContains Only list tags which don’t contain the specified commit (HEAD if not specified). Implies --list.
 // --no-contains [<commit>]
-func NoContains(commit string) func(*types.Cmd) {
+func NoContains(commit string) types.Option {
 	return func(g *types.Cmd) {
 		if commit == "" {
 			g.AddOptions("--no-contains")
@@ -173,7 +173,7 @@ func NoContains(commit string) func(*types.Cmd) {
 
 // NoMerged Only list tags whose commits are not reachable from the specified commit (HEAD if not specified), incompatible with --merged.
 // --no-merged [<commit>]
-func NoMerged(commit string) func(*types.Cmd) {
+func NoMerged(commit string) types.Option {
 	return func(g *types.Cmd) {
 		if commit == "" {
 			g.AddOptions("--no-merged")
@@ -185,7 +185,7 @@ func NoMerged(commit string) func(*types.Cmd) {
 
 // PointsAt Only list tags of the given object (HEAD if not specified). Implies --list.
 // --points-at <object>
-func PointsAt(object string) func(*types.Cmd) {
+func PointsAt(object string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--points-at")
 		g.AddOptions(object)
@@ -202,7 +202,7 @@ func Sign(g *types.Cmd) {
 // supports "version:refname" or "v:refname" (tag names are treated as versions). The "version:refname" sort order can also be affected by the "versionsort.suffix" configuration variable. The keys
 // supported are the same as those in git for-each-ref. Sort order defaults to the value configured for the tag.sort variable if it exists, or lexicographic order otherwise. See git-config(1).
 // --sort=<key>
-func Sort(key string) func(*types.Cmd) {
+func Sort(key string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--sort=%s", key))
 	}

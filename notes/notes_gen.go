@@ -40,7 +40,7 @@ func DryRun(g *types.Cmd) {
 // Use - to read the note message from the standard input.
 // Lines starting with # and empty lines other than a single line between paragraphs will be stripped out.
 // -F <file>, --file=<file>
-func File(value string) func(*types.Cmd) {
+func File(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--file=%s", value))
 	}
@@ -62,7 +62,7 @@ func IgnoreMissing(g *types.Cmd) {
 // If multiple -m options are given, their values are concatenated as separate paragraphs.
 // Lines starting with # and empty lines other than a single line between paragraphs will be stripped out.
 // -m <msg>, --message=<msg>
-func Message(msg string) func(*types.Cmd) {
+func Message(msg string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--message=%s", msg))
 	}
@@ -76,7 +76,7 @@ func Quiet(g *types.Cmd) {
 
 // ReeditMessage Like -C, but with -c the editor is invoked, so that the user can further edit the note message.
 // -c <object>, --reedit-message=<object>
-func ReeditMessage(object string) func(*types.Cmd) {
+func ReeditMessage(object string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--reedit-message=%s", object))
 	}
@@ -86,7 +86,7 @@ func ReeditMessage(object string) func(*types.Cmd) {
 // The ref specifies the full refname when it begins with refs/notes/;
 // when it begins with notes/, refs/ and otherwise refs/notes/ is prefixed to form a full name of the ref.
 // --ref <ref>
-func Ref(value string) func(*types.Cmd) {
+func Ref(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--ref")
 		g.AddOptions(value)
@@ -96,7 +96,7 @@ func Ref(value string) func(*types.Cmd) {
 // ReuseMessage Take the given blob object (for example, another note) as the note message.
 // (Use git notes copy <object> instead to copy notes between objects.)
 // -C <object>, --reuse-message=<object>
-func ReuseMessage(object string) func(*types.Cmd) {
+func ReuseMessage(object string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--reuse-message=%s", object))
 	}
@@ -113,7 +113,7 @@ func Stdin(g *types.Cmd) {
 // This option overrides the "notes.mergeStrategy" configuration setting.
 // See the "NOTES MERGE STRATEGIES" section below for more information on each notes merge strategy.
 // -s <strategy>, --strategy=<strategy>
-func Strategy(value string) func(*types.Cmd) {
+func Strategy(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--strategy=%s", value))
 	}

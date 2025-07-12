@@ -77,7 +77,7 @@ func EditTodo(g *types.Cmd) {
 //
 // Note that commits which start empty are kept (unless --no-keep-empty is specified), and commits which are clean cherry-picks (as determined by git log --cherry-mark ...) are detected and dropped as a preliminary step (unless --reapply-cherry-picks is passed).
 // --empty={drop,keep,ask}
-func Empty(value string) func(*types.Cmd) {
+func Empty(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--empty=%s", value))
 	}
@@ -88,7 +88,7 @@ func Empty(value string) func(*types.Cmd) {
 // By default no context is ever ignored.
 // Implies --apply.
 // -C<n>
-func EnsureContext(n string) func(*types.Cmd) {
+func EnsureContext(n string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("-C")
 		g.AddOptions(n)
@@ -99,7 +99,7 @@ func EnsureContext(n string) func(*types.Cmd) {
 // <cmd> will be interpreted as one or more shell commands.
 // Any command that fails will interrupt the rebase, with exit code 1.
 // -x <cmd>, --exec <cmd>
-func Exec(cmd string) func(*types.Cmd) {
+func Exec(cmd string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--exec")
 		g.AddOptions(cmd)
@@ -133,7 +133,7 @@ func ForkPoint(g *types.Cmd) {
 // The keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space.
 // --no-gpg-sign is useful to countermand both commit.gpgSign configuration variable, and earlier --gpg-sign.
 // -S[<keyid>], --gpg-sign[=<keyid>], --no-gpg-sign
-func GpgSign(keyID string) func(*types.Cmd) {
+func GpgSign(keyID string) types.Option {
 	return func(g *types.Cmd) {
 		if keyID == "" {
 			g.AddOptions("--gpg-sign")
@@ -320,7 +320,7 @@ func NoVerify(g *types.Cmd) {
 // As a special case, you may use "A...B" as a shortcut for the merge base of A and B if there is exactly one merge base.
 // You can leave out at most one of A and B, in which case it defaults to HEAD.
 // --onto <newbase>
-func Onto(newbase string) func(*types.Cmd) {
+func Onto(newbase string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--onto")
 		g.AddOptions(newbase)
@@ -364,7 +364,7 @@ func ReapplyCherryPicks(g *types.Cmd) {
 //
 // It is currently only possible to recreate the merge commits using the ort merge strategy; different merge strategies can be used only via explicit exec git merge -s <strategy> [...]  commands.
 // -r, --rebase-merges[=(rebase-cousins|no-rebase-cousins)]
-func RebaseMerges(value string) func(*types.Cmd) {
+func RebaseMerges(value string) types.Option {
 	return func(g *types.Cmd) {
 		if value == "" {
 			g.AddOptions("--rebase-merges")
@@ -438,7 +438,7 @@ func Stat(g *types.Cmd) {
 //
 // Because git rebase replays each commit from the working branch on top of the <upstream> branch using the given strategy, using the ours strategy simply empties all patches from the <branch>, which makes little sense.
 // -s <strategy>, --strategy=<strategy>
-func Strategy(value string) func(*types.Cmd) {
+func Strategy(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--strategy=%s", value))
 	}
@@ -448,7 +448,7 @@ func Strategy(value string) func(*types.Cmd) {
 // This implies --merge and, if no strategy has been specified, -s ort.
 // Note the reversal of ours and theirs as noted above for the -m option.
 // -X <strategy-option>, --strategy-option=<strategy-option>
-func StrategyOption(value string) func(*types.Cmd) {
+func StrategyOption(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--strategy-option=%s", value))
 	}
@@ -472,7 +472,7 @@ func Verify(g *types.Cmd) {
 // Whitespace This flag is passed to the git apply program (see git-apply(1)) that applies the patch.
 // Implies --apply.
 // --whitespace=<option>
-func Whitespace(option string) func(*types.Cmd) {
+func Whitespace(option string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--whitespace=%s", option))
 	}

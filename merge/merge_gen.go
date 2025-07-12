@@ -65,7 +65,7 @@ func FfOnly(g *types.Cmd) {
 // GpgSign GPG-sign the resulting merge commit.
 // The keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space.
 // -S[<keyid>], --gpg-sign[=<keyid>]
-func GpgSign(keyID string) func(*types.Cmd) {
+func GpgSign(keyID string) types.Option {
 	return func(g *types.Cmd) {
 		if keyID == "" {
 			g.AddOptions("--gpg-sign")
@@ -79,7 +79,7 @@ func GpgSign(keyID string) func(*types.Cmd) {
 // See also git-fmt-merge-msg(1).
 // With --no-log do not list one-line descriptions from the actual commits being merged.
 // --log[=<n>], --no-log
-func Log(n string) func(*types.Cmd) {
+func Log(n string) types.Option {
 	return func(g *types.Cmd) {
 		if n == "" {
 			g.AddOptions("--log")
@@ -94,7 +94,7 @@ func Log(n string) func(*types.Cmd) {
 // The git fmt-merge-msg command can be used to give a good default for automated git merge invocations.
 // The automated message can include the branch description.
 // -m <msg>
-func M(msg string) func(*types.Cmd) {
+func M(msg string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("-m")
 		g.AddOptions(msg)
@@ -218,7 +218,7 @@ func Stat(g *types.Cmd) {
 // Strategy Use the given merge strategy; can be supplied more than once to specify them in the order they should be tried.
 // If there is no -s option, a built-in list of strategies is used instead (git merge-recursive when merging a single head, git merge-octopus otherwise).
 // -s <strategy>, --strategy=<strategy>
-func Strategy(value string) func(*types.Cmd) {
+func Strategy(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--strategy=%s", value))
 	}
@@ -226,7 +226,7 @@ func Strategy(value string) func(*types.Cmd) {
 
 // StrategyOption Pass merge strategy specific option through to the merge strategy.
 // -X <option>, --strategy-option=<option>
-func StrategyOption(option string) func(*types.Cmd) {
+func StrategyOption(option string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--strategy-option=%s", option))
 	}

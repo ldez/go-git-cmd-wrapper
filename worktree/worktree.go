@@ -5,7 +5,7 @@ import (
 )
 
 // Add git worktree add [-f] [--detach] [--checkout] [--lock] [-b <new-branch>] <path> [<branch>]
-func Add(path, branch string) func(*types.Cmd) {
+func Add(path, branch string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("add")
 		g.AddOptions(path)
@@ -22,7 +22,7 @@ func List(g *types.Cmd) {
 }
 
 // Lock git worktree lock [--reason <string>] <worktree>
-func Lock(worktree string) func(*types.Cmd) {
+func Lock(worktree string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("lock")
 		g.AddOptions(worktree)
@@ -35,7 +35,7 @@ func Prune(g *types.Cmd) {
 }
 
 // UnLock git worktree unlock <worktree>
-func UnLock(worktree string) func(*types.Cmd) {
+func UnLock(worktree string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("unlock")
 		g.AddOptions(worktree)
@@ -48,7 +48,7 @@ func Force(g *types.Cmd) {
 }
 
 // Branch [-b]
-func Branch(branch string) func(*types.Cmd) {
+func Branch(branch string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("-b")
 
@@ -59,7 +59,7 @@ func Branch(branch string) func(*types.Cmd) {
 }
 
 // BranchOverride [-B]
-func BranchOverride(branch string) func(*types.Cmd) {
+func BranchOverride(branch string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("-B")
 
@@ -105,7 +105,7 @@ func Verbose(g *types.Cmd) {
 }
 
 // Expire [--expire <time>]
-func Expire(time string) func(*types.Cmd) {
+func Expire(time string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--expire")
 
@@ -116,7 +116,7 @@ func Expire(time string) func(*types.Cmd) {
 }
 
 // Reason [--reason <string>]
-func Reason(value string) func(*types.Cmd) {
+func Reason(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--reason")
 

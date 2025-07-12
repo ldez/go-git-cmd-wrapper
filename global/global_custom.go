@@ -12,7 +12,7 @@ import (
 //
 // This option affects options that expect path name like --git-dir and --work-tree in that their interpretations of the path names would be made relative to the working directory caused by the -C option.
 // -C path
-func UpperC(path string) func(*types.Cmd) {
+func UpperC(path string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions("-C")
 		g.AddBaseOptions(path)
@@ -23,7 +23,7 @@ func UpperC(path string) func(*types.Cmd) {
 // The value given will override values from configuration files.
 // The <name> is expected in the same format as listed by git config (subkeys separated by dots).
 // -c foo.bar=value
-func LowerC(name, value string) func(*types.Cmd) {
+func LowerC(name, value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions("-c")
 		g.AddBaseOptions(fmt.Sprintf("%s=%s", name, value))
@@ -37,7 +37,7 @@ func LowerC(name, value string) func(*types.Cmd) {
 // It is an error if the <envvar> does not exist in the environment.
 // <envvar> may not contain an equals sign to avoid ambiguity with <name> containing one.
 // --config-env=<name>=<envvar>
-func ConfigEnv(name, envvar string) func(*types.Cmd) {
+func ConfigEnv(name, envvar string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions(fmt.Sprintf("--config-env=%s=%s", name, envvar))
 	}
@@ -47,7 +47,7 @@ func ConfigEnv(name, envvar string) func(*types.Cmd) {
 // This can also be controlled by setting the GIT_EXEC_PATH environment variable.
 // If no path is given, git will print the current setting and then exit.
 // --exec-path[=<path>]
-func ExecPath(path string) func(*types.Cmd) {
+func ExecPath(path string) types.Option {
 	return func(g *types.Cmd) {
 		if path == "" {
 			g.AddBaseOptions("--exec-path")
@@ -61,7 +61,7 @@ func ExecPath(path string) func(*types.Cmd) {
 // HTMLPath Print the path, without trailing slash,
 // where Git’s HTML documentation is installed and exit.
 // --html-path
-func HTMLPath() func(*types.Cmd) {
+func HTMLPath() types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions("--html-path")
 	}
@@ -69,7 +69,7 @@ func HTMLPath() func(*types.Cmd) {
 
 // ManPath Print the manpath (see man(1)) for the man pages for this version of Git and exit.
 // --man-path
-func ManPath() func(*types.Cmd) {
+func ManPath() types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions("--man-path")
 	}
@@ -77,7 +77,7 @@ func ManPath() func(*types.Cmd) {
 
 // InfoPath Print the path where the Info files documenting this version of Git are installed and exit.
 // --info-path
-func InfoPath() func(*types.Cmd) {
+func InfoPath() types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions("--info-path")
 	}
@@ -87,7 +87,7 @@ func InfoPath() func(*types.Cmd) {
 // This overrides the pager.<cmd> configuration options (see the "Configuration Mechanism" section below).
 // -p
 // --paginate
-func Paginate() func(*types.Cmd) {
+func Paginate() types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions("--paginate")
 	}
@@ -96,7 +96,7 @@ func Paginate() func(*types.Cmd) {
 // NoPager Do not pipe Git output into a pager.
 // -P
 // --no-pager
-func NoPager() func(*types.Cmd) {
+func NoPager() types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions("--no-pager")
 	}
@@ -116,7 +116,7 @@ func NoPager() func(*types.Cmd) {
 //
 // If you just want to run git as if it was started in <path> then use git -C <path>.
 // --git-dir=<path>
-func GitDir(path string) func(*types.Cmd) {
+func GitDir(path string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions(fmt.Sprintf("--git-dir=%s", path))
 	}
@@ -128,7 +128,7 @@ func GitDir(path string) func(*types.Cmd) {
 // and the core.worktree configuration variable
 // (see core.worktree in git-config[1] for a more detailed discussion).
 // --work-tree=<path>
-func WorkTree(path string) func(*types.Cmd) {
+func WorkTree(path string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions(fmt.Sprintf("--work-tree=%s", path))
 	}
@@ -138,7 +138,7 @@ func WorkTree(path string) func(*types.Cmd) {
 // See gitnamespaces[7] for more details.
 // Equivalent to setting the GIT_NAMESPACE environment variable.
 // --namespace=<path>
-func Namespace(path string) func(*types.Cmd) {
+func Namespace(path string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions(fmt.Sprintf("--namespace=%s", path))
 	}
@@ -214,7 +214,7 @@ func ICasePathSpecs(g *types.Cmd) {
 // See gitattributes[5].
 // This is equivalent to setting the GIT_ATTR_SOURCE environment variable.
 // --attr-source=<tree-ish>
-func AttrSource(treeIsh string) func(*types.Cmd) {
+func AttrSource(treeIsh string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddBaseOptions(fmt.Sprintf("--attr-source=%s", treeIsh))
 	}

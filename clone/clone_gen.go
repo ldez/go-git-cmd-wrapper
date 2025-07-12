@@ -16,7 +16,7 @@ func Bare(g *types.Cmd) {
 
 // Branch Instead of pointing the newly created HEAD to the branch pointed to by the cloned repository’s HEAD, point to <name> branch instead. In a non-bare repository, this is the branch that will be checked out.  --branch can also take tags and detaches the HEAD at that commit in the resulting repository.
 // --branch <name>, -b <name>
-func Branch(name string) func(*types.Cmd) {
+func Branch(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--branch")
 		g.AddOptions(name)
@@ -25,7 +25,7 @@ func Branch(name string) func(*types.Cmd) {
 
 // Depth Create a shallow clone with a history truncated to the specified number of commits. Implies --single-branch unless --no-single-branch is given to fetch the histories near the tips of all branches. If you want to clone submodules shallowly, also pass --shallow-submodules.
 // --depth <depth>
-func Depth(value string) func(*types.Cmd) {
+func Depth(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--depth")
 		g.AddOptions(value)
@@ -40,7 +40,7 @@ func Dissociate(g *types.Cmd) {
 
 // Jobs The number of submodules fetched at the same time. Defaults to the submodule.fetchJobs option.
 // -j <n>, --jobs <n>
-func Jobs(n string) func(*types.Cmd) {
+func Jobs(n string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--jobs")
 		g.AddOptions(n)
@@ -91,7 +91,7 @@ func NoTags(g *types.Cmd) {
 
 // Origin Instead of using the remote name origin to keep track of the upstream repository, use <name>.
 // --origin <name>, -o <name>
-func Origin(name string) func(*types.Cmd) {
+func Origin(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--origin")
 		g.AddOptions(name)
@@ -112,7 +112,7 @@ func Quiet(g *types.Cmd) {
 
 // RecurseSubmodules After the clone is created, initialize and clone submodules within based on the provided pathspec. If no pathspec is provided, all submodules are initialized and cloned. Submodules are initialized and cloned using their default settings. The resulting clone has submodule.active set to the provided pathspec, or '.' (meaning all submodules) if no pathspec is provided. This is equivalent to running git submodule update --init --recursive immediately after the clone is finished. This option is ignored if the cloned repository does not have a worktree/checkout (i.e. if any of --no-checkout/-n, --bare, or --mirror is given)
 // --recurse-submodules[=<pathspec>]
-func RecurseSubmodules(pathspec string) func(*types.Cmd) {
+func RecurseSubmodules(pathspec string) types.Option {
 	return func(g *types.Cmd) {
 		if pathspec == "" {
 			g.AddOptions("--recurse-submodules")
@@ -124,7 +124,7 @@ func RecurseSubmodules(pathspec string) func(*types.Cmd) {
 
 // SeparateGitDir Instead of placing the cloned repository where it is supposed to be, place the cloned repository at the specified directory, then make a filesystem-agnostic Git symbolic link to there. The result is Git repository can be separated from working tree.
 // --separate-git-dir=<git dir>
-func SeparateGitDir(gitDir string) func(*types.Cmd) {
+func SeparateGitDir(gitDir string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--separate-git-dir=%s", gitDir))
 	}
@@ -132,7 +132,7 @@ func SeparateGitDir(gitDir string) func(*types.Cmd) {
 
 // ShallowExclude Create a shallow clone with a history, excluding commits reachable from a specified remote branch or tag. This option can be specified multiple times.
 // --shallow-exclude=<revision>
-func ShallowExclude(revision string) func(*types.Cmd) {
+func ShallowExclude(revision string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--shallow-exclude=%s", revision))
 	}
@@ -140,7 +140,7 @@ func ShallowExclude(revision string) func(*types.Cmd) {
 
 // ShallowSince Create a shallow clone with a history after the specified time.
 // --shallow-since=<date>
-func ShallowSince(date string) func(*types.Cmd) {
+func ShallowSince(date string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--shallow-since=%s", date))
 	}
@@ -166,7 +166,7 @@ func SingleBranch(g *types.Cmd) {
 
 // Template Specify the directory from which templates will be used; (See the 'TEMPLATE DIRECTORY' section of git-init(1).)
 // --template=<template_directory>
-func Template(templateDirectory string) func(*types.Cmd) {
+func Template(templateDirectory string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--template=%s", templateDirectory))
 	}
@@ -174,7 +174,7 @@ func Template(templateDirectory string) func(*types.Cmd) {
 
 // UploadPack When given, and the repository to clone from is accessed via ssh, this specifies a non-default path for the command run on the other end.
 // --upload-pack <upload-pack>, -u <upload-pack>
-func UploadPack(value string) func(*types.Cmd) {
+func UploadPack(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--upload-pack")
 		g.AddOptions(value)

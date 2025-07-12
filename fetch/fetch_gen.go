@@ -23,7 +23,7 @@ func Append(g *types.Cmd) {
 
 // Deepen Similar to --depth, except it specifies the number of commits from the current shallow boundary instead of from the tip of each remote branch history.
 // --deepen=<depth>
-func Deepen(depth string) func(*types.Cmd) {
+func Deepen(depth string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--deepen=%s", depth))
 	}
@@ -33,7 +33,7 @@ func Deepen(depth string) func(*types.Cmd) {
 // If fetching to a shallow repository created by git clone with --depth=<depth> option (see git-clone(1)), deepen or shorten the history to the specified number of commits.
 // Tags for the deepened commits are not fetched.
 // --depth=<depth>
-func Depth(value string) func(*types.Cmd) {
+func Depth(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--depth=%s", value))
 	}
@@ -68,7 +68,7 @@ func Ipv6(g *types.Cmd) {
 // Each will fetch from different submodules, such that fetching many submodules will be faster.
 // By default submodules will be fetched one at a time.
 // -j, --jobs=<n>
-func Jobs(n string) func(*types.Cmd) {
+func Jobs(n string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--jobs=%s", n))
 	}
@@ -123,7 +123,7 @@ func Quiet(g *types.Cmd) {
 
 // RecurseSubmodules This option controls if and under what conditions new commits of populated submodules should be fetched too.
 // --recurse-submodules[=yes|on-demand|no]
-func RecurseSubmodules(value string) func(*types.Cmd) {
+func RecurseSubmodules(value string) types.Option {
 	return func(g *types.Cmd) {
 		if value == "" {
 			g.AddOptions("--recurse-submodules")
@@ -136,7 +136,7 @@ func RecurseSubmodules(value string) func(*types.Cmd) {
 // RecurseSubmodulesDefault This option is used internally to temporarily provide a non-negative default value for the --recurse-submodules option.
 // All other methods of configuring fetch’s submodule recursion (such as settings in gitmodules(5) and git-config(1)) override this option, as does specifying --[no-]recurse-submodules directly.
 // --recurse-submodules-default=[yes|on-demand]
-func RecurseSubmodulesDefault(value string) func(*types.Cmd) {
+func RecurseSubmodulesDefault(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--recurse-submodules-default=%s", value))
 	}
@@ -144,7 +144,7 @@ func RecurseSubmodulesDefault(value string) func(*types.Cmd) {
 
 // Refmap When fetching refs listed on the command line, use the specified refspec (can be given more than once) to map the refs to remote-tracking branches, instead of the values of remote.*.fetch configuration variables for the remote repository.
 // --refmap=<refspec>
-func Refmap(refspec string) func(*types.Cmd) {
+func Refmap(refspec string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--refmap=%s", refspec))
 	}
@@ -153,7 +153,7 @@ func Refmap(refspec string) func(*types.Cmd) {
 // ShallowExclude Deepen or shorten the history of a shallow repository to exclude commits reachable from a specified remote branch or tag.
 // This option can be specified multiple times.
 // --shallow-exclude=<revision>
-func ShallowExclude(revision string) func(*types.Cmd) {
+func ShallowExclude(revision string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--shallow-exclude=%s", revision))
 	}
@@ -161,7 +161,7 @@ func ShallowExclude(revision string) func(*types.Cmd) {
 
 // ShallowSince Deepen or shorten the history of a shallow repository to include all reachable commits after <date>.
 // --shallow-since=<date>
-func ShallowSince(date string) func(*types.Cmd) {
+func ShallowSince(date string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--shallow-since=%s", date))
 	}
@@ -169,7 +169,7 @@ func ShallowSince(date string) func(*types.Cmd) {
 
 // SubmodulePrefix Prepend <path> to paths printed in informative messages.
 // --submodule-prefix=<path>
-func SubmodulePrefix(path string) func(*types.Cmd) {
+func SubmodulePrefix(path string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--submodule-prefix=%s", path))
 	}
@@ -205,7 +205,7 @@ func UpdateShallow(g *types.Cmd) {
 
 // UploadPack When given, and the repository to fetch from is handled by git fetch-pack, --exec=<upload-pack> is passed to the command to specify non-default path for the command run on the other end.
 // --upload-pack <upload-pack>
-func UploadPack(value string) func(*types.Cmd) {
+func UploadPack(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--upload-pack")
 		g.AddOptions(value)

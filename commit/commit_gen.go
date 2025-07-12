@@ -40,7 +40,7 @@ func Amend(g *types.Cmd) {
 // Specify an explicit author using the standard A U Thor <author@example.com> format.
 // Otherwise <author> is assumed to be a pattern and is used to search for an existing commit by that author (i.e. rev-list --all -i --author=<author>); the commit author is then copied from the first such commit found.
 // --author=<author>
-func Author(value string) func(*types.Cmd) {
+func Author(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--author=%s", value))
 	}
@@ -55,7 +55,7 @@ func Branch(g *types.Cmd) {
 // Cleanup This option determines how the supplied commit message should be cleaned up before committing.
 // The <mode> can be strip, whitespace, verbatim, scissors or default.
 // --cleanup=<mode>
-func Cleanup(mode string) func(*types.Cmd) {
+func Cleanup(mode string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--cleanup=%s", mode))
 	}
@@ -63,7 +63,7 @@ func Cleanup(mode string) func(*types.Cmd) {
 
 // Date Override the author date used in the commit.
 // --date=<date>
-func Date(value string) func(*types.Cmd) {
+func Date(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--date=%s", value))
 	}
@@ -85,7 +85,7 @@ func Edit(g *types.Cmd) {
 // File Take the commit message from the given file.
 // Use - to read the message from the standard input.
 // -F <file>, --file=<file>
-func File(value string) func(*types.Cmd) {
+func File(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--file=%s", value))
 	}
@@ -95,7 +95,7 @@ func File(value string) func(*types.Cmd) {
 // The commit message will be the subject line from the specified commit with a prefix of 'fixup! '.
 // See git-rebase(1) for details.
 // --fixup=<commit>
-func Fixup(commit string) func(*types.Cmd) {
+func Fixup(commit string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--fixup=%s", commit))
 	}
@@ -104,7 +104,7 @@ func Fixup(commit string) func(*types.Cmd) {
 // GpgSign GPG-sign commits.
 // The keyid argument is optional and defaults to the committer identity; if specified, it must be stuck to the option without a space.
 // -S[<keyid>], --gpg-sign[=<keyid>]
-func GpgSign(keyID string) func(*types.Cmd) {
+func GpgSign(keyID string) types.Option {
 	return func(g *types.Cmd) {
 		if keyID == "" {
 			g.AddOptions("--gpg-sign")
@@ -200,7 +200,7 @@ func Quiet(g *types.Cmd) {
 
 // ReeditMessage Like -C, but with -c the editor is invoked, so that the user can further edit the commit message.
 // -c <commit>, --reedit-message=<commit>
-func ReeditMessage(commit string) func(*types.Cmd) {
+func ReeditMessage(commit string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--reedit-message=%s", commit))
 	}
@@ -215,7 +215,7 @@ func ResetAuthor(g *types.Cmd) {
 
 // ReuseMessage Take an existing commit object, and reuse the log message and the authorship information (including the timestamp) when creating the commit.
 // -C <commit>, --reuse-message=<commit>
-func ReuseMessage(commit string) func(*types.Cmd) {
+func ReuseMessage(commit string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--reuse-message=%s", commit))
 	}
@@ -241,7 +241,7 @@ func Signoff(g *types.Cmd) {
 // Can be used with additional commit message options (-m/-c/-C/-F).
 // See git-rebase(1) for details.
 // --squash=<commit>
-func Squash(commit string) func(*types.Cmd) {
+func Squash(commit string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--squash=%s", commit))
 	}
@@ -260,7 +260,7 @@ func Status(g *types.Cmd) {
 // If the user exits the editor without editing the message, the commit is aborted.
 // This has no effect when a message is given by other means, e.g. with the -m or -F options.
 // -t <file>, --template=<file>
-func Template(file string) func(*types.Cmd) {
+func Template(file string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--template=%s", file))
 	}
@@ -269,7 +269,7 @@ func Template(file string) func(*types.Cmd) {
 // UntrackedFiles Show untracked files.
 // The mode parameter is optional (defaults to all), and is used to specify the handling of untracked files; when -u is not used, the default is normal, i.e. show untracked files and directories.
 // -u[<mode>], --untracked-files[=<mode>]
-func UntrackedFiles(mode string) func(*types.Cmd) {
+func UntrackedFiles(mode string) types.Option {
 	return func(g *types.Cmd) {
 		if mode == "" {
 			g.AddOptions("--untracked-files")

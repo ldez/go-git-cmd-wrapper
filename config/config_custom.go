@@ -7,7 +7,7 @@ import (
 )
 
 // Entry Adds a configuration entry.
-func Entry(key, value string) func(*types.Cmd) {
+func Entry(key, value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(key)
 		g.AddOptions(value)
@@ -16,7 +16,7 @@ func Entry(key, value string) func(*types.Cmd) {
 
 // Add Adds a new line to the option without altering any existing values. This is the same as providing ^$ as the value_regex in --replace-all.
 // --add
-func Add(name, value string) func(*types.Cmd) {
+func Add(name, value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--add")
 		g.AddOptions(name)
@@ -26,7 +26,7 @@ func Add(name, value string) func(*types.Cmd) {
 
 // ReplaceAll Default behavior is to replace at most one line. This replaces all lines matching the key (and optionally the value_regex).
 // --replace-all
-func ReplaceAll(name, value, valueRegex string) func(*types.Cmd) {
+func ReplaceAll(name, value, valueRegex string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--replace-all")
 		g.AddOptions(name)
@@ -40,7 +40,7 @@ func ReplaceAll(name, value, valueRegex string) func(*types.Cmd) {
 
 // Get the value for a given key (optionally filtered by a regex matching the value). Returns error code 1 if the key was not found and the last value if multiple key values were found.
 // --get
-func Get(name, valueRegex string) func(*types.Cmd) {
+func Get(name, valueRegex string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get")
 		g.AddOptions(name)
@@ -53,7 +53,7 @@ func Get(name, valueRegex string) func(*types.Cmd) {
 
 // GetAll Like get, but returns all values for a multi-valued key.
 // --get-all
-func GetAll(name, valueRegex string) func(*types.Cmd) {
+func GetAll(name, valueRegex string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get-all")
 		g.AddOptions(name)
@@ -66,7 +66,7 @@ func GetAll(name, valueRegex string) func(*types.Cmd) {
 
 // GetRegexp Like --get-all, but interprets the name as a regular expression and writes out the key names. Regular expression matching is currently case-sensitive and done against a canonicalized version of the key in which section and variable names are lowercased, but subsection names are not.
 // --get-regexp
-func GetRegexp(nameRegexp, valueRegex string) func(*types.Cmd) {
+func GetRegexp(nameRegexp, valueRegex string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get-regexp")
 		g.AddOptions(nameRegexp)
@@ -79,7 +79,7 @@ func GetRegexp(nameRegexp, valueRegex string) func(*types.Cmd) {
 
 // GetURLMatch When given a two-part name section.key, the value for section.<url>.key whose <url> part matches the best to the given URL is returned (if no such key exists, the value for section.key is used as a fallback). When given just the section as name, do so for all the keys in the section and list them. Returns error code 1 if no value is found.
 // --get-urlmatch name URL
-func GetURLMatch(name, url string) func(*types.Cmd) {
+func GetURLMatch(name, url string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get-urlmatch")
 		g.AddOptions(name)
@@ -89,7 +89,7 @@ func GetURLMatch(name, url string) func(*types.Cmd) {
 
 // Unset Remove the line matching the key from config file.
 // --unset
-func Unset(name, valueRegex string) func(*types.Cmd) {
+func Unset(name, valueRegex string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--unset")
 		g.AddOptions(name)
@@ -102,7 +102,7 @@ func Unset(name, valueRegex string) func(*types.Cmd) {
 
 // UnsetAll Remove all lines matching the key from config file.
 // --unset-all
-func UnsetAll(name, valueRegex string) func(*types.Cmd) {
+func UnsetAll(name, valueRegex string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--unset-all")
 		g.AddOptions(name)
@@ -115,7 +115,7 @@ func UnsetAll(name, valueRegex string) func(*types.Cmd) {
 
 // RenameSection Rename the given section to a new name.
 // --rename-section
-func RenameSection(oldName, newName string) func(*types.Cmd) {
+func RenameSection(oldName, newName string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--rename-section")
 		g.AddOptions(oldName)
@@ -125,7 +125,7 @@ func RenameSection(oldName, newName string) func(*types.Cmd) {
 
 // RemoveSection Remove the given section from the configuration file.
 // --remove-section
-func RemoveSection(name string) func(*types.Cmd) {
+func RemoveSection(name string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--remove-section")
 		g.AddOptions(name)
@@ -134,7 +134,7 @@ func RemoveSection(name string) func(*types.Cmd) {
 
 // GetColor Find the color configured for name (e.g.  color.diff.new) and output it as the ANSI color escape sequence to the standard output. The optional default parameter is used instead, if there is no color configured for name.
 // --get-color name [default]
-func GetColor(name, defaultValue string) func(*types.Cmd) {
+func GetColor(name, defaultValue string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get-color")
 		g.AddOptions(name)
@@ -147,7 +147,7 @@ func GetColor(name, defaultValue string) func(*types.Cmd) {
 
 // GetColorBool Find the color setting for name (e.g.  color.diff) and output "true" or "false".  stdout-is-tty should be either "true" or "false", and is taken into account when configuration says "auto". If stdout-is-tty is missing, then checks the standard output of the command itself, and exits with status 0 if color is to be used, or exits with status 1 otherwise. When the color setting for name is undefined, the command uses color.ui as fallback.
 // --get-colorbool name [stdout-is-tty]
-func GetColorBool(name string, stdoutIsTTY bool) func(*types.Cmd) {
+func GetColorBool(name string, stdoutIsTTY bool) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get-colorbool")
 		g.AddOptions(name)

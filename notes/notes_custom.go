@@ -3,7 +3,7 @@ package notes
 import "github.com/ldez/go-git-cmd-wrapper/v2/types"
 
 // Object related to `copy` sub-command (`<from-object> <to-object>`).
-func Object(from, to string) func(*types.Cmd) {
+func Object(from, to string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(from)
 
@@ -14,7 +14,7 @@ func Object(from, to string) func(*types.Cmd) {
 }
 
 // NotesRef related to `merge` sub-command (`<notes-ref>`).
-func NotesRef(ref string) func(*types.Cmd) {
+func NotesRef(ref string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(ref)
 	}

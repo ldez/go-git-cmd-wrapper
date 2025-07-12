@@ -22,7 +22,7 @@ func Branch(g *types.Cmd) {
 
 // Column Display untracked files in columns. See configuration variable column.status for option syntax. --column and --no-column without options are equivalent to always and never respectively.
 // --column[=<options>], --no-column
-func Column(options string) func(*types.Cmd) {
+func Column(options string) types.Option {
 	return func(g *types.Cmd) {
 		if options == "" {
 			g.AddOptions("--column")
@@ -34,7 +34,7 @@ func Column(options string) func(*types.Cmd) {
 
 // FindRenames Turn on rename detection, optionally setting the similarity threshold. See also git-diff(1) --find-renames.
 // -M, --find-renames[=<n>]
-func FindRenames(n string) func(*types.Cmd) {
+func FindRenames(n string) types.Option {
 	return func(g *types.Cmd) {
 		if n == "" {
 			g.AddOptions("--find-renames")
@@ -46,7 +46,7 @@ func FindRenames(n string) func(*types.Cmd) {
 
 // IgnoreSubmodules Ignore changes to submodules when looking for changes. <when> can be either "none", "untracked", "dirty" or "all", which is the default. Using "none" will consider the submodule modified when it either contains untracked or modified files or its HEAD differs from the commit recorded in the superproject and can be used to override any settings of the ignore option in git- config(1) or gitmodules(5). When "untracked" is used submodules are not considered dirty when they only contain untracked content (but they are still scanned for modified content). Using "dirty" ignores all changes to the work tree of submodules, only changes to the commits stored in the superproject are shown (this was the behavior before 1.7.0). Using "all" hides all changes to submodules (and suppresses the output of submodule summaries when the config option status.submoduleSummary is set).
 // --ignore-submodules[=<when>]
-func IgnoreSubmodules(when string) func(*types.Cmd) {
+func IgnoreSubmodules(when string) types.Option {
 	return func(g *types.Cmd) {
 		if when == "" {
 			g.AddOptions("--ignore-submodules")
@@ -68,7 +68,7 @@ func IgnoreSubmodules(when string) func(*types.Cmd) {
 //
 // When matching mode is specified, paths that explicitly match an ignored pattern are shown. If a directory matches an ignore pattern, then it is shown, but not paths contained in the ignored directory. If a directory does not match an ignore pattern, but all contents are ignored, then the directory is not shown, but all contents are shown.
 // --ignored[=<mode>]
-func Ignored(mode string) func(*types.Cmd) {
+func Ignored(mode string) types.Option {
 	return func(g *types.Cmd) {
 		if mode == "" {
 			g.AddOptions("--ignored")
@@ -110,7 +110,7 @@ func Null(g *types.Cmd) {
 
 // Porcelain Give the output in an easy-to-parse format for scripts. This is similar to the short output, but will remain stable across Git versions and regardless of user configuration. See below for details. The version parameter is used to specify the format version. This is optional and defaults to the original version v1 format.
 // --porcelain[=<version>]
-func Porcelain(version string) func(*types.Cmd) {
+func Porcelain(version string) types.Option {
 	return func(g *types.Cmd) {
 		if version == "" {
 			g.AddOptions("--porcelain")
@@ -154,7 +154,7 @@ func ShowStash(g *types.Cmd) {
 //
 // The default can be changed using the status.showUntrackedFiles configuration variable documented in git-config(1).
 // -u[<mode>], --untracked-files[=<mode>]
-func UntrackedFiles(mode string) func(*types.Cmd) {
+func UntrackedFiles(mode string) types.Option {
 	return func(g *types.Cmd) {
 		if mode == "" {
 			g.AddOptions("--untracked-files")

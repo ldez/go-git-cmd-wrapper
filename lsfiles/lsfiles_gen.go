@@ -10,7 +10,7 @@ import (
 
 // Abbrev Instead of showing the full 40-byte hexadecimal object lines, show the shortest prefix that is at least <n> hexdigits long that uniquely refers the object. Non default number of digits can be specified with --abbrev=<n>.
 // --abbrev[=<n>]
-func Abbrev(n string) func(*types.Cmd) {
+func Abbrev(n string) types.Option {
 	return func(g *types.Cmd) {
 		if n == "" {
 			g.AddOptions("--abbrev")
@@ -66,7 +66,7 @@ func ErrorUnmatch(g *types.Cmd) {
 
 // Exclude Skip untracked files matching pattern. Note that pattern is a shell wildcard pattern. See EXCLUDE PATTERNS below for more information.
 // -x <pattern>, --exclude=<pattern>
-func Exclude(pattern string) func(*types.Cmd) {
+func Exclude(pattern string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--exclude=%s", pattern))
 	}
@@ -74,7 +74,7 @@ func Exclude(pattern string) func(*types.Cmd) {
 
 // ExcludeFrom Read exclude patterns from <file>; 1 per line.
 // -X <file>, --exclude-from=<file>
-func ExcludeFrom(file string) func(*types.Cmd) {
+func ExcludeFrom(file string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--exclude-from=%s", file))
 	}
@@ -82,7 +82,7 @@ func ExcludeFrom(file string) func(*types.Cmd) {
 
 // ExcludePerDirectory Read additional exclude patterns that apply only to the directory and its subdirectories in <file>.
 // --exclude-per-directory=<file>
-func ExcludePerDirectory(file string) func(*types.Cmd) {
+func ExcludePerDirectory(file string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--exclude-per-directory=%s", file))
 	}
@@ -102,7 +102,7 @@ func F(g *types.Cmd) {
 
 // Format A string that interpolates %(fieldname) from the result being shown. It also interpolates %% to %, and %xx where xx are hex digits interpolates to character with hex code xx; for example %00 interpolates to \0 (NUL), %09 to \t (TAB) and %0a to \n (LF). --format cannot be combined with -s, -o, -k, -t, --resolve-undo and --eol.
 // --format=<format>
-func Format(value string) func(*types.Cmd) {
+func Format(value string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--format=%s", value))
 	}
@@ -182,7 +182,7 @@ func V(g *types.Cmd) {
 
 // WithTree When using --error-unmatch to expand the user supplied <file> (i.e. path pattern) arguments to paths, pretend that paths which were removed in the index since the named <tree-ish> are still present. Using this option with -s or -u options does not make any sense.
 // --with-tree=<tree-ish>
-func WithTree(treeIsh string) func(*types.Cmd) {
+func WithTree(treeIsh string) types.Option {
 	return func(g *types.Cmd) {
 		g.AddOptions(fmt.Sprintf("--with-tree=%s", treeIsh))
 	}
