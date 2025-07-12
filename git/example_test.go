@@ -628,6 +628,25 @@ func ExampleRawWithContext() {
 	// Output: git stash list --pretty=format:'%Cblue%gd%Creset%Cred:%Creset %C(yellow)%s%Creset'
 }
 
+func ExampleRawWithContext_baseOptions() {
+	out, _ := git.RawWithContext(
+		context.Background(),
+		"stash",
+		func(g *types.Cmd) {
+			g.AddOptions("list")
+			g.AddOptions("--pretty=format:'%Cblue%gd%Creset%Cred:%Creset %C(yellow)%s%Creset'")
+		},
+		func(g *types.Cmd) {
+			g.AddBaseOptions("-C")
+			g.AddBaseOptions("<your_path>")
+		},
+		git.CmdExecutor(cmdExecutorMock),
+	)
+
+	fmt.Println(out)
+	// Output: git -C <your_path> stash list --pretty=format:'%Cblue%gd%Creset%Cred:%Creset %C(yellow)%s%Creset'
+}
+
 func ExampleCond() {
 	param := false
 	out, _ := git.Push(push.All, git.Cond(param, push.DryRun), push.FollowTags, push.ReceivePack("aaa"), git.CmdExecutor(cmdExecutorMock))
