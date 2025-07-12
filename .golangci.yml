@@ -28,7 +28,7 @@ linters:
     - tparallel
     - varnamelen
     - wrapcheck
-    - wsl
+    - wsl # deprecayted
 
   settings:
     depguard:
@@ -98,17 +98,27 @@ linters:
     presets:
       - comments
     rules:
-      - linters:
+      - path: (.+)_test.go
+        linters:
           - funlen
-        path: (.+)_test.go
       - path: branch/branch.go
+        linter:
+        - revive
         text: func name will be used as branch.BranchName by other packages
       - path: notes/notes_custom.go
+        linter:
+          - revive
         text: func name will be used as notes.NotesRef by other packages
       - path: doc.go
+        linter:
+          - revive
         text: don't use an underscore in package name
       - path: internal/generator.go
         text: 'G306:'
+      - path: types/types.go
+        linters:
+          - revive
+        text: avoid meaningless package names
 
 issues:
   max-issues-per-linter: 0

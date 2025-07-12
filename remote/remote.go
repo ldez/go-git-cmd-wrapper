@@ -65,6 +65,7 @@ func SetURL(name, newurl, oldurl string) func(*types.Cmd) {
 		g.AddOptions("set-url")
 		g.AddOptions(name)
 		g.AddOptions(newurl)
+
 		if oldurl != "" {
 			g.AddOptions(oldurl)
 		}
@@ -75,6 +76,7 @@ func SetURL(name, newurl, oldurl string) func(*types.Cmd) {
 func Show(names ...string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("show")
+
 		for _, name := range names {
 			g.AddOptions(name)
 		}
@@ -85,6 +87,7 @@ func Show(names ...string) func(*types.Cmd) {
 func Prune(names ...string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("prune")
+
 		for _, name := range names {
 			g.AddOptions(name)
 		}
@@ -95,6 +98,7 @@ func Prune(names ...string) func(*types.Cmd) {
 func Update(remotes ...string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("update")
+
 		for _, name := range remotes {
 			g.AddOptions(name)
 		}

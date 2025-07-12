@@ -18,12 +18,14 @@ func TestInit(t *testing.T) {
 
 	// clean up
 	t.Cleanup(func() {
-		if errRm := os.RemoveAll(dir); errRm != nil {
+		errRm := os.RemoveAll(dir)
+		if errRm != nil {
 			log.Println(errRm)
 		}
 	})
 
-	if err = os.Chdir(dir); err != nil {
+	err = os.Chdir(dir)
+	if err != nil {
 		t.Fatal(err)
 	}
 
@@ -32,7 +34,8 @@ func TestInit(t *testing.T) {
 		t.Fatal(msg, err)
 	}
 
-	if ff, err := os.Stat(filepath.Join(dir, "test")); os.IsNotExist(err) {
+	ff, err := os.Stat(filepath.Join(dir, "test"))
+	if os.IsNotExist(err) {
 		t.Fatal("Repository not created.", ff)
 	}
 }

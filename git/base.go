@@ -248,6 +248,7 @@ func Cond(apply bool, options ...types.Option) types.Option {
 			g.ApplyOptions(options...)
 		}
 	}
+
 	return NoOp
 }
 

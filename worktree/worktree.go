@@ -9,6 +9,7 @@ func Add(path, branch string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("add")
 		g.AddOptions(path)
+
 		if branch != "" {
 			g.AddOptions(branch)
 		}
@@ -50,6 +51,7 @@ func Force(g *types.Cmd) {
 func Branch(branch string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("-b")
+
 		if branch != "" {
 			g.AddOptions(branch)
 		}
@@ -60,6 +62,7 @@ func Branch(branch string) func(*types.Cmd) {
 func BranchOverride(branch string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("-B")
+
 		if branch != "" {
 			g.AddOptions(branch)
 		}
@@ -105,6 +108,7 @@ func Verbose(g *types.Cmd) {
 func Expire(time string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("--expire")
+
 		if time != "" {
 			g.AddOptions(time)
 		}
@@ -115,6 +119,7 @@ func Expire(time string) func(*types.Cmd) {
 func Reason(value string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("--reason")
+
 		if value != "" {
 			g.AddOptions(value)
 		}

@@ -31,6 +31,7 @@ func ReplaceAll(name, value, valueRegex string) func(*types.Cmd) {
 		g.AddOptions("--replace-all")
 		g.AddOptions(name)
 		g.AddOptions(value)
+
 		if valueRegex != "" {
 			g.AddOptions(valueRegex)
 		}
@@ -43,6 +44,7 @@ func Get(name, valueRegex string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get")
 		g.AddOptions(name)
+
 		if valueRegex != "" {
 			g.AddOptions(valueRegex)
 		}
@@ -55,6 +57,7 @@ func GetAll(name, valueRegex string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get-all")
 		g.AddOptions(name)
+
 		if valueRegex != "" {
 			g.AddOptions(valueRegex)
 		}
@@ -67,6 +70,7 @@ func GetRegexp(nameRegexp, valueRegex string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get-regexp")
 		g.AddOptions(nameRegexp)
+
 		if valueRegex != "" {
 			g.AddOptions(valueRegex)
 		}
@@ -89,6 +93,7 @@ func Unset(name, valueRegex string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("--unset")
 		g.AddOptions(name)
+
 		if valueRegex != "" {
 			g.AddOptions(valueRegex)
 		}
@@ -101,6 +106,7 @@ func UnsetAll(name, valueRegex string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("--unset-all")
 		g.AddOptions(name)
+
 		if valueRegex != "" {
 			g.AddOptions(valueRegex)
 		}
@@ -132,6 +138,7 @@ func GetColor(name, defaultValue string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions("--get-color")
 		g.AddOptions(name)
+
 		if defaultValue != "" {
 			g.AddOptions(defaultValue)
 		}

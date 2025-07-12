@@ -160,6 +160,7 @@ func main() {
 	}
 
 	var jsonModels []jsonModel
+
 	err = json.Unmarshal(file, &jsonModels)
 	if err != nil {
 		log.Fatalf("unmarshal file content: %v", err)
@@ -205,18 +206,22 @@ func generateFileContent(model genCmdModel) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	_, err = base.New("templateCmdEqualNoOptional").Parse(templateCmdEqualNoOptional)
 	if err != nil {
 		return "", err
 	}
+
 	_, err = base.New("templateCmdEqualOptional").Parse(templateCmdEqualOptional)
 	if err != nil {
 		return "", err
 	}
+
 	_, err = base.New("templateCmdWithParameter").Parse(templateCmdWithParameter)
 	if err != nil {
 		return "", err
 	}
+
 	_, err = base.New("templateCmdWithOptionalParameter").Parse(templateCmdWithOptionalParameter)
 	if err != nil {
 		return "", err
@@ -225,6 +230,7 @@ func generateFileContent(model genCmdModel) (string, error) {
 	tmpl := template.Must(base.Parse(fileTemplate))
 
 	b := &bytes.Buffer{}
+
 	err = tmpl.Execute(b, model)
 	if err != nil {
 		return "", err
@@ -250,6 +256,7 @@ func hasImportFMT(jsonCmdModels []jsonCmdModel) bool {
 			return true
 		}
 	}
+
 	return false
 }
 
@@ -370,6 +377,7 @@ func methodName(raw string, jsonCmdModel jsonCmdModel) string {
 	if jsonCmdModel.MethodName == "" {
 		return raw
 	}
+
 	return jsonCmdModel.MethodName
 }
 
@@ -407,6 +415,7 @@ func toGoName(kebab string, upperFirst bool) string {
 	var camelCase string
 
 	isToUpper := false
+
 	for i, runeValue := range kebabTrim {
 		switch {
 		case i == 0 && upperFirst:
@@ -420,5 +429,6 @@ func toGoName(kebab string, upperFirst bool) string {
 			camelCase += string(runeValue)
 		}
 	}
+
 	return camelCase
 }

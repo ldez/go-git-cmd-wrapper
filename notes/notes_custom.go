@@ -6,6 +6,7 @@ import "github.com/ldez/go-git-cmd-wrapper/v2/types"
 func Object(from, to string) func(*types.Cmd) {
 	return func(g *types.Cmd) {
 		g.AddOptions(from)
+
 		if to != "" {
 			g.AddOptions(to)
 		}
