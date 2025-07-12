@@ -23,6 +23,9 @@ output, err = git.Fetch(fetch.NoTags, fetch.Remote("upstream"), fetch.RefSpec("m
 
 // add a remote
 output, err = git.Remote(remote.Add, remote.Name("upstream"), remote.URL("https://github.com/ldez/prm"))
+
+// --- global options ---
+output, err := git.Clone(global.UpperC("/tmp"), clone.Repository("https://github.com/ldez/prm"))
 ```
 
 More examples: [Documentation](https://pkg.go.dev/github.com/ldez/go-git-cmd-wrapper/v2/git)
