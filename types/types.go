@@ -21,11 +21,12 @@ type Executor func(ctx context.Context, name string, debug bool, args ...string)
 
 // Cmd Command.
 type Cmd struct {
-	Debug    bool
-	Base     string
-	Options  []string
-	Logger   logger
-	Executor Executor
+	Debug       bool
+	Base        string
+	BaseOptions []string
+	Options     []string
+	Logger      logger
+	Executor    Executor
 }
 
 // NewCmd Creates a new Cmd.
@@ -47,6 +48,11 @@ type Option func(g *Cmd)
 // AddOptions Add one command option.
 func (g *Cmd) AddOptions(option string) {
 	g.Options = append(g.Options, option)
+}
+
+// AddBaseOptions Add one global command option.
+func (g *Cmd) AddBaseOptions(option string) {
+	g.BaseOptions = append(g.BaseOptions, option)
 }
 
 // ApplyOptions Apply command options.
