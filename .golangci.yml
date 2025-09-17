@@ -28,7 +28,7 @@ linters:
     - tparallel
     - varnamelen
     - wrapcheck
-    - wsl # deprecayted
+    - wsl # deprecated
 
   settings:
     depguard:
