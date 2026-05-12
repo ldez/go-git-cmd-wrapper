@@ -412,23 +412,27 @@ func newMeta(rawMethodName, rawArg, cmd, cmdType, description, arguments string)
 func toGoName(kebab string, upperFirst bool) string {
 	kebabTrim := strings.NewReplacer(" ", "-", "_", "-").Replace(strings.TrimSpace(kebab))
 
-	var camelCase string
+	var camelCase strings.Builder
 
 	isToUpper := false
 
 	for i, runeValue := range kebabTrim {
 		switch {
 		case i == 0 && upperFirst:
-			camelCase += strings.ToUpper(string(runeValue))
+			camelCase.WriteString(strings.ToUpper(string(runeValue)))
+
 		case isToUpper:
-			camelCase += strings.ToUpper(string(runeValue))
+			camelCase.WriteString(strings.ToUpper(string(runeValue)))
+
 			isToUpper = false
+
 		case runeValue == '-':
 			isToUpper = true
+
 		default:
-			camelCase += string(runeValue)
+			camelCase.WriteRune(runeValue)
 		}
 	}
 
-	return camelCase
+	return camelCase.String()
 }

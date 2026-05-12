@@ -1,4 +1,4 @@
-name: Go Matrix
+name: Build and Test
 on:
   push:
     branches:
@@ -6,6 +6,8 @@ on:
   pull_request:
     branches:
       - main
+
+permissions: {}
 
 jobs:
 
@@ -21,7 +23,9 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: actions/setup-go@v6
         with:
           go-version: ${{ matrix.go-version }}
